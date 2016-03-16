@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::get('/flight-results', function () {
+    return view('flight-results');
 });
 
 /*
