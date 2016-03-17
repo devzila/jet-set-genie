@@ -14,10 +14,21 @@
 Route::get('/', function () {
     return view('home');
 });
+Route::post('/', 'ajaxController@create');
+
+Route::get('/login', function() {
+  return View::make('login');
+});
+Route::post('/login', 'AccountController@login');
 
 Route::get('/flight-results', function () {
     return view('flight-results');
 });
+
+Route::get('/email', function () {
+    return view('email');
+});
+
 
 /*
 |--------------------------------------------------------------------------
