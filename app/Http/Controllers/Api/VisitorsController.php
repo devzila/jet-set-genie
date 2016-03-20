@@ -17,7 +17,9 @@ class VisitorsController extends Controller
      */
     public function index()
     {
-        //
+         $visitors = Visitor::all();
+		 return $visitors->toJson();
+		 
     }
 
     /**
