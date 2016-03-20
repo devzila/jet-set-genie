@@ -15,7 +15,7 @@ class VisitorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() 
     {
          $visitors = Visitor::all();
 		 return $visitors->toJson();
@@ -57,6 +57,8 @@ class VisitorsController extends Controller
     public function show($id)
     {
         //
+		$visitor = Visitor::where('id', $id)->first();
+		return $visitor->toJson();
     }
 
     /**
