@@ -1,154 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Jet Set Genie</title>
-
-<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-<link href="{{ asset('css/style.css') }}" rel="stylesheet">
-<link href="{{ asset('css/animate.css') }}" rel="stylesheet">
-<link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
-<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-<link rel='stylesheet' href="{{ asset('font-awesome/css/font-awesome.min.css') }}"  type='text/css' media='all' />
+@extends("layouts.master")
 
 
-<script src="{{ asset('js/jquery.min.js') }}"></script> 
-<script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/wow.js') }}"></script>
-
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-
-<script>
-
-$(document).ready(function(){ 
+@section('content')
 
 
-				formvalidate = $("#jetform").validate({
-						
-							highlight: function (element, errorClass, validClass) {
-								//alert('........' +element.id);
-								$(element.form).find("input[id=" + element.id + "]")
-								.addClass("error");
-							},
-							unhighlight: function (element, errorClass, validClass) {
-								$(element.form).find("input[id=" + element.id + "]")
-								.removeClass("error");
-							},
-							
-							 errorPlacement: function(error, element) {}
-						
-				});
-
-	
-				$( ".leaving" ).datepicker({
-				  minDate: 0,
-				  defaultDate: "+1w",
-				  changeMonth: false,
-				  numberOfMonths: 1,
-				  onClose: function( selectedDate ) {
-					$( ".returning" ).datepicker( "option", "minDate", selectedDate );
-				  }
-				});
-				$( ".returning" ).datepicker({
-				  defaultDate: "+1w",
-				  changeMonth: false,
-				  numberOfMonths: 1,
-				  onClose: function( selectedDate ) {
-					$( ".leaving" ).datepicker( "option", "maxDate", selectedDate );
-				  }
-				});
-	
-				$('#jetbutton1').on('click', function(e){
-					
-							var validatename = formvalidate.element( "#name" ); 
-							var validateemail = formvalidate.element( "#email" ); 
-							if(validatename && validateemail) 
-							{		
-								$("#myModal").modal('hide');
-								$('.step-3').hide('fade', 200, function(){
-									 $('.step-1').show('fade', 200);
-								});
-							}
-							
-
-						var formData = $('#jetform').serialize();
-						console.log(formData);
-						  
-						   $.ajax({
-							//url:'/',
-							type:'POST',
-							data:$("#jetform").serialize(),
-							success:function(data){
-								//console.log('>>>>>>>>>>>>' + data);
-							}
-						  });
-
-						//return false;
-						  //}	
-							
-						
-							
-						$('#jetform').trigger('reset');		
-						
-				});
-						
-								//});	
-				
-				//});
-				
-				
-				$('#jetbutton').on('click', function(){	
-						
-						var validleaving = formvalidate.element( "#leavingdate" ); 
-						var validreturning = formvalidate.element( "#returningdate" ); 
-						var validairport = formvalidate.element( "#homeairport" ); 
-						if( validleaving && validreturning && validairport) 						
-						{
-									$('.step-1').hide('slide', {direction: 'left'}, 200, function(){
-										$('.step-2').show('slide', {direction: 'right'}, 200);
-									});	
-						}
-							
-				});	
-				
-				$('.blocks a').on('click', function(){	
-				
-					//formvalidate = $("#jetform").validate();
-					//formvalidate.element( $("input[name='destination']") );
-					
-					$('.step-2').hide('slide', {direction: 'left'}, 200, function(){
-						$('.step-3').show('slide', {direction: 'right'}, 200, function(){
-							setTimeout(
-							  function() 
-							  {
-							   $("#myModal").modal('show');
-							  }, 2000);  
-						});
-					});
-				});	
-		
-		
-	});
-</script>
-
-	<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]--> 
-    
-</head>
-<body>
-<header class="jsg-header">
-  <div class="container">
-	<h1 class="wow fadeInDown animated"><a href="#"><img src="{{ asset('assets/Logo.png') }}" alt="Jet set Genie"></a></h1>
-  </div>
-</header>
-<section id="jsg-content">
+    <section id="jsg-content">
 
 <form id="jetform" class="jetform">
 
@@ -309,26 +165,118 @@ $(document).ready(function(){
   </div>
 </section>
 </section>
-<footer class="jsg-footer">
-	<div class="container">
-    <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 footer-copyright">
-      <div class="pull-left copyright"> <p>Copyright reserved 2016, <a href="#">JetSetGenie</a></p></div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 footer-nav">
-    <div class="social-icons clearfix text-right">
-      <ul>
-        <li> <a href="#"><i class="fa fa-facebook"></i></a></li>
-         <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
-          <li> <a href="#"><i class="fa fa-linkedin"></i></a></li>
-           <li> <a href="#"><i class="fa fa-google-plus"></i></a></li>
-      </ul>
-      </div>
-    </div>
-  </div>
-  </div>
-</footer>
 
-</body>
-</html>
- 
+
+<script>
+
+    $(document).ready(function(){
+
+
+        formvalidate = $("#jetform").validate({
+
+            highlight: function (element, errorClass, validClass) {
+                //alert('........' +element.id);
+                $(element.form).find("input[id=" + element.id + "]")
+                        .addClass("error");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element.form).find("input[id=" + element.id + "]")
+                        .removeClass("error");
+            },
+
+            errorPlacement: function(error, element) {}
+
+        });
+
+
+        $( ".leaving" ).datepicker({
+            minDate: 0,
+            defaultDate: "+1w",
+            changeMonth: false,
+            numberOfMonths: 1,
+            onClose: function( selectedDate ) {
+                $( ".returning" ).datepicker( "option", "minDate", selectedDate );
+            }
+        });
+        $( ".returning" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: false,
+            numberOfMonths: 1,
+            onClose: function( selectedDate ) {
+                $( ".leaving" ).datepicker( "option", "maxDate", selectedDate );
+            }
+        });
+
+        $('#jetbutton1').on('click', function(e){
+
+            var validatename = formvalidate.element( "#name" );
+            var validateemail = formvalidate.element( "#email" );
+            if(validatename && validateemail)
+            {
+                $("#myModal").modal('hide');
+                $('.step-3').hide('fade', 200, function(){
+                    $('.step-1').show('fade', 200);
+                });
+            }
+
+
+            var formData = $('#jetform').serialize();
+            console.log(formData);
+
+            $.ajax({
+                //url:'/',
+                type:'POST',
+                data:$("#jetform").serialize(),
+                success:function(data){
+                    //console.log('>>>>>>>>>>>>' + data);
+                }
+            });
+
+            //return false;
+            //}
+
+
+
+            $('#jetform').trigger('reset');
+
+        });
+
+        //});
+
+        //});
+
+
+        $('#jetbutton').on('click', function(){
+
+            var validleaving = formvalidate.element( "#leavingdate" );
+            var validreturning = formvalidate.element( "#returningdate" );
+            var validairport = formvalidate.element( "#homeairport" );
+            if( validleaving && validreturning && validairport)
+            {
+                $('.step-1').hide('slide', {direction: 'left'}, 200, function(){
+                    $('.step-2').show('slide', {direction: 'right'}, 200);
+                });
+            }
+
+        });
+
+        $('.blocks a').on('click', function(){
+
+            //formvalidate = $("#jetform").validate();
+            //formvalidate.element( $("input[name='destination']") );
+
+            $('.step-2').hide('slide', {direction: 'left'}, 200, function(){
+                $('.step-3').show('slide', {direction: 'right'}, 200, function(){
+                    setTimeout(
+                            function()
+                            {
+                                $("#myModal").modal('show');
+                            }, 2000);
+                });
+            });
+        });
+
+
+    });
+</script>
+@stop
