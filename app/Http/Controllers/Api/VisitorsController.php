@@ -30,12 +30,6 @@ class VisitorsController extends Controller
      */
     public function create(Request $request)
     {
-        Mail::send('email/sample',[], function($message)
-        {
-            $message->from('nilay@devzila.com', 'Nilay Anand');
-            $message->to('nilayanand@gmail.com');
-            $message->subject('This is from Jet Set Genie');
-        });
     }
 
     /**
@@ -46,12 +40,23 @@ class VisitorsController extends Controller
      */
     public function store(Request $request)
     {
-        $result = Visitor::create([
+        $visitor = Visitor::create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email')
             ]);
 
-        return Response::json($result, 200);
+        $emails = ['nilay@devzila.com', 'ophia.b.popova@gmail.com', 'jnolan@mba2017.hbs.edu', 'jgoldstein@mba2017.hbs.edu', 'hchan@mba2017.hbs.edu', 'scook@mba2017.hbs.edu'];
+
+
+        Mail::send('email/visitor',[], function($message) use($visitor)
+        {
+            $message->from('jetset@devzila.com', 'JetSetGenie');
+            $message->to($emails);
+            $message->subject('Someone signed up for JetSetGenie!');
+        });
+
+
+        return Response::json($visitor, 200);
         //
     }
 

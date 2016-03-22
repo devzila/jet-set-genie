@@ -1,1 +1,0 @@
-<p>This email is from JetSetGenie</p>
