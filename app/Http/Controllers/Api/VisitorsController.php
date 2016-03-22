@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Response;
 use App\Models\Visitor;
+use Mail;
 
 class VisitorsController extends Controller
 {
@@ -29,6 +30,12 @@ class VisitorsController extends Controller
      */
     public function create(Request $request)
     {
+        Mail::send('email/sample',[], function($message)
+        {
+            $message->from('nilay@devzila.com', 'Nilay Anand');
+            $message->to('nilayanand@gmail.com');
+            $message->subject('This is from Jet Set Genie');
+        });
     }
 
     /**
@@ -93,5 +100,7 @@ class VisitorsController extends Controller
     public function destroy($id)
     {
         //
+
+
     }
 }
