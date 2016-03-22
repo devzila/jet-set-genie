@@ -9,6 +9,17 @@
 	margin-top:0;
 }
 
+#jetform1 .form-group{
+	height:35px;
+}
+
+.jetform1{
+	padding:0 10%;
+}
+
+.action-btn{
+	text-align:center;
+}
 /*html, body {height: 100%;}*/
 
 .form-control::-moz-placeholder, .form-control::-webkit-input-placeholder {
@@ -35,8 +46,10 @@ input[type=date]::-webkit-outer-spin-button {
 	 min-height: 700px;
 }*/
 .jsg-banner {
-    background: rgba(0, 0, 0, 0) url("../assets/sunset-plane.png") no-repeat scroll 100% center / cover ;
+    background: rgba(0, 0, 0, 0) url("../assets/jet-set-genie.jpg") no-repeat scroll 100% center / cover ;
 	min-height: 400px;
+	position:relative;
+	top:0;
 }
  
 .col-centered {
@@ -274,7 +287,21 @@ p, h4
     border-color: #33cccc;
     color: #fff;
 	/*   height: 30px;*/
-	/*padding: 6px 30px; */
+	padding: 6px 30px;
+}
+.form-inline .jsg-submit{
+	padding-left:10px;
+	padding-right:10px;
+}
+.step-back{
+	display:block;
+	position:absolute;
+	left:15px;
+	width:53px;
+	height:100%;
+	top:0;
+	background:url("../assets/step-back.png") no-repeat center center;
+	z-index:100;
 }
 .step-1 .jsg-submit 
 {
@@ -1085,12 +1112,6 @@ li
     margin-left: 2px;
 }
 
-
-
-
-
-
-
 @media only screen and (max-width:1024px)
 {
 .steps h2 {
@@ -1450,5 +1471,35 @@ footer {
 
 }
 
+@media only screen and (min-width:1550px){
+	.jsg-banner{
+		min-height: 505px;
+	}
+	.jsg-footer{
+		position:absolute;
+		bottom:0;
+		width:100%;
+	}
+}
 
 
+
+
+.ui-datepicker-calendar .ui-state-default{
+	border-color:#fff !important;
+	background:#fff !important;
+}
+
+.ui-datepicker-calendar .ui-state-default:hover{
+	background:#33cccc !important;
+	color:#fff !important;
+}
+
+.error-on-form{
+	color:#ff0000;
+	position: relative;
+    top: -26px;
+    left: 10px;
+    background: #fff;
+    display: inline-block;
+}
