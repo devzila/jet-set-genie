@@ -65,12 +65,11 @@ $(document).ready(function(){
  
 		$.ajax({
 			type: 'POST',
-			url: 'http://localhost/jetsetgenie/api/visitors/',			
+			url: 'http://jetsetgenie.devzila.com/api/visitors',			
 			data: {name:name , email:email , leaving_date:leaving_date, returning_date:returning_date, home_airport:home_airport, ip:ip, browser:browser, destination_type:destination_type},
 			dataType: 'json',
 			success:function(data){				 
-				/*  
-				
+			 
 				$('.email-alert').show();
 				$('.jetform1').hide();
 				
@@ -85,7 +84,7 @@ $(document).ready(function(){
 					});					
 				}, 3000);
 				
-				*/				
+			 			
 			}
 		});		
 	});
