@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	formvalidate = $("#jetform").validate({
 		highlight: function (element, errorClass, validClass) {
-			console.log('........' +element.id);
+			//console.log('........' +element.id);
 			$('#'+element.id).addClass("error");
 		},
 		unhighlight: function (element, errorClass, validClass) {
@@ -32,17 +32,25 @@ $(document).ready(function(){
 			$( ".leaving" ).datepicker( "option", "maxDate", selectedDate );
 		}
 	});
+	
+	$('#name, #email').focusin(function() { $('.error-on-form').remove() });
+	 
 
 	$('#jetbutton1').on('click', function(e){
 
 		var validatename = formvalidate.element( "#name" );
 		var validateemail = formvalidate.element( "#email" );
 		$('.email-alert-error').hide();
+		$('.error-on-form').remove();
 		
 		if(validatename && validateemail)
 		{
 			 
 		}else{		 
+			if(!validatename)
+				$('#name').after('<div class="error-on-form">WRONG FORMAT</div>');
+			if(!validateemail)
+				$('#email').after('<div class="error-on-form">WRONG FORMAT</div>');
 			return;
 		}
 
@@ -80,20 +88,33 @@ $(document).ready(function(){
 						$('#jetform').trigger('reset');
 										
 						$('.step-3').hide('slide', {direction: 'right'}, 200, function(){
-						$('.step-1').show('slide', {direction: 'left'}, 200);
-						
-						$('.email-alert').hide();
-						$('.jetform1').show();
-				
-					});					
+							$('.step-1').show('slide', {direction: 'left'}, 200);		
+							$('.email-alert').hide();
+							$('.jetform1').show();
+						});					
 				}, 3000);
 				
 			 			
 			}
 		});		
 	});
+	
+	$('#myModal').on('hidden.bs.modal', function (e) {
+	  // do something...
+	  $('.step-3').hide('slide', {direction: 'right'}, 200, function(){
+		$('.step-1').show('slide', {direction: 'left'}, 200);		
+		$('.email-alert').hide();
+		$('.jetform1').show();
+		$('#jetform').trigger('reset');
+	});	
+	})
 
-
+	$('.step-back').on('click',function(){
+	 
+		$('.step-2').hide('slide', {direction: 'right'}, 200, function(){
+			$('.step-1').show('slide', {direction: 'left'}, 200);		
+		});			
+	});
 
 	$('#jetbutton').on('click', function(){
 
