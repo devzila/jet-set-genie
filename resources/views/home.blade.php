@@ -45,7 +45,7 @@
 				 <label>
 						<i class="fa fa-anchor wow fadeIn animated"></i>
 						<h5 class="wow fadeIn animated">Beach</h5>
-						<input class="destination" type="radio" name="destination_type" value="">
+						<input class="destination" type="radio" name="destination_type" value="Beach">
 					
 					</label>
 					
@@ -55,21 +55,21 @@
 				<label>
 				 <i class="fa fa-tree wow fadeIn animated"></i>
 					<h5 class="wow fadeIn animated">Mountain</h5>
-					 <input class="destination" type="radio" name="destination_type" value="">
+					 <input class="destination" type="radio" name="destination_type" value="Mountain">
 					</label>
 				</a>
 				<a href="">
 				<label>
 				  <i class="fa fa-bicycle wow fadeIn animated"></i>
 					<h5 class="wow fadeIn animated">Europe</h5>
-					 <input class="destination" type="radio" name="destination_type" value="">
+					 <input class="destination" type="radio" name="destination_type" value="Europe">
 					</label>
 				</a>
 				<a href="">
 				<label>
 				 <i class="fa fa-futbol-o wow fadeIn animated"></i>
 					<h5 class="wow fadeIn animated">Latin America</h5>
-					 <input class="destination" type="radio" name="destination_type" value="">
+					 <input class="destination" type="radio" name="destination_type" value="Latin America">
 					</label>
 				</a>
 				
@@ -77,7 +77,7 @@
 				<label>
 				 <i class="fa fa-star wow fadeIn animated"></i>
 					<h5 class="wow fadeIn animated">Surprise Me</h5>
-					 <input class="destination" type="radio" name="destination_type" value="">
+					 <input class="destination" type="radio" name="destination_type" value="Surprise Me">
 					</label>
 			   </a>
 				
