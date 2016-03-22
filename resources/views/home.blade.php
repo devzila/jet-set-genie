@@ -164,5 +164,55 @@
 
 @section('additional-scripts')
 <script src="{{ asset('js/scripts.js') }}"></script>
-<script type="text/javascript">mixpanel.track("Home View");</script>
+<script type="text/javascript">
+	mixpanel.track("Home View");
+	$.widget( "custom.catcomplete", $.ui.autocomplete, {
+		_create: function() {
+		  this._super();
+		  this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+		},
+		_renderMenu: function( ul, items ) {
+		  var that = this;
+		  $.each( items, function( index, item ) {
+			var li;
+			 
+			li = that._renderItemData( ul, item );
+			if ( item.category ) {
+			  li.attr( "aria-label", item.label + " : " + item.code );
+			}
+		  });
+		}
+		});
+		
+	$(document).ready(function(){
+		var xhr;
+		  $( "#homeairport" ).catcomplete({
+			delay: 0,
+			source: function( request, response ) {
+			  var regex = new RegExp(request.term, 'i');
+			  if(xhr){
+				xhr.abort();
+			  }
+			  xhr = $.ajax({
+				  url: "airports.json",
+				  dataType: "json",
+				  cache: false,
+				  success: function(data) {
+					response($.map(data.list, function(item) {
+					  if(regex.test(item.label)){
+						return {
+							label: item.label,
+							country: item.country,
+							code: item.code
+						};
+					  }
+					}));
+				  }
+			  });
+			},
+			minlength:0
+		  });
+	});
+		  
+</script>
 @stop

@@ -1503,3 +1503,13 @@ footer {
     background: #fff;
     display: inline-block;
 }
+
+.ui-autocomplete {
+	max-height: 250px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+* html .ui-autocomplete {
+height: 250px;
+}
