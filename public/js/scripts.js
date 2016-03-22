@@ -1,4 +1,4 @@
- $(document).ready(function(){
+$(document).ready(function(){
 	formvalidate = $("#jetform").validate({
 		highlight: function (element, errorClass, validClass) {
 			console.log('........' +element.id);
@@ -51,41 +51,43 @@
 		);
 		
 		var formData = $('#jetform').serialize();
-
+		
+		var name, email, leaving_date, returning_date, home_airport, ip, browser;
+		name = $("input[name='name']").val();
+		email = $("input[name='email']").val();
+		leaving_date = $("input[name='leaving_date']").val();
+		returning_date = $("input[name='returning_date']").val();
+		home_airport = $("input[name='home_airport']").val();
+		ip = $("input[name='ip']").val();
+		browser = $("input[name='browser']").val();
+		destination_type = $("input[name='destination_type']").val();
+		
+ 
 		$.ajax({
-			url:'/jetsetgenie/api/visitor',
-			type:'POST',
-			data:$("#jetform").serialize(),
+			type: 'POST',
+			url: 'http://localhost/jetsetgenie/api/visitors/',			
+			data: {name:name , email:email , leaving_date:leaving_date, returning_date:returning_date, home_airport:home_airport, ip:ip, browser:browser, destination_type:destination_type},
+			dataType: 'json',
 			success:function(data){				 
-				$('#jetform1').html('<div class="alert alert-success"><h3>Thank you for your Request</h3><p>We\'ll get back to you as soon as possible.</p></div>');
+				/*  
+				
+				$('.email-alert').show();
+				$('.jetform1').hide();
 				
 				setTimeout(
 				function()
 				{
-					$("#myModal").modal('hide');							 
+					$("#myModal").modal('hide');
+					$('#jetform').trigger('reset');
+									
+					$('.step-3').hide('slide', {direction: 'right'}, 200, function(){
+						$('.step-1').show('slide', {direction: 'left'}, 200);
+					});					
 				}, 3000);
 				
-				$('#jetform').trigger('reset');
+				*/				
 			}
-		});
-		
-		/* remove this code after we've api ready */
-		$('#jetform1').html('<div class="alert alert-success"><h3>Thank you for your Request</h3><p>We\'ll get back to you as soon as possible.</p></div>');
-				
-		setTimeout(
-		function()
-		{
-			$("#myModal").modal('hide');
-			$('.step-3').hide('slide', {direction: 'right'}, 200, function(){
-				$('.step-1').show('slide', {direction: 'left'}, 200);
-			});
-			$('#jetform').trigger('reset');
-		}, 3000);
-		
-		
-		
-		/* remove this code after we've api ready */
-		
+		});		
 	});
 
 
