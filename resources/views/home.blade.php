@@ -36,6 +36,7 @@
 		  </div>
 
 		  <div class="slider-step2 step-2" style="display:none;">
+		  <a href="javascript://" class="step-back"></a>
 		   <div class="steps col-lg-9 col-md-10 col-sm-12 col-xs-12 col-centered">        
 			  <h2>HAVE A DESTINATION IN MIND?</h2>          
 			
@@ -131,19 +132,23 @@
 							<h2 class="lobster-font modal-title" align="center">Jet <span class="light">Set</span> Genie is still in Beta</h2>
 							<p align="center">We'll email you your search results</p>                        
 						  </div>
-						  <div class="modal-body jetform1" id="jetform1">
-
+						  <div class="modal-body" id="jetform1">
+							<div class="jetform1">
 							  <div class="form-group">                            
 								<input type="text" class="form-control" name="name" id="name" placeholder="NAME" required/>
 							  </div>
 							  <div class="form-group">                            
 								<input type="email" name="email" class="form-control" id="email" placeholder="EMAIL" required/>
 							  </div>  
-													  
-							  <button type="button" id="jetbutton1" class="btn btn-default jsg-submit">Go</button>
-	   
+							  <div class="action-btn">				  
+								<button type="button" id="jetbutton1" class="btn btn-default jsg-submit">Go</button>
+							  </div>
+							  </div>
+							  <div class="alert email-alert-error alert-error" style="display:none">The request to send email failed. Please try again.</p></div>
+							<div class="alert email-alert alert-success" style="display:none"><h3>Thank you for your Request</h3><p>We\'ll get back to you as soon as possible.</p></div>
+							  
 						  </div>
-						  <div class="alert email-alert alert-success" style="display:none"><h3>Thank you for your Request</h3><p>We\'ll get back to you as soon as possible.</p></div>
+						  
 						  <div class="modal-body" align="center";>
 							<p>JetSetGenie will never spam you or<br> share your contact information</p>
 						  </div>
