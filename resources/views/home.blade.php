@@ -45,7 +45,7 @@
 				 <label>
 						<i class="fa fa-anchor wow fadeIn animated"></i>
 						<h5 class="wow fadeIn animated">Beach</h5>
-						<input class="destination" type="radio" name="destination_type" value="">
+						<input class="destination" type="radio" name="destination_type" value="Beach">
 					
 					</label>
 					
@@ -55,21 +55,21 @@
 				<label>
 				 <i class="fa fa-tree wow fadeIn animated"></i>
 					<h5 class="wow fadeIn animated">Mountain</h5>
-					 <input class="destination" type="radio" name="destination_type" value="">
+					 <input class="destination" type="radio" name="destination_type" value="Mountain">
 					</label>
 				</a>
 				<a href="">
 				<label>
 				  <i class="fa fa-bicycle wow fadeIn animated"></i>
 					<h5 class="wow fadeIn animated">Europe</h5>
-					 <input class="destination" type="radio" name="destination_type" value="">
+					 <input class="destination" type="radio" name="destination_type" value="Europe">
 					</label>
 				</a>
 				<a href="">
 				<label>
 				 <i class="fa fa-futbol-o wow fadeIn animated"></i>
 					<h5 class="wow fadeIn animated">Latin America</h5>
-					 <input class="destination" type="radio" name="destination_type" value="">
+					 <input class="destination" type="radio" name="destination_type" value="Latin America">
 					</label>
 				</a>
 				
@@ -77,7 +77,7 @@
 				<label>
 				 <i class="fa fa-star wow fadeIn animated"></i>
 					<h5 class="wow fadeIn animated">Surprise Me</h5>
-					 <input class="destination" type="radio" name="destination_type" value="">
+					 <input class="destination" type="radio" name="destination_type" value="Surprise Me">
 					</label>
 			   </a>
 				
@@ -164,5 +164,55 @@
 
 @section('additional-scripts')
 <script src="{{ asset('js/scripts.js') }}"></script>
-<script type="text/javascript">mixpanel.track("Home View");</script>
+<script type="text/javascript">
+	mixpanel.track("Home View");
+	$.widget( "custom.catcomplete", $.ui.autocomplete, {
+		_create: function() {
+		  this._super();
+		  this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+		},
+		_renderMenu: function( ul, items ) {
+		  var that = this;
+		  $.each( items, function( index, item ) {
+			var li;
+			 
+			li = that._renderItemData( ul, item );
+			if ( item.category ) {
+			  li.attr( "aria-label", item.label + " : " + item.code );
+			}
+		  });
+		}
+		});
+		
+	$(document).ready(function(){
+		var xhr;
+		  $( "#homeairport" ).catcomplete({
+			delay: 0,
+			source: function( request, response ) {
+			  var regex = new RegExp(request.term, 'i');
+			  if(xhr){
+				xhr.abort();
+			  }
+			  xhr = $.ajax({
+				  url: "airports.json",
+				  dataType: "json",
+				  cache: false,
+				  success: function(data) {
+					response($.map(data.list, function(item) {
+					  if(regex.test(item.label)){
+						return {
+							label: item.label,
+							country: item.country,
+							code: item.code
+						};
+					  }
+					}));
+				  }
+			  });
+			},
+			minlength:0
+		  });
+	});
+		  
+</script>
 @stop
