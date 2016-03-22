@@ -48,7 +48,7 @@ class VisitorsController extends Controller
         $emails = ['nilay@devzila.com', 'ophia.b.popova@gmail.com', 'jnolan@mba2017.hbs.edu', 'jgoldstein@mba2017.hbs.edu', 'hchan@mba2017.hbs.edu', 'scook@mba2017.hbs.edu'];
 
 
-        Mail::send('email/visitor',['visitor' => $visitor], function($message)
+        Mail::send('email/visitor',['visitor' => $visitor], function($message) use($emails)
         {
             $message->from('jetset@devzila.com', 'JetSetGenie');
             $message->to($emails);
