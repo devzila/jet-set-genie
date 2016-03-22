@@ -42,7 +42,11 @@ class VisitorsController extends Controller
     {
         $visitor = Visitor::create([
                 'name' => $request->input('name'),
-                'email' => $request->input('email')
+                'email' => $request->input('email'),
+                'leaving_date' => $request->input('leaving_date'),
+                'returning_date' => $request->input('returning_date'),
+                'destination_type' => $request->input('destination_type'),
+                'home_airport' => $request->input('home_airport')
             ]);
 
         //$emails = ['nilay@devzila.com', 'ophia.b.popova@gmail.com', 'jnolan@mba2017.hbs.edu', 'jgoldstein@mba2017.hbs.edu', 'hchan@mba2017.hbs.edu', 'scook@mba2017.hbs.edu'];
