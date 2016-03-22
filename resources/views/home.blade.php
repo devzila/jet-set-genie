@@ -1,25 +1,23 @@
 @extends("layouts.master")
 
 @section('content')
-<form id="jetform" class="jetform">
+<form id="jetform" class="jetform" method="POST">
 	<section id="jsg-content">
 	<section class="jsg-banner wow fadeIn animated ">
 	  <div class="container">
 		<div class="row row-centered main">
 		<div id="slider">
 		 <div class="slider-step1 step-1">
-		  <div class="steps col-lg-6 col-md-7 col-sm-9 col-xs-12 col-centered">
-			
-			
+		  <div class="steps col-lg-6 col-md-7 col-sm-9 col-xs-12 col-centered">			
 			  <h2>WHEN CAN YOU GO?</h2>
 			  <div class="home-airport-form">
 				<div class="row">
 				  <div class="col-lg-10 col-sm-10">
 					<div class="form-group form-inline">
 					  <label class="control-label">LEAVING</label>
-					  <input class="form-control leaving datepicker" type="text" name="leavingdate" id="leavingdate" value="" placeholder="MM/DD/YY" required />               
+					  <input class="form-control leaving datepicker" type="text" name="leaving_date" id="leavingdate" value="" placeholder="MM/DD/YY" required />               
 					  <label class="control-label">RETURNING</label>
-					  <input class="form-control returning datepicker" type="text" id="returningdate" name="returningdate" value="" placeholder="MM/DD/YY" required />    
+					  <input class="form-control returning datepicker" type="text" id="returningdate" name="returning_date" value="" placeholder="MM/DD/YY" required />    
 					</div>
 				  </div>
 				</div>
@@ -27,7 +25,7 @@
 					<div class="col-lg-12 col-sm-12">
 					<div class="form-group form-inline">
 					  <label class="control-label ">HOME AIRPORT</label>
-					  <input class="form-control home-airport" id="homeairport" placeholder="Hometown or Airport Code" type="text" name="homeairport" value="" required/>
+					  <input class="form-control home-airport" id="homeairport" placeholder="Hometown or Airport Code" type="text" name="home_airport" value="" required/>
 					  <!--<button class="jet-set-submit" type="submit" value="jetset">JetSet!</button>-->
 					  <button class="btn btn-default jsg-submit" id="jetbutton" type="button">JETSET!</button>
 				  </div></div>
@@ -46,7 +44,7 @@
 				 <label>
 						<i class="fa fa-anchor wow fadeIn animated"></i>
 						<h5 class="wow fadeIn animated">Beach</h5>
-						<input class="destination" type="radio" name="destination" value="">
+						<input class="destination" type="radio" name="destination_type" value="">
 					
 					</label>
 					
@@ -56,21 +54,21 @@
 				<label>
 				 <i class="fa fa-tree wow fadeIn animated"></i>
 					<h5 class="wow fadeIn animated">Mountain</h5>
-					 <input class="destination" type="radio" name="destination" value="">
+					 <input class="destination" type="radio" name="destination_type" value="">
 					</label>
 				</a>
 				<a href="">
 				<label>
 				  <i class="fa fa-bicycle wow fadeIn animated"></i>
 					<h5 class="wow fadeIn animated">Europe</h5>
-					 <input class="destination" type="radio" name="destination" value="">
+					 <input class="destination" type="radio" name="destination_type" value="">
 					</label>
 				</a>
 				<a href="">
 				<label>
 				 <i class="fa fa-futbol-o wow fadeIn animated"></i>
 					<h5 class="wow fadeIn animated">Latin America</h5>
-					 <input class="destination" type="radio" name="destination" value="">
+					 <input class="destination" type="radio" name="destination_type" value="">
 					</label>
 				</a>
 				
@@ -78,7 +76,7 @@
 				<label>
 				 <i class="fa fa-star wow fadeIn animated"></i>
 					<h5 class="wow fadeIn animated">Surprise Me</h5>
-					 <input class="destination" type="radio" name="destination" value="">
+					 <input class="destination" type="radio" name="destination_type" value="">
 					</label>
 			   </a>
 				
@@ -95,19 +93,10 @@
 			  </div>
 			  </div>
 		   </div>
-		 
-		   
-		   
-	 
-		   </div>
-		
+	   </div>		
 		</div>
-
 	  </div>
-	  
-
 	</section>
-
 
 	<section class="inner-content">
 	  <div class="container">
@@ -154,6 +143,7 @@
 							  <button type="button" id="jetbutton1" class="btn btn-default jsg-submit">Go</button>
 	   
 						  </div>
+						  <div class="alert email-alert alert-success" style="display:none"><h3>Thank you for your Request</h3><p>We\'ll get back to you as soon as possible.</p></div>
 						  <div class="modal-body" align="center";>
 							<p>JetSetGenie will never spam you or<br> share your contact information</p>
 						  </div>
@@ -162,6 +152,8 @@
 					  </div>
 						</div>
 	</section>
+	<input type="hidden" name="ip" />
+	<input type="hidden" name="browser" />
 </form>
 @stop
 
