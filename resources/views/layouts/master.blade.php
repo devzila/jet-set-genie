@@ -9,7 +9,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lobster|Roboto:400,300italic,300,400italic,500,500italic,700,700italic,900,900italic,100italic,100' rel='stylesheet' type='text/css'>
     <link rel='stylesheet' href="{{ asset('font-awesome/css/font-awesome.min.css') }}"  type='text/css' media='all' />
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>

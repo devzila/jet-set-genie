@@ -24,7 +24,7 @@
 				<div class="row">
 					<div class="col-lg-12 col-sm-12">
 					<div class="form-group form-inline">
-					  <label class="control-label ">HOME AIRPORT</label>
+					  <label class="control-label ">From&nbsp;&nbsp;&nbsp;&nbsp;</label>
 					  <input class="form-control home-airport" id="homeairport" placeholder="Hometown or Airport Code" type="text" name="home_airport" value="" required/>
 					  <!--<button class="jet-set-submit" type="submit" value="jetset">JetSet!</button>-->
 					  <button class="btn btn-default jsg-submit" id="jetbutton" type="button">JETSET!</button>
@@ -103,7 +103,7 @@
 	  <div class="container">
 		<div class="row row-centered">
 		  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<h3 class="lobster-font wow animated fadeIn">How Does Jet <span class="light">Set</span> Genie Work ?</h3>
+			<h3 class="lobster-font wow animated fadeIn">How Does Jet<span class="light">Set</span>Genie Work?</h3>
 		  </div>
 		  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 jsg-work"> <img src="{{ asset('assets/iconmonstr-calendar-4-240.png') }}" alt="" class="wow fadeIn animated" />
 			<h4 class="wow fadeIn animated">You tell us when.<br/>
@@ -129,7 +129,7 @@
 						<div class="modal-content">
 						  <div class="modal-header">
 							<!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-							<h2 class="lobster-font modal-title" align="center">Jet <span class="light">Set</span> Genie is still in Beta</h2>
+							<h2 class="lobster-font modal-title" align="center">Jet<span class="light">Set</span>Genie is still in Beta</h2>
 							<p align="center">We'll email you your search results</p>                        
 						  </div>
 						  <div class="modal-body" id="jetform1">
@@ -144,8 +144,8 @@
 								<button type="button" id="jetbutton1" class="btn btn-default jsg-submit">Go</button>
 							  </div>
 							  </div>
-							  <div class="alert email-alert-error alert-error" style="display:none">The request to send email failed. Please try again.</p></div>
-							<div class="alert email-alert alert-success" style="display:none"><h3>Thank you for your Request</h3><p>We\'ll get back to you as soon as possible.</p></div>
+							  <div class="alert email-alert-error alert-error text-center" style="display:none">The request to send email failed. Please try again.</p></div>
+							<div class="alert email-alert alert-success text-center" style="display:none"><h3>Thank you for your Request</h3><p>We'll get back to you as soon as possible.</p></div>
 							  
 						  </div>
 						  
@@ -210,8 +210,9 @@
 				  }
 			  });
 			},
-			minlength:0
+			minlength:3
 		  });
+		
 	});
 		  
 </script>

@@ -1,9 +1,7 @@
-*
-{
-	margin:0px;
-	padding:0px;
+body{
+	font-family:Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight:300;
 }
-
 
 #jetform1 h3{
 	margin-top:0;
@@ -20,6 +18,7 @@
 .action-btn{
 	text-align:center;
 }
+
 /*html, body {height: 100%;}*/
 
 .form-control::-moz-placeholder, .form-control::-webkit-input-placeholder {
@@ -72,6 +71,7 @@ input[type=date]::-webkit-outer-spin-button {
      font-size: 53px;
       margin: 20px 0 25px;
     text-transform: uppercase;
+	font-weight:300;
 	
 }
 .steps label {
@@ -116,7 +116,7 @@ input[type=date]::-webkit-outer-spin-button {
 .inner-content h3
 {
 	margin: 0;
-    padding: 0 0 30px;
+    padding: 0 0 50px;
 }
 
 
@@ -158,6 +158,8 @@ input[type=date]::-webkit-outer-spin-button {
     margin-top: 20px;
     min-height: 33px;
     text-transform: uppercase;
+	font-weight:300;
+	font-size:18px;
 }
 .footer-copyright p {
     color: #fff;
@@ -1512,4 +1514,19 @@ footer {
 
 * html .ui-autocomplete {
 height: 250px;
+}
+* {
+	transition: all 0.5s ease, left 0.001ms, top 0.001ms;
+}
+.ui-autocomplete{
+	transition:none;
+}
+
+.ui-menu .ui-menu-item{
+	border: none;
+    padding: 5px 10px;
+}
+
+.email-alert p{
+	color:#2a2a2a !important;
 }
