@@ -1,5 +1,10 @@
 @extends("layouts.master")
 
+
+@section('jsg-page-title')
+	<title>JetSetGenie | WHEN CAN YOU GO?</title>
+@stop
+
 @section('content')
 <form id="jetform" class="jetform" method="POST">
 	<section id="jsg-content">
