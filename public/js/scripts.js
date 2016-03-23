@@ -136,9 +136,13 @@ $(document).ready(function(){
 
 		//formvalidate = $("#jetform").validate();
 		//formvalidate.element( $("input[name='destination']") );
-
+		var selected_destination = $()
+		mixpanel.track(
+			"Destination Select",
+			{"type":  $(this).val() } 
+		);
+		
 		$('.step-2').hide('slide', {direction: 'left'}, 200, function(){
-			mixpanel.track("Destination Select");
 			$('.step-3').show('slide', {direction: 'right'}, 200, function(){
 				setTimeout(
 						function()
