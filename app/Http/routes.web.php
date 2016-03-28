@@ -19,10 +19,15 @@ Route::post('/', 'ajaxController@create');
 Route::get('/login', function() {
   return View::make('login');
 });
+
 Route::post('/login', 'AccountController@login');
 
 Route::get('/flight-results', function () {
     return view('flight-results');
+});
+
+Route::get('/favorites', function () {
+    return view('favorites');
 });
 
 Route::get('/email', function () {
