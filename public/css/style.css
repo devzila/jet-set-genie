@@ -51,6 +51,7 @@ input[type=date]::-webkit-outer-spin-button {
 	right:15px;
 	text-align:center;
 	cursor:pointer;
+	color:#fff;
 }
 
 /*#jsg-content
@@ -765,8 +766,16 @@ a:focus, a:hover {
 .blank-bg h5 {
     margin-top: 5px;
 }
-li
-{
+
+.removeicon{
+	display:block;
+	padding:2px;
+	cursor:pointer;
+}
+
+.booking-time ul{
+	margin:0;
+	padding:0;
 	list-style:none;
 }
 .booking-time li {
@@ -817,7 +826,7 @@ li
 .jsg-hotel-tabs-inner .nav-pills {
     margin-bottom: 15px;
 }
-.jsg-hotel-tabs-inner .nav-pills {
+.jsg-hotel-tabs-inner .nav-. {
     border-bottom: 2px solid #33cccc;
 }
 .jsg-hotel-tabs-inner .nav-pills > li > a {
@@ -833,10 +842,11 @@ li
 	text-align: left;
 	float: left;
 }
-.star img {
+.star {
     background-color: #33cccc;
-    margin-top: -15px;
-    padding: 7px 5px;
+	display:block;
+	padding:10px;
+	color:#fff;
 }
 .country_logo > img {
     background-color: inherit;

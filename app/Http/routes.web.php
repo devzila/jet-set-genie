@@ -23,7 +23,7 @@ Route::get('/login', function() {
 Route::post('/login', 'AccountController@login');
 
 Route::get('/flight-results', function () {
-    return view('flight-results');
+    return view('flights');
 });
 
 Route::get('/favorites', function () {

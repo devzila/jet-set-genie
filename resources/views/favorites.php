@@ -2,11 +2,11 @@
 
 
 @section('jsg-page-title')
-	<title>JetSetGenie | My Favorites?</title>
+	<title>JetSetGenie | My Favorites</title>
 @stop
 
 @section('content') 
-<section class="app-content container-fluid" data-ng-controller="ctrlFavorites">
+<section class="container-fluid" data-ng-controller="ctrlFavorites">
 
 <div class="row row-centered favorites-section"  >
 	<div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 col-centered">    

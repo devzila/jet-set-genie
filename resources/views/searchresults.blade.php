@@ -6,7 +6,7 @@
 @stop
 
 @section('content') 
-<section class="app-content container-fluid" data-ng-controller="ctrlFavorites">
+<section class="app-content container-fluid" data-ng-controller="ctrlSearchResults">
 
 <div class="row row-centered favorites-section"  >
 	<div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 col-centered">    
@@ -34,15 +34,7 @@
 							<p>Chepest Flight</p>
 							<p>@{{ favorite.cheapestFlight }}</p>
 							</div>
-						</div>
-						<div class="blank-bg" data-ng-repeat="flight in favorite.flights"> 							
-							<a class="removeicon" data-ng-click="deleteflight(parentIndex, $index)" title="Remove Flight" > <i class="fa fa-times"></i> </a>
-							<div class="box-info">                                           
-							<h5>FLIGHT</h5>
-							<p>@{{ flight.price + " " + flight.name }}</p>
-							<p>@{{ flight.departDate }}</p>                                            
-							</div>
-						</div>
+						</div>						
 					<div class="clear"></div>
 					</div>
 				</div>
