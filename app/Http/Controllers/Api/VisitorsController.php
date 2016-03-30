@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Response;
 use App\Models\Visitor;
+use Mail;
 
 class VisitorsController extends Controller
 {
@@ -39,12 +40,28 @@ class VisitorsController extends Controller
      */
     public function store(Request $request)
     {
-        $result = Visitor::create([
+        $visitor = Visitor::create([
                 'name' => $request->input('name'),
-                'email' => $request->input('email')
+                'email' => $request->input('email'),
+                'leaving_date' => $request->input('leaving_date'),
+                'returning_date' => $request->input('returning_date'),
+                'destination_type' => $request->input('destination_type'),
+                'home_airport' => $request->input('home_airport')
             ]);
 
-        return Response::json($result, 200);
+        $emails = ['nilay@devzila.com', 'ophia.b.popova@gmail.com', 'jnolan@mba2017.hbs.edu', 'jgoldstein@mba2017.hbs.edu', 'hchan@mba2017.hbs.edu', 'scook@mba2017.hbs.edu'];
+        //$emails = ['nilay@devzila.com', 'kiran@devzila.com', 'kawal@ideapps.in'];
+
+
+        Mail::send('email/visitor',['visitor' => $visitor], function($message) use($emails)
+        {
+            $message->from('jetset@devzila.com', 'JetSetGenie');
+            $message->to($emails);
+            $message->subject('Someone signed up for JetSetGenie!');
+        });
+
+
+        return Response::json($visitor, 200);
         //
     }
 
@@ -93,5 +110,7 @@ class VisitorsController extends Controller
     public function destroy($id)
     {
         //
+
+
     }
 }

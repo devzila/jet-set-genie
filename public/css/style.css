@@ -1,12 +1,26 @@
-*
-{
-	margin:0px;
-	padding:0px;
+body, html{
+	height:100%;
 }
 
+body{
+	font-family:Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight:300;
+}
 
 #jetform1 h3{
 	margin-top:0;
+}
+
+#jetform1 .form-group{
+	height:35px;
+}
+
+.jetform1{
+	padding:0 10%;
+}
+
+.action-btn{
+	text-align:center;
 }
 
 /*html, body {height: 100%;}*/
@@ -30,13 +44,25 @@ input[type=date]::-webkit-outer-spin-button {
   
 }
 
+.setFavorite{
+	width:30px;
+	height:30px;
+	position:absolute;
+	right:15px;
+	text-align:center;
+	cursor:pointer;
+	color:#fff;
+}
+
 /*#jsg-content
 {
 	 min-height: 700px;
 }*/
 .jsg-banner {
-    background: rgba(0, 0, 0, 0) url("../assets/sunset-plane.png") no-repeat scroll 100% center / cover ;
+    background: rgba(0, 0, 0, 0) url("../assets/jet-set-genie.jpg") no-repeat scroll 100% center / cover ;
 	min-height: 400px;
+	position:relative;
+	top:0;
 }
  
 .col-centered {
@@ -59,6 +85,7 @@ input[type=date]::-webkit-outer-spin-button {
      font-size: 53px;
       margin: 20px 0 25px;
     text-transform: uppercase;
+	font-weight:300;
 	
 }
 .steps label {
@@ -103,7 +130,7 @@ input[type=date]::-webkit-outer-spin-button {
 .inner-content h3
 {
 	margin: 0;
-    padding: 0 0 30px;
+    padding: 0 0 50px;
 }
 
 
@@ -145,6 +172,8 @@ input[type=date]::-webkit-outer-spin-button {
     margin-top: 20px;
     min-height: 33px;
     text-transform: uppercase;
+	font-weight:300;
+	font-size:18px;
 }
 .footer-copyright p {
     color: #fff;
@@ -274,7 +303,21 @@ p, h4
     border-color: #33cccc;
     color: #fff;
 	/*   height: 30px;*/
-	/*padding: 6px 30px; */
+	padding: 6px 30px;
+}
+.form-inline .jsg-submit{
+	padding-left:10px;
+	padding-right:10px;
+}
+.step-back{
+	display:block;
+	position:absolute;
+	left:15px;
+	width:53px;
+	height:100%;
+	top:0;
+	background:url("../assets/step-back.png") no-repeat center center;
+	z-index:100;
 }
 .step-1 .jsg-submit 
 {
@@ -358,7 +401,9 @@ p, h4
 }
 
 
-
+.clear{
+	clear:both;
+}
 
 
 .lists .btn.active h5, .lists .btn.active span.fa{
@@ -423,11 +468,24 @@ p, h4
 
 
 
-/*.box {
-	
-    min-height: 140px;
-    
-}*/
+ .box {
+	padding:2px;
+	box-sizing:border-box;
+	height:auto;
+	padding-bottom:0;
+} 
+
+.box h5 {
+    margin-bottom: 15px;
+    margin-top: 20px;
+    min-height: 29px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+	font-weight:300;
+	font-size:1.4em;
+}
+
 .hr {
     min-height: 50px;
 }
@@ -457,17 +515,14 @@ p, h4
 
 .box-info > p {
     color: #fff;
-    font-size: 10px;
-    line-height: 10px;
+    font-size: 12px;
+    line-height: 13px;
 }
 .light-blue
 {
 	border: 2px solid #33cccc;	
 }
-
-.dark-blue {
-    border: 2px solid #028c90;
-}
+ 
 .yellow
 {
 	border: 2px solid #ffc000;	
@@ -484,6 +539,7 @@ p, h4
 .list-box
 {
 	margin-bottom:20px;
+	height:auto;
 }
 .search-options .box-info > p {
     color: #b1b1b1;
@@ -672,78 +728,11 @@ a:focus, a:hover {
     text-decoration: none;
 }
 .blank-bg {
-    border-bottom: 2px solid #028c90;
-   /* min-height: 100px;*/
-	 padding: 5px;
-	/* display: none;*/
-}
-
-.dark-blue .blank-bg {
-    border-bottom: 2px solid #028c90;
-}
-.dark-blue .blank-bg:last-child {
-    border-bottom: 0px;
-}
-.dark-blue .box-detail {
-    background-color:#028c90;
-  /*  padding: 5px;*/
-	/*min-height: 136px;*/
-}
-
-
-.light-blue .blank-bg {
-    border-bottom: 2px solid #33cccc;
-}
-.light-blue .blank-bg:last-child {
-    border-bottom: 0px;
-}
-.light-blue .box-detail {
-    background-color:#33cccc;
-   /* padding: 5px;*/
-	/*min-height: 136px;*/
-}
-
-
-
-
-.yellow .blank-bg {
-    border-bottom: 2px solid #ffc000;
-}
-.yellow .blank-bg:last-child {
-    border-bottom: 0px;
-}
-.yellow .box-detail {
-    background-color:#ffc000;
-   /* padding: 5px;*/
-	/*min-height: 136px;*/
-}
-
-
-.grey .blank-bg {
-    border-bottom: 2px solid #7f7f7f;
-}
-.grey .blank-bg:last-child {
-    border-bottom: 0px;
-}
-.grey .box-detail {
-    background-color:#7f7f7f;
-   /* padding: 5px;*/
-	/*min-height: 136px;*/
-}
-
-
-.light-grey .blank-bg {
-    border-bottom: 2px solid #bfbfbf;
-}
-.light-grey .blank-bg:last-child {
-    border-bottom: 0px;
-}
-.light-grey .box-detail {
-    background-color:#bfbfbf;
-    /*padding: 5px;*/
-	/*min-height: 136px;*/
-}
-
+	 margin-bottom: 2px;
+	 padding:5px;
+	background:#fff;
+}  
+   
 .favorites-section .fav-share {
     text-align: right;
 	margin-bottom: 20px;
@@ -758,7 +747,7 @@ a:focus, a:hover {
     color: #028c90;
     text-align: left;
 	min-height: 15px;
-	
+	margin:0;
 }
 .box-detail > img {
     float: right;
@@ -777,8 +766,16 @@ a:focus, a:hover {
 .blank-bg h5 {
     margin-top: 5px;
 }
-li
-{
+
+.removeicon{
+	display:block;
+	padding:2px;
+	cursor:pointer;
+}
+
+.booking-time ul{
+	margin:0;
+	padding:0;
 	list-style:none;
 }
 .booking-time li {
@@ -804,6 +801,7 @@ li
 	  padding: 3px 5px;
    
 }
+.app-content{ min-height:80%; }
 .jsg-hotel-tabs-inner .left-part {
     padding: 0;
 }
@@ -828,7 +826,7 @@ li
 .jsg-hotel-tabs-inner .nav-pills {
     margin-bottom: 15px;
 }
-.jsg-hotel-tabs-inner .nav-pills {
+.jsg-hotel-tabs-inner .nav-. {
     border-bottom: 2px solid #33cccc;
 }
 .jsg-hotel-tabs-inner .nav-pills > li > a {
@@ -844,10 +842,11 @@ li
 	text-align: left;
 	float: left;
 }
-.star img {
+.star {
     background-color: #33cccc;
-    margin-top: -15px;
-    padding: 7px 5px;
+	display:block;
+	padding:10px;
+	color:#fff;
 }
 .country_logo > img {
     background-color: inherit;
@@ -996,6 +995,7 @@ li
 .box-detail {
     display: block;
     padding: 5px;
+	box-sizing:border-box;
 }
 
 .middle-title {
@@ -1084,12 +1084,6 @@ li
 	font-size: 13px;
     margin-left: 2px;
 }
-
-
-
-
-
-
 
 @media only screen and (max-width:1024px)
 {
@@ -1309,14 +1303,6 @@ footer {
 .step-1 .jsg-submit {
     margin: 20px 0;
 }
-
-
-
-
-
-
-
-
 }
 
 
@@ -1426,8 +1412,12 @@ footer {
 
 }
 
-@media only screen and (max-width:375px)
+@media only screen and (max-width:450px)
 {
+	.list-box{
+		width:100%;
+	}
+ 
 .step-4 .modal-dialog {
     width: 300px;
    
@@ -1450,5 +1440,60 @@ footer {
 
 }
 
+@media only screen and (min-width:1550px){
+	.jsg-banner{
+		min-height: 505px;
+	}
+	.jsg-footer{
+		position:absolute;
+		bottom:0;
+		width:100%;
+	}
+}
 
 
+
+
+.ui-datepicker-calendar .ui-state-default{
+	border-color:#fff !important;
+	background:#fff !important;
+}
+
+.ui-datepicker-calendar .ui-state-default:hover{
+	background:#33cccc !important;
+	color:#fff !important;
+}
+
+.error-on-form{
+	color:#ff0000;
+	position: relative;
+    top: -26px;
+    left: 10px;
+    background: #fff;
+    display: inline-block;
+}
+
+.ui-autocomplete {
+	max-height: 250px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+* html .ui-autocomplete {
+height: 250px;
+}
+* {
+	transition: all 0.5s ease, left 0.001ms, top 0.001ms;
+}
+.ui-autocomplete{
+	transition:none;
+}
+
+.ui-menu .ui-menu-item{
+	border: none;
+    padding: 5px 10px;
+}
+
+.email-alert p{
+	color:#2a2a2a !important;
+}
