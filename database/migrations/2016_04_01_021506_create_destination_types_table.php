@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateVisitors1 extends Migration
+class CreateDestinationTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,7 @@ class UpdateVisitors1 extends Migration
      */
     public function up()
     {
-        Schema::table('visitors', function($table)
-        {
-            $table->string('leaving_date', 50)->nullable()->change();
-            $table->string('returning_date', 50)->nullable()->change();
-        });
+          DB::unprepared(file_get_contents("database/migrations/destination_types.sql"));
     }
 
     /**
