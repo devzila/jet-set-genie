@@ -23,8 +23,7 @@ class DestinationTypeAirportMappingController extends Controller
 			->where('destination_type_airport_mapping.destination_type_id','=',$id)
             ->get();
 		 
-		echo "<pre>";
-		print_r($data);
+	 return Response::json($data, 200);
     }
 
     /**
