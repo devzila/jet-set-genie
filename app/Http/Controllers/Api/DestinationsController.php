@@ -28,7 +28,21 @@ class DestinationsController extends Controller
 			->where('destination_type_airport_mapping.destination_type_id','=',$id)
             ->get();
 		 
-	 return Response::json($data, 200);
+	    foreach($data as $key => $value){
+            $duration = rand(30, 300);
+            if($duration < 60){
+                $duration = "$duration Minutes";
+            }
+            else{
+                $hour = intval($duration/60);
+                $min = $duration%60;
+
+                $duration = $min == 0 ? "$hour Hour(s)" : "$hour Hour(s) $min Minute(s)";
+            }
+            $data[$key]->duration = $duration;
+            $data[$key]->fare = '$' . rand(40, 2000);
+        }
+        return Response::json($data, 200);
     }
 
     /**
