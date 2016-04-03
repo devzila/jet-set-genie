@@ -10,16 +10,24 @@ use App\Models\DestinationTypes;
 
 class DestinationTypesController extends Controller 
 {
+
+    public function __construct(Request $request)
+    {
+        parent::__construct($request);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index(Request $request)
     {
-         $destination = DestinationTypes::all();
-		 return response()->json($destination);
-		 
+        return response()->json(['user' => $this->user ]);
+        $destination = DestinationTypes::all();
+        return response()->json($destination);
+
     }
 
     /**
@@ -51,6 +59,7 @@ class DestinationTypesController extends Controller
     public function show($id)
     {
         //
+
 		$destination = DestinationTypes::find($id);
 		return response()->json($destination);
     }
