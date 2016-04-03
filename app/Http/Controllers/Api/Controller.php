@@ -15,4 +15,3 @@ class Controller extends BaseController
         $this->user = $request->cookie('uuid') ? $request->cookie('uuid') : session('flash_uuid');
     }
 }
-

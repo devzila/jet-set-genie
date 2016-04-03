@@ -10,6 +10,11 @@ use Response;
 use DB;
 class DestinationsController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        parent::__construct($request);
+    }
+
     /**
      * Display a listing of the resource.
      *

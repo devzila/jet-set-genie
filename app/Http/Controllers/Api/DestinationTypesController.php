@@ -24,7 +24,6 @@ class DestinationTypesController extends Controller
      */
     public function index(Request $request)
     {
-        return response()->json(['user' => $this->user ]);
         $destination = DestinationTypes::all();
         return response()->json($destination);
 
