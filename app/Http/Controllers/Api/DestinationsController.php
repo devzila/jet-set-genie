@@ -8,7 +8,7 @@ use App\Http\Requests;
 use Response;
 
 use DB;
-class DestinationTypeAirportMappingController extends Controller 
+class DestinationsController extends Controller
 {
     /**
      * Display a listing of the resource.
