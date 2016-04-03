@@ -18,7 +18,7 @@ class DestinationTypesController extends Controller
     public function index() 
     {
          $destination = DestinationTypes::all();
-		 return $destination->toJson();
+		 return response()->json($destination);
 		 
     }
 
@@ -52,7 +52,7 @@ class DestinationTypesController extends Controller
     {
         //
 		$destination = DestinationTypes::find($id);
-		return $destination->toJson();
+		return response()->json($destination);
     }
 
     /**
