@@ -21,8 +21,7 @@ class DestinationTypeAirportMappingController extends Controller
             ->join('destination_type_airport_mapping', 'destination_type_airport_mapping.destination_id', '=', 'destination.id')
             ->select('destination.*')
 			->where('destination_type_airport_mapping.destination_type_id','=',$id)
-            ->get();
-		 
+            ->get();		 
 	 return Response::json($data, 200);
     }
 
