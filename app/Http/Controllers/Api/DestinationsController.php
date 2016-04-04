@@ -22,11 +22,17 @@ class DestinationsController extends Controller
      */
     public function index($id)  
     {
-		 $data = DB::table('destination')
+
+        $select = DB::table('destination')
             ->join('destination_type_airport_mapping', 'destination_type_airport_mapping.destination_id', '=', 'destination.id')
-            ->select('destination.*')
-			->where('destination_type_airport_mapping.destination_type_id','=',$id)
-            ->get();
+            ->select('destination.*');
+
+        // 0 = 'surprise me'
+        if($id != 0){
+            $select->where('destination_type_airport_mapping.destination_type_id','=',$id);
+        }
+
+        $data = $select->limit(40)->get();
 		 
 	    foreach($data as $key => $value){
             $duration = rand(30, 300);
