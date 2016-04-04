@@ -8,8 +8,13 @@ use App\Http\Requests;
 use Response;
 
 use DB;
-class DestinationTypeAirportMappingController extends Controller 
+class DestinationsController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        parent::__construct($request);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +26,23 @@ class DestinationTypeAirportMappingController extends Controller
             ->join('destination_type_airport_mapping', 'destination_type_airport_mapping.destination_id', '=', 'destination.id')
             ->select('destination.*')
 			->where('destination_type_airport_mapping.destination_type_id','=',$id)
-            ->get();		 
-	 return Response::json($data, 200);
+            ->get();
+		 
+	    foreach($data as $key => $value){
+            $duration = rand(30, 300);
+            if($duration < 60){
+                $duration = "$duration Minutes";
+            }
+            else{
+                $hour = intval($duration/60);
+                $min = $duration%60;
+
+                $duration = $min == 0 ? "$hour Hour(s)" : "$hour Hour(s) $min Minute(s)";
+            }
+            $data[$key]->duration = $duration;
+            $data[$key]->fare = '$' . rand(40, 2000);
+        }
+        return Response::json($data, 200);
     }
 
     /**
