@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Response;
 use App\Models\DestinationCards;
+use DB;
 
 class CardsController extends Controller
 {
@@ -20,10 +21,14 @@ class CardsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index()
     {
-         $cards = DestinationCards::all();
-		 return $cards->toJson();
+        $select = DB::table('destination_cards')
+            ->join('destination', 'destination.id', '=', 'destination_cards.destination_id')
+            ->where('destination_cards.user_id', $this->user)
+            ->select('destination.display_name', 'destination.city_name', 'destination.airport_code', 'destination.id');
+
+       return Response::json($select->get(), 200);
 		 
     }
 
@@ -45,7 +50,7 @@ class CardsController extends Controller
     public function store(Request $request)
     {
       $result = DestinationCards::create([
-        'user_id' => $request->input('id'),
+        'user_id' => $this->user,
          'destination_id' => $request->input('destination_id')
 		 ]);
         return Response::json($result, 200);
@@ -98,5 +103,6 @@ class CardsController extends Controller
         //
 		$card = DestinationCards::find($id);
 		$card->delete();
+        return Response::json(['status' => 'ok'], 200);
     }
 }
