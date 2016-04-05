@@ -26,6 +26,18 @@ Route::get('/flight-results', function () {
     return view('flights');
 });
 
+Route::get('/flight-results/leaving/{leaving}/returning/{returning}/origin/{origin}/destination/{destination}/type/{type}', function () {
+    return view('flights');
+});
+
+Route::get('/search-results', function () {
+    return view('searchresults');
+});
+
+Route::get('/search-results/leaving/{leaving}/returning/{returning}/origin/{origin}/type/{type}', function () {
+    return view('searchresults');
+});
+
 Route::get('/favorites', function () {
     return view('favorites');
 });

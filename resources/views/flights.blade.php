@@ -5,13 +5,19 @@
 @stop
 
 @section('content') 
-@include('shared.searchbox')
 <section class="app-content container-fluid" data-ng-controller="ctrlFlightResults">
+	<div class="row-centered serch-part">
+		<div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 col-centered">
+			<h3 class="lobster-font text-center">Search Results</h3>
+			@include('shared.searchbox')
+		</div>
+	</div>    
+	<div class="hr"></div>
 	<div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 col-centered">    
 		<div class="row row-centered flight-results"  > 
 		<div class="col-md-9 left-part">			 		
 				<div class="col-md-12 text-center">
-					<h4>SHOWING RESULTS TO PUERTO VALLARTA</h4>
+					<h4>SHOWING RESULTS TO @{{ destination }}</h4>
 				</div>				
 			 
 				<div class="col-lg-12 timing-results">
@@ -44,5 +50,31 @@
 @stop
  
 @section('additional-scripts')
+<script>
+	var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+	var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+	var sParams = {};
+	
 
+	var sQuery = (window.location.pathname).split("/"); 
+	airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
+	dest_code = (((decodeURIComponent(sQuery[9])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
+	//console.log(sQuery[9])
+	dt = new Date(sQuery[3]);	
+	leavingdt = days[dt.getDay()] + ", " + months[dt.getMonth()]  + " " + dt.getDate() + ", " + dt.getFullYear();
+	
+	dt = new Date(sQuery[5]);	
+	returningdt = days[dt.getDay()] + ", " + months[dt.getMonth()]  + " " + dt.getDate() + ", " + dt.getFullYear();
+	
+	sParams = {
+		leaving: leavingdt,
+		returning: returningdt,
+		origin: decodeURIComponent(sQuery[7]),
+		origincode: airportCode,
+		type: decodeURIComponent(sQuery[11]),
+		destination: decodeURIComponent(sQuery[9]),
+		dest_code: dest_code
+	}
+	console.log(sParams)
+</script>
 @stop

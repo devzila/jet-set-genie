@@ -15,14 +15,15 @@
 		 <div class="slider-step1 step-1">
 		  <div class="steps col-lg-6 col-md-7 col-sm-9 col-xs-12 col-centered">			
 			  <h2>WHEN CAN YOU GO?</h2>
+			 
 			  <div class="home-airport-form">
 				<div class="row">
 				  <div class="col-lg-10 col-sm-10">
 					<div class="form-group form-inline">
 					  <label class="control-label">LEAVING</label>
-					  <input class="form-control leaving datepicker" type="text" name="leaving_date" id="leavingdate" value="" placeholder="MM/DD/YY" required />               
+					  <input class="form-control leaving datepicker" type="text" name="leaving_date" id="leavingdate"  value="" placeholder="MM-DD-YY" required />               
 					  <label class="control-label">RETURNING</label>
-					  <input class="form-control returning datepicker" type="text" id="returningdate" name="returning_date" value="" placeholder="MM/DD/YY" required />    
+					  <input class="form-control returning datepicker" type="text" id="returningdate" name="returning_date" value="" placeholder="MM-DD-YY" required />    
 					</div>
 				  </div>
 				</div>
@@ -45,47 +46,15 @@
 		   <div class="steps col-lg-9 col-md-10 col-sm-12 col-xs-12 col-centered">        
 			  <h2>HAVE A DESTINATION IN MIND?</h2>          
 			
-		   <div class="blocks text-center destinations">
-			 <a href="">
+		   <div class="blocks text-center destinations" >
+			   <a href="" data-ng-repeat="desttype in desttypes">
 				 <label>
-						<i class="fa fa-anchor wow fadeIn animated"></i>
-						<h5 class="wow fadeIn animated">Beach</h5>
-						<input class="destination" type="radio" name="destination_type" value="Beach">
+						<i class="fa @{{ desttype.icon }} wow fadeIn animated"></i>
+						<h5 class="wow fadeIn animated">@{{ desttype.name }}</h5>
+						<input class="destination" type="radio" name="destination_type" value="@{{ desttype.slug }}">
 					
 					</label>
-					
 				</a>
-				<a href="">
-				
-				<label>
-				 <i class="fa fa-tree wow fadeIn animated"></i>
-					<h5 class="wow fadeIn animated">Mountain</h5>
-					 <input class="destination" type="radio" name="destination_type" value="Mountain">
-					</label>
-				</a>
-				<a href="">
-				<label>
-				  <i class="fa fa-bicycle wow fadeIn animated"></i>
-					<h5 class="wow fadeIn animated">Europe</h5>
-					 <input class="destination" type="radio" name="destination_type" value="Europe">
-					</label>
-				</a>
-				<a href="">
-				<label>
-				 <i class="fa fa-futbol-o wow fadeIn animated"></i>
-					<h5 class="wow fadeIn animated">Latin America</h5>
-					 <input class="destination" type="radio" name="destination_type" value="Latin America">
-					</label>
-				</a>
-				
-				<a href="">
-				<label>
-				 <i class="fa fa-star wow fadeIn animated"></i>
-					<h5 class="wow fadeIn animated">Surprise Me</h5>
-					 <input class="destination" type="radio" name="destination_type" value="Surprise Me">
-					</label>
-			   </a>
-				
 			</div>
 		  </div>
 		</div>
@@ -168,7 +137,7 @@
 @stop
 
 @section('additional-scripts')
-<script src="{{ asset('js/scripts.js') }}"></script>
+<script src="{{asset('js/scripts.js') }}"></script>
 <script type="text/javascript">
 	mixpanel.track("Home View");
 	$.widget( "custom.catcomplete", $.ui.autocomplete, {
@@ -187,7 +156,7 @@
 			}
 		  });
 		}
-		});
+	});
 		
 	$(document).ready(function(){
 		var xhr;
@@ -199,7 +168,7 @@
 				xhr.abort();
 			  }
 			  xhr = $.ajax({
-				  url: "airports.json",
+				  url: "/data/airports.json",
 				  dataType: "json",
 				  cache: false,
 				  success: function(data) {
@@ -219,6 +188,46 @@
 		  });
 		
 	});
-		  
+	
+	var FlightRequest = {
+      "request": {
+        "slice": [
+          {
+            "origin": "DCA",
+            "destination": "LAX",
+            "date": "2016-05-11"
+          }
+        ],
+        "passengers": {
+          "adultCount": 1,
+          "infantInLapCount": 0,
+          "infantInSeatCount": 0,
+          "childCount": 0,
+          "seniorCount": 0
+        },
+        "solutions": 20,
+        "refundable": false
+      }
+    };
+/*	
+$.ajax({
+     type: "POST",
+     //Set up your request URL and API Key.
+     url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE", 
+     contentType: 'application/json', // Set Content-type: application/json
+     dataType: 'json',
+     // The query we want from Google QPX, This will be the variable we created in the beginning
+     data: JSON.stringify(FlightRequest),
+     success: function (data) {
+      //Once we get the result you can either send it to console or use it anywhere you like.
+      console.log(JSON.stringify(data));
+    },
+      error: function(){
+       //Error Handling for our request
+       alert("Access to Google QPX Failed.");
+     }
+    });	*/
+
+ 
 </script>
 @stop

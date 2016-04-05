@@ -6,12 +6,19 @@ var app = angular.module("jetSetGenie", ['ngRoute', 'ngResource']).run(function 
 	 "#028c90",
 	 "#2FD280"  
 	];
-	$rootScope.searchopts = [{
-		fromlocation: 'Bahamas',
-		tripchoice: 'Beach', 
-		leaving: '03/30/16',
-		returning: '03/25/16',
-		filters: [{}]
-	}] 
-});
- 
+	
+	
+})
+
+/*.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.
+      when('/search-results/leaving/:leaving/returning/:returning/origin/:origin/type/:type/destination/:destination}', {
+        templateUrl: 'Partials/search-results.html',
+        controller: 'ctrlFlightResults'
+      }).
+      otherwise({
+        redirectTo: '/'
+      });
+}]); 
+*/

@@ -19,6 +19,7 @@ $(document).ready(function(){
 		defaultDate: "+1w",
 		changeMonth: false,
 		numberOfMonths: 1,
+		dateFormat: 'mm-dd-yy',
 		onClose: function( selectedDate ) {
 			$( ".returning" ).datepicker( "option", "minDate", selectedDate );
 		}
@@ -28,6 +29,7 @@ $(document).ready(function(){
 		defaultDate: "+1w",
 		changeMonth: false,
 		numberOfMonths: 1,
+		dateFormat: 'mm-dd-yy',
 		onClose: function( selectedDate ) {
 			$( ".leaving" ).datepicker( "option", "maxDate", selectedDate );
 		}
@@ -71,7 +73,9 @@ $(document).ready(function(){
 		browser = $("input[name='browser']").val();
 		destination_type = $("input[name='destination_type']").val();
 		
- 
+	 
+		
+		/*
 		$.ajax({
 			type: 'POST',
 			url: 'http://jetsetgenie.devzila.com/api/visitors',			
@@ -96,7 +100,9 @@ $(document).ready(function(){
 				
 			 			
 			}
-		});		
+		});	
+		*/
+		
 	});
 	
 	$('#myModal').on('hidden.bs.modal', function (e) {
@@ -147,11 +153,31 @@ $(document).ready(function(){
 				setTimeout(
 						function()
 						{
-							$("#myModal").modal('show');
+							var name, email, leaving_date, returning_date, home_airport, ip, browser;
+							leaving_date = $("input[name='leaving_date']").val();
+							returning_date = $("input[name='returning_date']").val();
+							home_airport = $("input[name='home_airport']").val();
+							ip = $("input[name='ip']").val();
+							browser = $("input[name='browser']").val();
+							destination_type = $("input[name='destination_type']").val();
+							
+							url="/search-results/leaving/"+leaving_date+"/returning/"+returning_date+"/origin/"+home_airport+"/type/"+destination_type;
+							
+							window.location = url;
+							
 							mixpanel.track("Beta Wall View");
-						}, 2000);
+						}, 1000);
 			});
 		});
 	});
 
 });
+
+getFormattedTime = function (fourDigitTime) {
+    var hours24 = parseInt(fourDigitTime.substring(0, 2),10);
+    var hours = ((hours24 + 11) % 12) + 1;
+    var amPm = hours24 > 11 ? 'pm' : 'am';
+    var minutes = fourDigitTime.substring(2);
+
+    return hours + 'h ' + minutes + 'm';
+};

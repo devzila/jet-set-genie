@@ -12,15 +12,17 @@
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=Lobster|Roboto:400,300italic,300,400italic,500,500italic,700,700italic,900,900italic,100italic,100' rel='stylesheet' type='text/css' />
-    <link rel='stylesheet' href="{{ asset('font-awesome/css/font-awesome.min.css') }}"  type='text/css' media='all' />
-	<script src="{{ asset('js/jquery.min.js') }}"></script>
+    <link rel='stylesheet' href="{{asset('font-awesome/css/font-awesome.min.css') }}"  type='text/css' media='all' />
+    <link rel='stylesheet' href="{{ asset('css/bootstrap-tagsinput.css') }}" type='text/css' media='all' />
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/angular.min.js') }}"></script>
 	<script src="{{ asset('js/angular-route.js') }}"></script>  
-    <script src="{{ asset('js/angular-resource.min.js') }}"></script>
-	
+    <script src="{{asset('js/angular-resource.min.js') }}"></script>
+    <script src="{{asset('js/bootstrap-tagsinput-angular.js') }}"></script>
+   
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('js/wow.js') }}"></script>
+	<script src="{{asset('js/wow.js') }}"></script>
       
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <!--[if lt IE 9]>
@@ -32,16 +34,18 @@ for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElemen
 mixpanel.init("f97b2eb9569581304a1d8dcaa66e1793");</script><!-- end Mixpanel -->
 
 </head>
-<body data-ng-app="jetSetGenie">
+<body data-ng-app="jetSetGenie" data-ng-controller="jetSetGenie">
 	<header class="jsg-header">
 		<div class="container">
 			<h1 ><a href="/" class="animated wow fadeIn"><img src="{{ asset('assets/Logo.png') }}" alt="Jet set Genie" /></a></h1>
 		</div>
 	</header>
+	 
 	<div class="app-content">
 			@yield('content')
 			@yield('additional-scripts')
 	</div>
+	 
    <footer class="jsg-footer">
        <div class="container">
            <div class="row">
@@ -61,6 +65,7 @@ mixpanel.init("f97b2eb9569581304a1d8dcaa66e1793");</script><!-- end Mixpanel -->
            </div>
        </div>
    </footer>
+<div class="bodyloaders"><i class="fa fa-spinner fa-pulse fa-3x"></i></div>
 <script src="{{ asset('js/jetSetApp.js') }}"></script>
   <script src="{{ asset('js/jetSetCtrl.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
