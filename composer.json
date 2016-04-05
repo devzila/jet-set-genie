@@ -9,7 +9,7 @@
         "laravel/framework": "5.2.*",
         "guzzlehttp/guzzle": "~5.0",
         "mailgun/mailgun-php": "~1.7.2",
-		"moontoast/math": "*"
+		"moontoast/math": "*",
 		"doctrine/dbal": "2.5.*"
     },
     "require-dev": {
