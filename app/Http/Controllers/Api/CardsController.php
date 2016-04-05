@@ -45,7 +45,7 @@ class CardsController extends Controller
     public function store(Request $request)
     {
       $result = DestinationCards::create([
-        'user_id' => $request->input('id'),
+        'user_id' => $this->user,
          'destination_id' => $request->input('destination_id')
 		 ]);
         return Response::json($result, 200);
