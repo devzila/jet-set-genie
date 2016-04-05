@@ -1,16 +1,16 @@
 
-resturl = "http://jetsetgenie.devzila.com/api/destination-types/beach/airport"; 
+resturl = "/api/destination-types/beach/airport"; 
 
 var getairports = $.ajax({
     url: resturl,
-    dataType: 'jsonp',
+    dataType: 'json',
     jsonp:false,
     success: function (data) {
-        alert(data);
+        return data;
     }
 });
 
-alert(getairports);
+console.log(JSON.stringify(getairports));
 
 app.controller('jetSetGenie', function ($scope) {
     $scope.desttypes = [{ "id": 1, "name": "Beach", "created_at": "2016-04-05 13:01:22", "updated_at": "2016-03-30 13:15:00", "icon": "fa-anchor", "slug": "beach" }, { "id": 2, "name": "Mountains", "created_at": "2016-04-05 13:01:22", "updated_at": "2016-03-30 13:15:00", "icon": "fa-tree", "slug": "mountains" }, { "id": 3, "name": "Europe", "created_at": "2016-04-05 13:01:22", "updated_at": "2016-03-30 13:15:21", "icon": "fa-bicycle", "slug": "europe" }, { "id": 4, "name": "Latin America", "created_at": "2016-04-05 13:01:22", "updated_at": "2016-03-30 13:15:21", "icon": "fa-futbol-o", "slug": "latin-america" }, { "id": 5, "name": "Surprise Me", "created_at": "2016-04-05 13:01:22", "updated_at": "-0001-11-30 00:00:00", "icon": "fa-star", "slug": "surprise-me" }];
