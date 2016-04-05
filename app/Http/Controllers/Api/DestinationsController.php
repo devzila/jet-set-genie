@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Response;
+use App\Models\DestinationTypes;
 
 use DB;
 class DestinationsController extends Controller
@@ -28,9 +29,14 @@ class DestinationsController extends Controller
             ->select('destination.*');
 
         // 0 = 'surprise me'
-        if($id != 0){
-            $select->where('destination_type_airport_mapping.destination_type_id','=',$id);
+        if($id !== 0 and $id !== 5 and $id !=='surprise-me'){
+            $destination_type = DestinationTypes::where('slug', $id)->get();
+            if($destination_type){
+                $select->where('destination_type_airport_mapping.destination_type_id','=',$destination_type[0]->id);
+            }
+
         }
+
 
         $data = $select->limit(40)->get();
 		 
