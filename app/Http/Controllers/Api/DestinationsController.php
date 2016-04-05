@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Response;
+use App\Models\DestinationTypes;
 
 use DB;
 class DestinationsController extends Controller
@@ -22,11 +23,22 @@ class DestinationsController extends Controller
      */
     public function index($id)  
     {
-		 $data = DB::table('destination')
+
+        $select = DB::table('destination')
             ->join('destination_type_airport_mapping', 'destination_type_airport_mapping.destination_id', '=', 'destination.id')
-            ->select('destination.*')
-			->where('destination_type_airport_mapping.destination_type_id','=',$id)
-            ->get();
+            ->select('destination.*');
+
+        // 0 = 'surprise me'
+        if($id !== 0 and $id !== 5 and $id !=='surprise-me'){
+            $destination_type = DestinationTypes::where('slug', $id)->get();
+            if($destination_type){
+                $select->where('destination_type_airport_mapping.destination_type_id','=',$destination_type[0]->id);
+            }
+
+        }
+
+
+        $data = $select->limit(40)->get();
 		 
 	    foreach($data as $key => $value){
             $duration = rand(30, 300);

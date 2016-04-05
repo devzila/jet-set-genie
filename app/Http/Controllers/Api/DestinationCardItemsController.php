@@ -20,9 +20,9 @@ class DestinationCardItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index(Request $request,$card_id)
     {
-         $cards = DestinationCardItems::all();
+         $cards = DestinationCardItems::where('destination_card_id', $card_id)->get();
 		 return $cards->toJson();
 		 
     }
