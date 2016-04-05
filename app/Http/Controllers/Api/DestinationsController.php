@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Response;
-use App\Models\Visitor;
-use Mail;
+use App\Models\DestinationTypes;
 
-class VisitorsController extends Controller
+use DB;
+class DestinationsController extends Controller
 {
     public function __construct(Request $request)
     {
@@ -21,11 +21,40 @@ class VisitorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index($id)  
     {
-         $visitors = Visitor::all();
-		 return $visitors->toJson();
+
+        $select = DB::table('destination')
+            ->join('destination_type_airport_mapping', 'destination_type_airport_mapping.destination_id', '=', 'destination.id')
+            ->select('destination.*');
+
+        // 0 = 'surprise me'
+        if($id !== 0 and $id !== 5 and $id !=='surprise-me'){
+            $destination_type = DestinationTypes::where('slug', $id)->get();
+            if($destination_type){
+                $select->where('destination_type_airport_mapping.destination_type_id','=',$destination_type[0]->id);
+            }
+
+        }
+
+
+        $data = $select->limit(40)->get();
 		 
+	    foreach($data as $key => $value){
+            $duration = rand(30, 300);
+            if($duration < 60){
+                $duration = "$duration Minutes";
+            }
+            else{
+                $hour = intval($duration/60);
+                $min = $duration%60;
+
+                $duration = $min == 0 ? "$hour Hour(s)" : "$hour Hour(s) $min Minute(s)";
+            }
+            $data[$key]->duration = $duration;
+            $data[$key]->fare = '$' . rand(40, 2000);
+        }
+        return Response::json($data, 200);
     }
 
     /**
@@ -45,29 +74,7 @@ class VisitorsController extends Controller
      */
     public function store(Request $request)
     {
-        $visitor = Visitor::create([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'leaving_date' => $request->input('leaving_date'),
-                'returning_date' => $request->input('returning_date'),
-                'destination_type' => $request->input('destination_type'),
-                'home_airport' => $request->input('home_airport')
-            ]);
 
-        $emails = ['nilay@devzila.com', 'ophia.b.popova@gmail.com', 'jnolan@mba2017.hbs.edu', 'jgoldstein@mba2017.hbs.edu', 'hchan@mba2017.hbs.edu', 'scook@mba2017.hbs.edu'];
-        //$emails = ['nilay@devzila.com', 'kiran@devzila.com', 'kawal@ideapps.in'];
-
-
-        Mail::send('email/visitor',['visitor' => $visitor], function($message) use($emails)
-        {
-            $message->from('jetset@devzila.com', 'JetSetGenie');
-            $message->to($emails);
-            $message->subject('Someone signed up for JetSetGenie!');
-        });
-
-
-        return Response::json($visitor, 200);
-        //
     }
 
     /**
@@ -79,8 +86,7 @@ class VisitorsController extends Controller
     public function show($id)
     {
         //
-		$visitor = Visitor::where('id', $id)->first();
-		return $visitor->toJson();
+		
     }
 
     /**
@@ -115,7 +121,6 @@ class VisitorsController extends Controller
     public function destroy($id)
     {
         //
-
-
+		
     }
 }

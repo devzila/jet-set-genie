@@ -46,6 +46,11 @@ Route::get('/email', function () {
     return view('email');
 });
 
+Route::get('/register', 'HomeController@register');
+Route::get('/login', 'HomeController@login');
+
+Route::post('/post_register', 'HomeController@post_register');
+Route::post('/post_login', 'HomeController@post_login');
 
 /*
 |--------------------------------------------------------------------------

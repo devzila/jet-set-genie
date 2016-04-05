@@ -6,26 +6,27 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Response;
-use App\Models\Visitor;
-use Mail;
+use App\Models\DestinationTypes;
 
-class VisitorsController extends Controller
+class DestinationTypesController extends Controller 
 {
+
     public function __construct(Request $request)
     {
         parent::__construct($request);
     }
+
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index(Request $request)
     {
-         $visitors = Visitor::all();
-		 return $visitors->toJson();
-		 
+        $destination = DestinationTypes::all();
+        return response()->json($destination);
+
     }
 
     /**
@@ -45,29 +46,7 @@ class VisitorsController extends Controller
      */
     public function store(Request $request)
     {
-        $visitor = Visitor::create([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'leaving_date' => $request->input('leaving_date'),
-                'returning_date' => $request->input('returning_date'),
-                'destination_type' => $request->input('destination_type'),
-                'home_airport' => $request->input('home_airport')
-            ]);
 
-        $emails = ['nilay@devzila.com', 'ophia.b.popova@gmail.com', 'jnolan@mba2017.hbs.edu', 'jgoldstein@mba2017.hbs.edu', 'hchan@mba2017.hbs.edu', 'scook@mba2017.hbs.edu'];
-        //$emails = ['nilay@devzila.com', 'kiran@devzila.com', 'kawal@ideapps.in'];
-
-
-        Mail::send('email/visitor',['visitor' => $visitor], function($message) use($emails)
-        {
-            $message->from('jetset@devzila.com', 'JetSetGenie');
-            $message->to($emails);
-            $message->subject('Someone signed up for JetSetGenie!');
-        });
-
-
-        return Response::json($visitor, 200);
-        //
     }
 
     /**
@@ -79,8 +58,9 @@ class VisitorsController extends Controller
     public function show($id)
     {
         //
-		$visitor = Visitor::where('id', $id)->first();
-		return $visitor->toJson();
+
+		$destination = DestinationTypes::find($id);
+		return response()->json($destination);
     }
 
     /**
@@ -115,7 +95,6 @@ class VisitorsController extends Controller
     public function destroy($id)
     {
         //
-
-
+		
     }
 }

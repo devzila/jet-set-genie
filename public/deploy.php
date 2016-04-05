@@ -8,6 +8,7 @@
 	 */
 	// The commands
 	$commands = array(
+		'cd ..',
 		'echo $PWD',
 		'whoami',
 		'git pull origin staging',
@@ -15,6 +16,7 @@
 		'git submodule sync',
 		'git submodule update',
 		'git submodule status',
+		'composer install'
 	);
 	// Run the commands for output
 	$output = '';

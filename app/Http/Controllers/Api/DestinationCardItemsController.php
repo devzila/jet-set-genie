@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Response;
-use App\Models\Visitor;
-use Mail;
+use App\Models\DestinationCardItems;
 
-class VisitorsController extends Controller
+class DestinationCardItemsController extends Controller
 {
     public function __construct(Request $request)
     {
@@ -21,10 +20,10 @@ class VisitorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index(Request $request,$card_id)
     {
-         $visitors = Visitor::all();
-		 return $visitors->toJson();
+         $cards = DestinationCardItems::where('destination_card_id', $card_id)->get();
+		 return $cards->toJson();
 		 
     }
 
@@ -43,31 +42,15 @@ class VisitorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$card_id)
     {
-        $visitor = Visitor::create([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'leaving_date' => $request->input('leaving_date'),
-                'returning_date' => $request->input('returning_date'),
-                'destination_type' => $request->input('destination_type'),
-                'home_airport' => $request->input('home_airport')
-            ]);
-
-        $emails = ['nilay@devzila.com', 'ophia.b.popova@gmail.com', 'jnolan@mba2017.hbs.edu', 'jgoldstein@mba2017.hbs.edu', 'hchan@mba2017.hbs.edu', 'scook@mba2017.hbs.edu'];
-        //$emails = ['nilay@devzila.com', 'kiran@devzila.com', 'kawal@ideapps.in'];
-
-
-        Mail::send('email/visitor',['visitor' => $visitor], function($message) use($emails)
-        {
-            $message->from('jetset@devzila.com', 'JetSetGenie');
-            $message->to($emails);
-            $message->subject('Someone signed up for JetSetGenie!');
-        });
-
-
-        return Response::json($visitor, 200);
-        //
+      $result = DestinationCardItems::create([
+        'destination_card_id' => $card_id,
+         'flight_id' => $request->input('flight_id'),
+		 'action_date' => $request->input('action_date'),
+		 'action_time' => $request->input('action_time')
+		 ]);
+        return Response::json($result, 200);
     }
 
     /**
@@ -79,8 +62,8 @@ class VisitorsController extends Controller
     public function show($id)
     {
         //
-		$visitor = Visitor::where('id', $id)->first();
-		return $visitor->toJson();
+		$card = DestinationCardItems::find($id);
+		return $card->toJson();
     }
 
     /**
@@ -115,7 +98,7 @@ class VisitorsController extends Controller
     public function destroy($id)
     {
         //
-
-
+		$card = DestinationCardItems::find($id);
+		$card->delete();
     }
 }
