@@ -68,6 +68,13 @@ class CardsController extends Controller
 		$card = DestinationCards::find($id);
 		return $card->toJson();
     }
+	
+	public function getCards($id)
+    {
+        //
+		$data = DB::table('destination_cards')->where('destination_cards.user_id','=',$id)->get();
+		return Response::json($data, 200);
+    }
 
     /**
      * Show the form for editing the specified resource.
