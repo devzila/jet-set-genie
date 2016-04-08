@@ -4,7 +4,7 @@
 			<h4>FAVORITES</h4>
 		</div>
 		<div class="col-md-12 favorite-container">
-				<div class="list-box" data-ng-repeat="favorite in favorites" ng-init="parentIndex = $index" >
+				<div class="list-box" data-ng-repeat="favorite in favorites | limitTo:3" ng-init="parentIndex = $index" >
 					<div class="box clearfix" data-ng-style="{background: place_bg_colors[$index % place_bg_colors.length]}">
 						<div class="box-detail">
 							<a class="setFavorite" onclick="setfavorite()" ><i class="fa fa-star"></i></a>

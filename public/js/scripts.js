@@ -19,6 +19,7 @@ $(document).ready(function(){
 		defaultDate: "+1w",
 		changeMonth: false,
 		numberOfMonths: 1,
+		dateFormat: 'mm-dd-yy',
 		onClose: function( selectedDate ) {
 			$( ".returning" ).datepicker( "option", "minDate", selectedDate );
 		}
@@ -28,6 +29,7 @@ $(document).ready(function(){
 		defaultDate: "+1w",
 		changeMonth: false,
 		numberOfMonths: 1,
+		dateFormat: 'mm-dd-yy',
 		onClose: function( selectedDate ) {
 			$( ".leaving" ).datepicker( "option", "maxDate", selectedDate );
 		}
@@ -71,7 +73,9 @@ $(document).ready(function(){
 		browser = $("input[name='browser']").val();
 		destination_type = $("input[name='destination_type']").val();
 		
- 
+	 
+		
+		/*
 		$.ajax({
 			type: 'POST',
 			url: 'http://jetsetgenie.devzila.com/api/visitors',			
@@ -96,7 +100,9 @@ $(document).ready(function(){
 				
 			 			
 			}
-		});		
+		});	
+		*/
+		
 	});
 	
 	$('#myModal').on('hidden.bs.modal', function (e) {
@@ -118,40 +124,17 @@ $(document).ready(function(){
 
 	$('#jetbutton').on('click', function(){
 
-		var validleaving = formvalidate.element( "#leavingdate" );
-		var validreturning = formvalidate.element( "#returningdate" );
-		var validairport = formvalidate.element( "#homeairport" );
-		if( validleaving && validreturning && validairport)
-		{
-			mixpanel.track("JetSet Click");
-			
-			$('.step-1').hide('slide', {direction: 'left'}, 200, function(){
-				$('.step-2').show('slide', {direction: 'right'}, 200);
-			});
-		}
-
-	});
-
-	$('.destinations a').on('click', function(){
-
-		//formvalidate = $("#jetform").validate();
-		//formvalidate.element( $("input[name='destination']") );
-		var selected_destination = $()
-		mixpanel.track(
-			"Destination Select",
-			{"type":  $(this).val() } 
-		);
 		
-		$('.step-2').hide('slide', {direction: 'left'}, 200, function(){
-			$('.step-3').show('slide', {direction: 'right'}, 200, function(){
-				setTimeout(
-						function()
-						{
-							$("#myModal").modal('show');
-							mixpanel.track("Beta Wall View");
-						}, 2000);
-			});
-		});
+
 	});
 
 });
+
+getFormattedTime = function (fourDigitTime) {
+    var hours24 = parseInt(fourDigitTime.substring(0, 2),10);
+    var hours = ((hours24 + 11) % 12) + 1;
+    var amPm = hours24 > 11 ? 'pm' : 'am';
+    var minutes = fourDigitTime.substring(2);
+
+    return hours + 'h ' + minutes + 'm';
+};

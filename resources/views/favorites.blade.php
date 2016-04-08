@@ -9,8 +9,15 @@
 <section class="app-content container-fluid" data-ng-controller="ctrlFavorites">
 
 <div class="row row-centered favorites-section"  >
-	<div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 col-centered">    
-			<div class="row">
+    <div class="row-centered serch-part">
+        <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 col-centered">
+            <h3 class="lobster-font text-center">@{{ pagetitle }}</h3>
+            @include('shared.searchbox')
+        </div>
+    </div>
+    <div class="hr"></div>
+	<div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 col-centered">
+            <div class="row">
 				<div class="col-xs-12">
 					<div class="pull-left back">
 						<a href="/">
