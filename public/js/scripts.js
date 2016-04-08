@@ -124,51 +124,8 @@ $(document).ready(function(){
 
 	$('#jetbutton').on('click', function(){
 
-		var validleaving = formvalidate.element( "#leavingdate" );
-		var validreturning = formvalidate.element( "#returningdate" );
-		var validairport = formvalidate.element( "#homeairport" );
-		if( validleaving && validreturning && validairport)
-		{
-			mixpanel.track("JetSet Click");
-			
-			$('.step-1').hide('slide', {direction: 'left'}, 200, function(){
-				$('.step-2').show('slide', {direction: 'right'}, 200);
-			});
-		}
-
-	});
-
-	$('.destinations a').on('click', function(){
-
-		//formvalidate = $("#jetform").validate();
-		//formvalidate.element( $("input[name='destination']") );
-		var selected_destination = $()
-		mixpanel.track(
-			"Destination Select",
-			{"type":  $(this).val() } 
-		);
 		
-		$('.step-2').hide('slide', {direction: 'left'}, 200, function(){
-			$('.step-3').show('slide', {direction: 'right'}, 200, function(){
-				setTimeout(
-						function()
-						{
-							var name, email, leaving_date, returning_date, home_airport, ip, browser;
-							leaving_date = $("input[name='leaving_date']").val();
-							returning_date = $("input[name='returning_date']").val();
-							home_airport = $("input[name='home_airport']").val();
-							ip = $("input[name='ip']").val();
-							browser = $("input[name='browser']").val();
-							destination_type = $("input[name='destination_type']").val();
-							
-							url="/search-results/leaving/"+leaving_date+"/returning/"+returning_date+"/origin/"+home_airport+"/type/"+destination_type;
-							
-							window.location = url;
-							
-							mixpanel.track("Beta Wall View");
-						}, 1000);
-			});
-		});
+
 	});
 
 });

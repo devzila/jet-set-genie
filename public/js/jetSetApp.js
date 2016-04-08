@@ -4,21 +4,21 @@ var app = angular.module("jetSetGenie", ['ngRoute', 'ngResource']).run(function 
 	 "#ffc000",
 	 "#7f7f7f",
 	 "#028c90",
-	 "#2FD280"  
+	 "#2FD280",  
 	];
 	
+	$rootScope.randomcolor = function () {
+	    return $rootScope.place_bg_colors[Math.floor(Math.random() * $rootScope.place_bg_colors.length)];
+	}
 	
-})
-
-/*.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.
-      when('/search-results/leaving/:leaving/returning/:returning/origin/:origin/type/:type/destination/:destination}', {
-        templateUrl: 'Partials/search-results.html',
-        controller: 'ctrlFlightResults'
-      }).
-      otherwise({
-        redirectTo: '/'
-      });
-}]); 
-*/
+}).filter('getById', function () {
+    return function (input, id) {
+        var i = 0, len = input.length;
+        for (; i < len; i++) {
+            if (+input[i].id == +id) {
+                return input[i];
+            }
+        }
+        return null;
+    }
+});

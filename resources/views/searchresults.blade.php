@@ -19,23 +19,25 @@
 		<div class="row row-centered search-results"  > 
 		<div class="col-md-9 left-part">	 		
 			<div class="row result-container">
-				<div class="col-md-4 col-sm-4 col-xs-6 list-box" data-ng-repeat="record in records | filter: setfilters" ng-init="parentIndex = $index" >
-					<div class="box clearfix" data-ng-style="{background: record.color}">					
-						<div class="box-detail">						
-							<a class="setFavorite" data-ng-click="setfavorite( $index )" title="Remove Favorite" ><i class="fa @{{ isFavorite ? 'fa-star' : 'fa-star-o' }}"></i></a>
-							<a class="lnkFlights" data-ng-click="showFlights(  record.airport_code, record.display_name );" >
-								<h5>@{{ record.display_name }}</h5>
+				<div class="col-md-4 col-sm-4 col-xs-6 list-box" data-ng-repeat="record in records" ng-init="parentIndex = $index" >
+                         
+                        <div class="box clearfix" data-ng-style="{ background:  randomcolor }">					
+						<div class="box-detail">
+                                <a class="setFavorite" data-ng-click="setfavorite( $index, record.id )" title="Remove Favorite" ><i class="fa @{{ isFavorite(record.id) ? 'fa-star' : 'fa-star-o' }}"></i></a>
+                                <a class="lnkFlights" data-ng-click="showFlights( record.airport_code, record.display_name );" >
+                                <h5>@{{ record.display_name }}</h5>
 								<div class="box-info">
 								<p>Shortest Flight</p>
-								<p>@{{ record.shortest_flight }}</p>
+								<p>@{{ record.duration }}</p>
 								<p>Chepest Flight</p>
-								<p>@{{ record.cheapest_flight }}</p>
+								<p>@{{ record.fare }}</p>
 							</div>
 							</a>
 						</div>
 					<div class="clear"></div>
 					</div>
 				</div>
+                    <p ng-hide="records.length">Sorry, no results found for selected criteria. Please select again.</p>
 			</div>
 		</div>
 		@include('shared.sidebar')
@@ -47,7 +49,7 @@
 @section('additional-scripts')
 <script src="{{ asset('/js/bootstrap-slider.js') }}"></script>
 <script src="{{ asset('js/masonry.pkgd.min.js') }}" ></script>
-<script src="{{ asset('/js/search-form.js') }}"></script>
+<script src="{{asset('/js/search-form.js') }}"></script>
 <script>
 	var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 	var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -71,5 +73,47 @@
 		type: decodeURIComponent(sQuery[9])
 	}
 </script>
+<script src="{{asset('js/masonry.pkgd.min.js') }}"></script>
+<script>
+	var favoriteMsnry;
+	$(document).ready(function(){
+	    favoriteMsnry = $('.result-container').masonry({
+	        itemSelector: '.list-box',
+		});
+	});
+	$( window ).resize(function() {
+	    $('.result-container').masonry({
+	        itemSelector: '.list-box',
+	    });
+	});
+    
+	/*//tag inputs
+	var tagit = $('.tag_places');
 
+	tagit.tagsinput({
+	    tagClass: function (item) {
+	        switch (item.continent) {
+	            case 'Europe': return 'label label-primary';
+	            case 'America': return 'label label-danger label-important';
+	            case 'Australia': return 'label label-success';
+	            case 'Africa': return 'label label-default';
+	            case 'Asia': return 'label label-warning';
+	        }
+	    },
+	    itemValue: 'slug',
+	    itemText: 'name',
+	    typeaheadjs: {
+	        name: 'destinations',
+	        displayKey: 'name',
+	        source: [{ "value": 1, "text": "Amsterdam", "continent": "Europe" }],
+            freeInput: false
+	    }
+	});
+
+	tagit.tagsinput('add', { "value": 1, "text": "Amsterdam", "continent": "Europe" });
+    */
+
+	
+
+</script>
 @stop

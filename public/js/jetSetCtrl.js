@@ -1,124 +1,220 @@
+app.controller('jetSetGenie', function ($scope, $http) {
+    $scope.desttypes = [];
 
-resturl = "/api/destination-types/beach/airport"; 
+    $scope.loader = function (type) {
+        if (type == "show")
+            $('.bodyloaders').show();
+        else
+            $('.bodyloaders').hide();
+    }   
 
-var getairports = $.ajax({
-    url: resturl,
-    dataType: 'json',
-    jsonp:false,
-    success: function (data) {
-        return data;
+    $http.get("http://jetsetgenie.devzila.com/api/destination-types")
+    .success(function (data, status, headers, config) {
+        $scope.desttypes = data;
+    })
+    .error(function (error, status, headers, config) {
+        console.log(status);
+        console.log("Error occured");
+    });
+
+    $scope.getResults = function (selected_destination) {
+       
+        mixpanel.track(
+			"Destination Select",
+			{ "type": selected_destination }
+		);
+
+        $('.step-2').hide('slide', { direction: 'left' }, 200, function () {
+            $('.step-3').show('slide', { direction: 'right' }, 200, function () {
+                setTimeout(
+						function () {
+						    var name, email, leaving_date, returning_date, home_airport, ip, browser;
+						    leaving_date = $("input[name='leaving_date']").val();
+						    returning_date = $("input[name='returning_date']").val();
+						    home_airport = $("input[name='home_airport']").val();
+						    ip = $("input[name='ip']").val();
+						    browser = $("input[name='browser']").val();
+						    destination_type = selected_destination;
+
+						    url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + destination_type;
+
+						    window.location = url;
+
+						    mixpanel.track("Beta Wall View");
+						}, 1000);
+            });
+        });
     }
-});
 
-console.log(JSON.stringify(getairports));
+    $scope.setDates = function () {
+        var validleaving = formvalidate.element("#leavingdate");
+        var validreturning = formvalidate.element("#returningdate");
+        var validairport = formvalidate.element("#homeairport");
 
-app.controller('jetSetGenie', function ($scope) {
-    $scope.desttypes = [{ "id": 1, "name": "Beach", "created_at": "2016-04-05 13:01:22", "updated_at": "2016-03-30 13:15:00", "icon": "fa-anchor", "slug": "beach" }, { "id": 2, "name": "Mountains", "created_at": "2016-04-05 13:01:22", "updated_at": "2016-03-30 13:15:00", "icon": "fa-tree", "slug": "mountains" }, { "id": 3, "name": "Europe", "created_at": "2016-04-05 13:01:22", "updated_at": "2016-03-30 13:15:21", "icon": "fa-bicycle", "slug": "europe" }, { "id": 4, "name": "Latin America", "created_at": "2016-04-05 13:01:22", "updated_at": "2016-03-30 13:15:21", "icon": "fa-futbol-o", "slug": "latin-america" }, { "id": 5, "name": "Surprise Me", "created_at": "2016-04-05 13:01:22", "updated_at": "-0001-11-30 00:00:00", "icon": "fa-star", "slug": "surprise-me" }];
+        if (validleaving && validreturning && validairport) {
+            mixpanel.track("JetSet Click");
+
+            $('.step-1').hide('slide', { direction: 'left' }, 200, function () {
+                $('.step-2').show('slide', { direction: 'right' }, 200);
+            });
+        }
+    }
+
+    $scope.favorites = [
+	{
+	    placeName: "Puerto Vallarta",
+	    shortestFlight: "6hrs 23 mins",
+	    cheapestFlight: "$509",
+	    color: "#33cccc",
+	    flights: [
+            {
+                price: "$509",
+                name: "American",
+                departDate: "Sat, Feb 29 6:55PM"
+            },
+            {
+                price: "$499",
+                name: "United",
+                departDate: "Sat, Feb 29 3:14PM"
+            },
+	    ]
+	},
+		{
+		    placeName: "Los Angeles",
+		    shortestFlight: "6hrs 23 mins",
+		    cheapestFlight: "$509",
+		    color: "#ffc000",
+		    flights: [
+				{
+				    price: "$377",
+				    name: "LAN",
+				    departDate: "Sun, Mar 1 4:32PM"
+				},
+		    ]
+		},
+		{
+		    placeName: "Majorca",
+		    shortestFlight: "6hrs 23 mins",
+		    cheapestFlight: "$509",
+		    color: "#7f7f7f",
+		    flights: []
+		},
+		{
+		    placeName: "Malibu",
+		    shortestFlight: "5hrs 21 mins",
+		    cheapestFlight: "$399",
+		    color: "#028c90",
+		    flights: [
+				{
+				    price: "$509",
+				    name: "American",
+				    departDate: "Sat, Feb 29 6:55PM"
+				},
+				{
+				    price: "$499",
+				    name: "United",
+				    departDate: "Sat, Feb 29 3:14PM"
+				},
+		    ]
+		},
+		{
+		    placeName: "Puerto Vallarta",
+		    shortestFlight: "6hrs 23 mins",
+		    cheapestFlight: "$509",
+		    color: "#2FD280",
+		    flights: [
+				{
+				    price: "$509",
+				    name: "American",
+				    departDate: "Sat, Feb 29 6:55PM"
+				},
+				{
+				    price: "$499",
+				    name: "United",
+				    departDate: "Sat, Feb 29 3:14PM"
+				},
+		    ]
+		}
+    ];
+
+    $scope.isFavorite = function (placeid) {
+        var foundFavorite = false;
+        angular.forEach($scope.favorites, function (value, key) {
+            //console.log(JSON.stringify(value))
+            //console.log(value.placeName)
+            // console.log(value.id + '-----' + placeid)             
+            if (value.id == placeid)
+                foundFavorite = true;
+        });
+        //console.log(foundFavorite)
+        return foundFavorite;
+    };
+  
+
+    $scope.deleteFavorite = function (index) {
+        var con = window.confirm('Are you sure you want to remove this from favorite');
+        if (con)
+            $scope.favorites.splice(index, 1);
+    };
+    $scope.setfavorite = function (index) {
+        //alert($scope.records[index].id);
+        return
+        $scope.favorites.push({ id: "0" });
+    };
+
+
+    $scope.deleteflight = function (parentindex, index) {
+        $scope.favorites[parentindex].flights.splice(index, 1);
+        favoriteMsnry.masonry('reloadItems');
+    };
     
+    $scope.searchfilters = {
+            time: {
+            leaving: {
+                        takeoff: {
+                        text: "Sat 12:30 am - Sun 12:30 am",
+                        timeslot: ['0030', '0000']
+                        },
+                landing: {
+                    text: "Sat 12:30 am - Sun 12:30 am",
+                    timeslot: ['0030', '0000']
+                }
+            },
+                returning: {
+                    takeoff: {
+                            text: "Sat 12:30 am - Sun 12:30 am",
+                            timeslot: ['0030', '0000']
+                    },
+                    landing: {
+                        text: "Sat 12:30 am - Sun 12:30 am",
+                        timeslot: ['0030', '0000']
+                    }
+                }
+            },
+        price: [100, 1000],
+        stops: ['nonstop', 'one', 'two', ''],
+        duration: [1, 24]
+    };
+    window.console.log($scope.searchfilters.time.leaving.takeoff.text)
 });
 
 app.controller('ctrlFavorites', function($scope, $http){	 
-	$scope.favorites = [
-	{
-			placeName:"Puerto Vallarta",
-			shortestFlight:"6hrs 23 mins",
-			cheapestFlight: "$509",
-			color: "#33cccc",
-			flights: [
-				{
-					price:"$509",
-					name:"American",
-					departDate:"Sat, Feb 29 6:55PM"
-				},
-				{
-					price:"$499",
-					name:"United",
-					departDate:"Sat, Feb 29 3:14PM"
-				},
-			]
-		},
-		{
-			placeName:"Los Angeles",
-			shortestFlight:"6hrs 23 mins",
-			cheapestFlight: "$509",
-			color: "#ffc000",
-			flights: [
-				{
-					price:"$377",
-					name:"LAN",
-					departDate:"Sun, Mar 1 4:32PM"
-				},
-			]
-		},
-		{
-			placeName:"Majorca",
-			shortestFlight:"6hrs 23 mins",
-			cheapestFlight: "$509",
-			color: "#7f7f7f",
-			flights: []
-		},
-		{
-			placeName:"Malibu",
-			shortestFlight:"5hrs 21 mins",
-			cheapestFlight: "$399",
-			color: "#028c90",
-			flights: [
-				{
-					price:"$509",
-					name:"American",
-					departDate:"Sat, Feb 29 6:55PM"
-				},
-				{
-					price:"$499",
-					name:"United",
-					departDate:"Sat, Feb 29 3:14PM"
-				},
-			]
-		},
-		{
-			placeName:"Puerto Vallarta",
-			shortestFlight:"6hrs 23 mins",
-			cheapestFlight: "$509",
-			color: "#2FD280",
-			flights: [
-				{
-					price:"$509",
-					name:"American",
-					departDate:"Sat, Feb 29 6:55PM"
-				},
-				{
-					price:"$499",
-					name:"United",
-					departDate:"Sat, Feb 29 3:14PM"
-				},
-			]
-		} 
-	];
-	
-	$scope.setfavorite = function( index ){
-		var con = window.confirm('Are you sure you want to remove this from favorite');
-		if(con)
-		$scope.favorites.splice(index, 1);
-	};
-	
-	$scope.deleteflight = function( parentindex, index ){
-		$scope.favorites[parentindex].flights.splice(index, 1);
-		favoriteMsnry.masonry('reloadItems');
-	};
+    $scope.pagetitle = 'Favorites';
 });
 
-app.controller('ctrlSearchResults', function($scope, $http){	
-	
+app.controller('dummy', function ($scope, $http) {
+    $scope.heading = 'This is dummy heading';
+})
+
+app.controller('ctrlSearchResults', function($scope, $http){
 	$scope.sparams = {
 		leaving: sParams.leaving,
 		returning: sParams.returning,
 		origin: sParams.origin,
 		origincode: sParams.origincode,
 		type: sParams.type
-	};	 
-	 
-	$scope.setfilters = { trip_type: $scope.sparams.type };
-	
+	};
+
 	$scope.trip_type = function( type ){
 		if(type)
 		return type + ' x ';
@@ -141,551 +237,53 @@ app.controller('ctrlSearchResults', function($scope, $http){
 		url="/flight-results/leaving/"+leavingdt+"/returning/"+returningdt+"/origin/"+home_airport+"/destination/"+destination+"/type/"+destination_type;
 		window.location = url;
 	}
-	
-	$scope.records = [
-	  {
-		display_name: "Miami",
-		city_name: "Miami, FL",
-		airport_code: "MIA",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#33cccc",
-		isFavorite: true,
-	  },
-	  {
-		display_name: "Siesta Beach",
-		city_name: "Tampa, FL",
-		airport_code: "TPA",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#ffc000"
-	  },
-	  {
-		display_name: "Los Angeles",
-		city_name: "Los Angeles, CA",
-		airport_code: "LAX",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#7f7f7f",
-		isFavorite: true,
-	  },
-	  {
-		display_name: "San Diego",
-		city_name: "San Diego, CA",
-		airport_code: "SAN",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#028c90",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Santa Barbara",
-		city_name: "Santa Barbara, CA",
-		airport_code: "SBA",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#2FD280",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Cabo San Lucas",
-		city_name: "Cabo San Lucas, Mexico",
-		airport_code: "SJD",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#33cccc",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Acapulco",
-		city_name: "Acapulco, Mexico",
-		airport_code: "ACA",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#ffc000",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Puerto Vallarta",
-		city_name: "Puerto Vallarta, Mexico",
-		airport_code: "PVR",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#7f7f7f",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Tulum",
-		city_name: "Tulum, Mexico",
-		airport_code: "CZM",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#028c90",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Nassau",
-		city_name: "Nassau, Bahamas",
-		airport_code: "PID",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#2FD280",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Grand Cayman",
-		city_name: "Grand Cayman Islands",
-		airport_code: "GCM",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#33cccc",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Key West",
-		city_name: "Key West, FL",
-		airport_code: "EYW",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#7f7f7f",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "St. Thomas",
-		city_name: "St. Thomas, US Virgin Islands",
-		airport_code: "STT",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#2FD280",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "St. Croix",
-		city_name: "St. Croix, US Virgin Islands",
-		airport_code: "STX",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#33cccc",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Puerto Rico",
-		city_name: "San Juan, Puerto Rico",
-		airport_code: "SJU",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#028c90",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Jamaica",
-		city_name: "Montego Bay, Jamaica",
-		airport_code: "MBJ",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#33cccc",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Dominican Republic",
-		city_name: "Punta Cana, Dominican Republic",
-		airport_code: "PUJ",
-		city_image: "",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#ffc000",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Jackson Hole",
-		city_name: "Jackson Hole, Wyoming",
-		airport_code: "JAC",
-		city_image: "",
-		trip_type: "Mountain",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#2FD280",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Beaver Creek",
-		city_name: "Beaver Creek, CO",
-		airport_code: "EGE",
-		city_image: "",
-		trip_type: "Mountain",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#028c90",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Vail",
-		city_name: "Vail, CO",
-		airport_code: "EGE",
-		city_image: "",
-		trip_type: "Mountain",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#ffc000",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Mammoth",
-		city_name: "Mammoth Mountain, CO",
-		airport_code: "MMH",
-		city_image: "",
-		trip_type: "Mountain",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#7f7f7f",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Steamboat Springs",
-		city_name: "Steamboat Springs, CO",
-		airport_code: "HDN",
-		city_image: "",
-		trip_type: "Mountain",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#33cccc",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Aspen",
-		city_name: "Aspen, CO",
-		airport_code: "ASE",
-		city_image: "",
-		trip_type: "Mountain",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#ffc000",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Deer Valley",
-		city_name: "Deer Valley, UT",
-		airport_code: "SLC",
-		city_image: "",
-		trip_type: "Mountain",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#028c90",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Breckenridge",
-		city_name: "Breckenridge, CO",
-		airport_code: "DEN",
-		city_image: "",
-		trip_type: "Mountain",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#33cccc",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Alta",
-		city_name: "Alta, UT",
-		airport_code: "SLC",
-		city_image: "",
-		trip_type: "Mountain",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#028c90",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Whistler",
-		city_name: "Whistler Blackcomb, Canada",
-		airport_code: "YVR",
-		city_image: "",
-		trip_type: "Mountain",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#2FD280",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Snowbird",
-		city_name: "Snowbird, UT",
-		airport_code: "SLC",
-		city_image: "",
-		trip_type: "Mountain",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#028c90",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Telluride",
-		city_name: "Telluride, CO",
-		airport_code: "TEX",
-		city_image: "",
-		trip_type: "Mountain",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#7f7f7f",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Paris",
-		city_name: "Paris, France",
-		airport_code: "CDG",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#ffc000",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "London",
-		city_name: "London, England",
-		airport_code: "CDG",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#33cccc",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Istanbul",
-		city_name: "Istanbul, Turkey",
-		airport_code: "IST",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#2FD280",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Barcelona",
-		city_name: "Barcelona, Spain",
-		airport_code: "BCN",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#028c90",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Madrid",
-		city_name: "Madrid, Spain",
-		airport_code: "MAD",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#ffc000",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Lisbon",
-		city_name: "Lisbon, Portugal",
-		airport_code: "LIS",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#7f7f7f",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Copenhagen",
-		city_name: "Copenhagen, Denmark",
-		airport_code: "CPH",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#33cccc",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Stockholm",
-		city_name: "Stockholm, Sweden",
-		airport_code: "ARN",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#ffc000",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Rome",
-		city_name: "Rome, Italy",
-		airport_code: "ROM",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#33cccc",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Venice",
-		city_name: "Venice, Italy",
-		airport_code: "VCE",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#7f7f7f",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Athens",
-		city_name: "Athens, Greece",
-		airport_code: "ATH",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#2FD280",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Nice",
-		city_name: "Nice, France",
-		airport_code: "NCE",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#7f7f7f",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Prague",
-		city_name: "Prague, Czech Republic",
-		airport_code: "PRG",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#ffc000",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Budapest",
-		city_name: "Budapest, Hungary",
-		airport_code: "BUD",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#33cccc",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Amsterdam",
-		city_name: "Amsterdam, Netherlands",
-		airport_code: "AMS",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#2FD280",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Berlin",
-		city_name: "Berlin, Germany",
-		airport_code: "SXF",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#028c90",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Edinburgh",
-		city_name: "Edinburgh, Scotland",
-		airport_code: "EDI",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#33cccc",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Santorini",
-		city_name: "Santorini, Greece",
-		airport_code: "JTR",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#ffc000",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Santorini",
-		city_name: "Santorini, Greece",
-		airport_code: "",
-		city_image: "JTR",
-		trip_type: "Beach",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#028c90",
-		isFavorite: false,
-	  },
-	  {
-		display_name: "Vienna",
-		city_name: "Vienna, Austria",
-		airport_code: "VIE",
-		city_image: "",
-		trip_type: "Europe",
-		shortest_flight: "6hrs 23 mins",
-		cheapest_flight: "$509",
-		color: "#7f7f7f",
-		isFavorite: false,
-	  }
-	];
+   
+    getPlaceUrl = "http://jetsetgenie.devzila.com/api/destination-types/" + $scope.sparams.type + "/airport";
+    
+    $scope.loader('show');
 
+	$scope.records = [];
+
+    $http.get(getPlaceUrl)
+    .success(function (data, status, headers, config) {
+        $scope.records = data;
+        $scope.loader('hide');
+    })
+    .error(function (error, status, headers, config) {
+        console.log(status);
+        console.log("Error occured");
+    });
+
+    $scope.setfavorite = function (index, id) {
+        if ($scope.isFavorite(id))
+        {
+            var con = window.confirm('Are you sure you want to remove this from favorite');
+            angular.forEach($scope.favorites, function (value, key) {
+                if (value.id == id)
+                    $scope.favorites.splice(key, 1);
+            });
+
+        }else{
+            var getRecord = []
+            angular.forEach($scope.favorites, function (value, key) {
+                if (value.id == id)
+                    getRecord = $scope.favorites[key];
+            });
+
+            //console.log(JSON.stringify(getRecord))
+       
+           $scope.favorites.unshift({
+               id: id,
+               placeName: "Test",
+               shortestFlight: "Test",
+               cheapestFlight: "Test",
+               flights: []
+           });
+        }
+    }
 });
 
-app.controller('ctrlFlightResults', function($scope, $http){
+app.controller('ctrlFlightResults', function($scope, $http, $resource){
 	$scope.sparams = {
 		leaving: sParams.leaving,
 		returning: sParams.returning,
@@ -696,79 +294,83 @@ app.controller('ctrlFlightResults', function($scope, $http){
 		type: sParams.type
 	};
 	
-	$scope.favorites = [
-	{
-			placeName:"Puerto Vallarta",
-			shortestFlight:"6hrs 23 mins",
-			cheapestFlight: "$509",
-			flights: [
-				{
-					price:"$509",
-					name:"American",
-					departDate:"Sat, Feb 29 6:55PM"
-				},
-				{
-					price:"$499",
-					name:"United",
-					departDate:"Sat, Feb 29 3:14PM"
-				},
-			]
-		},
-		{
-			placeName:"Los Angeles",
-			shortestFlight:"6hrs 23 mins",
-			cheapestFlight: "$509",
-			flights: [
-				{
-					price:"$377",
-					name:"LAN",
-					departDate:"Sun, Mar 1 4:32PM"
-				},
-			]
-		}		 
-	];
-	
-	$scope.flights = [
-		{
-			price: '$509',
-			tripType: 'round trip',
-			timings: '6:55 pm - 10:45 pm',
-			airline: 'American-Alaska',
-			airlineLogo: '/assets/flight-dummy.png',
-			duration: '6:50m',
-			type: 'Nonstop',
-			bookUrl: 'http://www.expedia.com'
-		},
-		{
-			price: '$509',
-			tripType: 'round trip',
-			timings: '6:55 pm - 10:45 pm',
-			airline: 'American-Alaska',
-			airlineLogo: '/assets/flight-dummy.png',
-			duration: '6:50m',
-			type: 'Nonstop',
-			bookUrl: 'http://www.expedia.com'
-		},
-		{
-			price: '$509',
-			tripType: 'round trip',
-			timings: '6:55 pm - 10:45 pm',
-			airline: 'American-Alaska',
-			airlineLogo: '/assets/flight-dummy.png',
-			duration: '6:50m',
-			type: 'Nonstop',
-			bookUrl: 'http://www.expedia.com'
-		}
-	]
-	
+	//alert($scope.sparams.origincode + "" + $scope.sparams.dest_code)
+
+	var FlightRequest = {
+	    "request": {
+	        "slice": [
+              {
+                  "origin": $scope.sparams.origincode,
+                  "destination": $scope.sparams.dest_code,
+                  "date": "2016-05-11"
+              }
+	        ],
+	        "passengers": {
+	            "adultCount": 1,
+	            "infantInLapCount": 0,
+	            "infantInSeatCount": 0,
+	            "childCount": 0,
+	            "seniorCount": 0
+	        },
+	        "solutions": 20,
+	        "refundable": false,
+	        "saleCountry":"US"
+	    }
+	};
+
+	$scope.loader('show');
+
+	$http.defaults.useXDomain = true;
+	fetchFlights = $resource("https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4")
+	flightRAW = fetchFlights.get({ method: "POST", params: FlightRequest });
+
+	return;
+	$scope.flights = [];
+
+	//getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE";
+
+	getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4";
+	$http.jsonp({
+	    method: 'POST',
+	    url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4",
+	    params: FlightRequest,
+	    headers: { 'Content-Type': 'application/json' },
+	}).then(function successCallback(response) {
+	    $scope.loader('hide');
+	    console.log(response);
+	    return;
+	    $.each(response.trips.tripOption, function (index, value) {
+	        flightRecord = {};
+	        flightRecord.flights = [{}];
+
+	        flightRecord.price = value.saleTotal;
+	        flightRecord.tripType = 'round trip';
+	        flightRecord.type = (value.slice[0].segment.length > 1) ? 'Connected' : 'Nonstop';
+	        flightRecord.bookUrl = 'http://www.expedia.com';
+
+	        $.each(value.slice[0].segment, function (i, flight) {
+	            flightRecord.flights.push({
+	                airline: '',
+	                airlineLogo: '',
+	                duration: '',
+	                timings: '',
+	            })
+	        });
+
+	        //console.log(JSON.stringify(flightRecord))
+	        $scope.flights.push(flightRecord);
+	    })
+	}, function errorCallback(response) {
+	    // called asynchronously if an error occurs
+	    // or server returns response with an error status.
+	});
+
+
+	console.log(JSON.stringify($scope.flights));
+
 	$scope.deleteflight = function( parentindex, index ){
 		$scope.favorites[parentindex].flights.splice(index, 1);
 	};
-	
-	$scope.setfavorite = function( index ){
-		var con = window.confirm('Are you sure you want to remove this from favorite');
-		if(con)
-		$scope.favorites.splice(index, 1);
-	};
+
 });
 
