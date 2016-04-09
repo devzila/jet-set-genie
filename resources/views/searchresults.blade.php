@@ -14,7 +14,7 @@
 	</div>
 	</div>    
 	<div class="hr"></div>
-
+    
 	<div id="resultCont" class="col-lg-7 col-md-7 col-sm-9 col-xs-12 col-centered">    
 		<div class="row row-centered search-results"  > 
 		<div class="col-md-9 left-part">	 		
@@ -50,30 +50,7 @@
 <script src="{{ asset('/js/bootstrap-slider.js') }}"></script>
 <script src="{{ asset('js/masonry.pkgd.min.js') }}" ></script>
 <script src="{{asset('/js/search-form.js') }}"></script>
-<script>
-	var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-	var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-	var sParams = {};
-	
-
-	var sQuery = (window.location.pathname).split("/"); 
-	airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
-	
-	dt = new Date(sQuery[3]);	
-	leavingdt = days[dt.getDay()] + ", " + months[dt.getMonth()]  + " " + dt.getDate() + ", " + dt.getFullYear();
-	
-	dt = new Date(sQuery[5]);	
-	returningdt = days[dt.getDay()] + ", " + months[dt.getMonth()]  + " " + dt.getDate() + ", " + dt.getFullYear();
-	
-	sParams = {
-		leaving: leavingdt,
-		returning: returningdt,
-		origin: decodeURIComponent(sQuery[7]),
-		origincode: airportCode,
-		type: decodeURIComponent(sQuery[9])
-	}
-</script>
-<script src="{{asset('js/masonry.pkgd.min.js') }}"></script>
+ <script src="{{asset('js/masonry.pkgd.min.js') }}"></script>
 <script>
 	var favoriteMsnry;
 	$(document).ready(function(){
