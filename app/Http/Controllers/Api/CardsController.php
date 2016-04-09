@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Response;
 use App\Models\DestinationCards;
+use App\Models\DestinationCardItems;
 use DB;
 
 class CardsController extends Controller
@@ -26,9 +27,14 @@ class CardsController extends Controller
         $select = DB::table('destination_cards')
             ->join('destination', 'destination.id', '=', 'destination_cards.destination_id')
             ->where('destination_cards.user_id', $this->user)
-            ->select('destination.display_name', 'destination.city_name', 'destination.airport_code', 'destination.id', 'destination_cards.duration', 'destination_cards.fare');
+            ->select('destination.id as destination_id', 'destination.display_name', 'destination.city_name', 'destination.airport_code', 'destination_cards.id as card_id', 'destination_cards.duration', 'destination_cards.fare');
 
-       return Response::json($select->get(), 200);
+
+        $cards = $select->get();
+        foreach($cards as $key => $card){
+            $cards[$key]->items = DestinationCardItems::where('destination_card_id', $card->card_id)->get();
+        }
+        return Response::json($cards, 200);
 		 
     }
 
