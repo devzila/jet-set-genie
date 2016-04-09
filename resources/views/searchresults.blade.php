@@ -29,7 +29,7 @@
 								<div class="box-info">
 								<p>Shortest Flight</p>
 								<p>@{{ record.duration }}</p>
-								<p>Chepest Flight</p>
+								<p>Cheapest Flight</p>
 								<p>@{{ record.fare }}</p>
 							</div>
 							</a>
@@ -50,7 +50,7 @@
 <script src="{{ asset('/js/bootstrap-slider.js') }}"></script>
 <script src="{{ asset('js/masonry.pkgd.min.js') }}" ></script>
 <script src="{{asset('/js/search-form.js') }}"></script>
- <script src="{{asset('js/masonry.pkgd.min.js') }}"></script>
+<script src="{{asset('js/masonry.pkgd.min.js') }}"></script>
 <script>
 	var favoriteMsnry;
 	$(document).ready(function(){

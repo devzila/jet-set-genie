@@ -1,5 +1,3 @@
-var FlightRequest = '';
-
 app.controller('jetSetGenie', function ($scope, $http) {
     $scope.desttypes = [];
 
@@ -353,57 +351,76 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 
 });
 
-app.controller('ctrlFlightResults', function ($scope, $http, getFlights, $resource) {
+app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
+
+    $scope.flights = {};
+  
+    var sQuery = (window.location.pathname).split("/");
+
+    airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
+    dest_code = (((decodeURIComponent(sQuery[9])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
+    //console.log(sQuery[9])
+    dt = new Date(sQuery[3]);
+    leavingdt = $scope.daysInWeek[dt.getDay()] + ", " + $scope.months[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
+
+    dt = new Date(sQuery[5]);
+    returningdt = $scope.daysInWeek[dt.getDay()] + ", " + $scope.months[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
+
+    sParams = {
+        leaving: leavingdt,
+        returning: returningdt,
+        origin: decodeURIComponent(sQuery[7]),
+        origincode: airportCode,
+        type: decodeURIComponent(sQuery[11]),
+        destination: decodeURIComponent(sQuery[9]),
+        dest_code: dest_code
+    }
+
  
-	$scope.sparams = {
-		leaving: sParams.leaving,
-		returning: sParams.returning,
-		origin: sParams.origin,
-		origincode: sParams.origincode,
-		destination: sParams.destination,
-		dest_code: sParams.dest_code,
-		type: sParams.type
-	};
-	
+    $scope.sparams.leaving = leavingdt;
+    $scope.sparams.returning = returningdt;
+    $scope.sparams.origin = decodeURIComponent(sQuery[7]);
+    $scope.sparams.origincode = airportCode;
+    $scope.sparams.destination = decodeURIComponent(sQuery[9]);
+    $scope.sparams.dest_code = dest_code;
+    $scope.sparams.type = decodeURIComponent(sQuery[11]);
+	 
 	//alert($scope.sparams.origincode + "" + $scope.sparams.dest_code)
 
-	FlightRequest = {
-	    "request": {
-	        "slice": [
+	var FlightRequest = {
+        "request": {
+            "slice": [
               {
-                  "origin": $scope.sparams.origincode,
-                  "destination": $scope.sparams.dest_code,
+                  "origin": "DCA",
+                  "destination": "LAX",
                   "date": "2016-05-11"
               }
-	        ],
-	        "passengers": {
-	            "adultCount": 1,
-	            "infantInLapCount": 0,
-	            "infantInSeatCount": 0,
-	            "childCount": 0,
-	            "seniorCount": 0
-	        },
-	        "solutions": 20,
-	        "refundable": false,
-	        "saleCountry":"US"
-	    }
-	};
-
-	$scope.loader('show');
-
-	$scope.flights = getFlights.query();
-    console.log('ho')
-	return;
+            ],
+            "passengers": {
+                "adultCount": 1,
+                "infantInLapCount": 0,
+                "infantInSeatCount": 0,
+                "childCount": 0,
+                "seniorCount": 0
+            },
+            "solutions": 20,
+            "refundable": false
+        }
+    };
 
 	//getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE";
+    getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4";
+ 
+    $scope.loader('show');
 
-	getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4";
-	$http.jsonp({
+	$http({
 	    method: 'POST',
 	    url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4",
 	    params: FlightRequest,
-	    headers: { 'Content-Type': 'application/json' },
+	    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+	    transformRequest: false,
 	}).then(function successCallback(response) {
+
 	    $scope.loader('hide');
 	    console.log(response);
 	    return;
