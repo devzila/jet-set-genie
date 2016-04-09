@@ -846,13 +846,15 @@ a:focus, a:hover {
     font-size: 12px;
 }*/
 .currnt-time > p {
-    display: inline;
+    display: inline-block;
     margin-left: 2px;
+    margin-top:10px;
 }
 .booking .jsg-submit {
     margin-left: 3px;
-	  padding: 3px 5px;
-   
+    padding: 3px 15px;
+    font-size: 19px;
+    text-transform: uppercase;
 }
 .app-content{ min-height:80%; }
 .jsg-hotel-tabs-inner .left-part {
@@ -894,12 +896,14 @@ a:focus, a:hover {
     /*float: left;*/
 	text-align: left;
 	float: left;
+    margin-top:7px;
 }
 .star {
     background-color: #33cccc;
 	display:block;
-	padding:10px;
+	padding:5px;
 	color:#fff;
+    margin:0 5px;
 }
 .country_logo > img {
     background-color: inherit;
@@ -1034,17 +1038,27 @@ a:focus, a:hover {
     width: 35px;
     z-index: 1;
 }
+
 .set-favorite .fa-star, .set-favorite .fa-star-o {
     color: #fff;
     font-size: 20px;
 }
+
 .flight-booking {
     border-bottom: 1px solid #f5f5f5;
     display: table;
-    padding-top: 10px;
     width: 100%;
+    padding:10px 0;
 }
 
+.Connected .flight-booking:last-child{
+    padding-bottom:0;
+    border-bottom:0;
+}
+
+.Connected {
+    border-bottom:2px solid #ccc;
+}
 .box-detail {
     display: block;
     padding: 5px;
