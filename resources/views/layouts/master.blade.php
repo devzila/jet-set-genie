@@ -34,7 +34,7 @@
     <link rel='stylesheet' href="{{ asset('css/bootstrap-tagsinput.css') }}" type='text/css' media='all' />
     <script src="{{asset('js/bootstrap-tagsinput.js') }}"></script>
     <script src="{{asset('js/bootstrap-tagsinput-angular.js') }}"></script>
-
+    
 
     <!-- start Mixpanel -->
     <script type="text/javascript">
@@ -84,5 +84,6 @@
 
     <script src="{{ asset('js/jetSetApp.js') }}"></script>
     <script src="{{ asset('js/jetSetCtrl.js') }}"></script>
+    <script src="{{asset('js/angular-ui-slider.js') }}"></script>
 </body>
 </html>
