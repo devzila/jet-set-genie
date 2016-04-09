@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateDestinationCardItems extends Migration
+class UpdateDestinationCardItems2 extends Migration
 {
     /**
      * Run the migrations.
