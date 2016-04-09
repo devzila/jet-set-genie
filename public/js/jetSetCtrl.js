@@ -1,5 +1,3 @@
-var FlightRequest = '';
-
 app.controller('jetSetGenie', function ($scope, $http) {
     $scope.desttypes = [];
 
@@ -23,9 +21,31 @@ app.controller('jetSetGenie', function ($scope, $http) {
             $('.bodyloaders').hide();
     }
 
-    $scope.convertDate = function ( date ){
+    
+
+    $scope.convertTime = function ( strTime ){
+         
+        if (strTime < 60) return strTime + "m"; else
+            if (strTime.length == 3) {
+                hr = strTime.substr(0, 1);
+                min = strTime.substr(-2);
+                return hr + "h " + min + "m"
+            } else {
+                hr = strTime.substr(0, 2);
+                min = strTime.substr(-2);
+                return hr + "h " + min + "m"
+            }
+    }
+
+ 
+
+    $scope.convertDate = function ( date, flight ){
         var dt = new Date(date);
-        return (dt.getMonth() + 1) + '-' + dt.getDate() + '-' + dt.getFullYear();
+ 
+        if(!flight)
+            return (dt.getMonth() + 1) + '-' + dt.getDate() + '-' + dt.getFullYear();
+        else
+            return dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
     }
 
     $http.get("http://jetsetgenie.devzila.com/api/destination-types")
@@ -63,6 +83,11 @@ app.controller('jetSetGenie', function ($scope, $http) {
 						}, 1000);
             });
         });
+    }
+
+    $scope.backtodestinations = function () {
+        url = "/search-results/leaving/" + $scope.sparams.leaving + "/returning/" + $scope.sparams.returning + "/origin/" + $scope.sparams.origin + "/type/" + $scope.sparams.type;
+         //   window.location = url;
     }
 
     $scope.setDates = function () {
@@ -353,88 +378,174 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 
 });
 
-app.controller('ctrlFlightResults', function ($scope, $http, getFlights, $resource) {
+app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
+
+    $scope.flights = [{ }];
+  
+    var sQuery = (window.location.pathname).split("/");
+
+    airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
+    dest_code = (((decodeURIComponent(sQuery[9])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
+    //console.log(sQuery[9])
+    dt = new Date(sQuery[3]);
+    leavingdt = $scope.daysInWeek[dt.getDay()] + ", " + $scope.months[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
+
+    dt = new Date(sQuery[5]);
+    returningdt = $scope.daysInWeek[dt.getDay()] + ", " + $scope.months[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
+
+    sParams = {
+        leaving: leavingdt,
+        returning: returningdt,
+        origin: decodeURIComponent(sQuery[7]),
+        origincode: airportCode,
+        type: decodeURIComponent(sQuery[11]),
+        destination: decodeURIComponent(sQuery[9]),
+        dest_code: dest_code
+    }
+
  
-	$scope.sparams = {
-		leaving: sParams.leaving,
-		returning: sParams.returning,
-		origin: sParams.origin,
-		origincode: sParams.origincode,
-		destination: sParams.destination,
-		dest_code: sParams.dest_code,
-		type: sParams.type
-	};
-	
+    $scope.sparams.leaving = leavingdt;
+    $scope.sparams.returning = returningdt;
+    $scope.sparams.origin = decodeURIComponent(sQuery[7]);
+    $scope.sparams.origincode = airportCode;
+    $scope.sparams.destination = decodeURIComponent(sQuery[9]);
+    $scope.sparams.dest_code = dest_code;
+    $scope.sparams.type = decodeURIComponent(sQuery[11]);
+	 
 	//alert($scope.sparams.origincode + "" + $scope.sparams.dest_code)
 
-	FlightRequest = {
-	    "request": {
-	        "slice": [
+    $scope.FlightRequest = {
+        "request": {
+            "slice": [
               {
                   "origin": $scope.sparams.origincode,
                   "destination": $scope.sparams.dest_code,
-                  "date": "2016-05-11"
+                  "date": $scope.convertDate($scope.sparams.leaving, true)
               }
-	        ],
-	        "passengers": {
-	            "adultCount": 1,
-	            "infantInLapCount": 0,
-	            "infantInSeatCount": 0,
-	            "childCount": 0,
-	            "seniorCount": 0
-	        },
-	        "solutions": 20,
-	        "refundable": false,
-	        "saleCountry":"US"
-	    }
-	};
+            ],
+            "passengers": {
+                "adultCount": 1,
+                "infantInLapCount": 0,
+                "infantInSeatCount": 0,
+                "childCount": 0,
+                "seniorCount": 0
+            },
+            "solutions": 20,
+            "refundable": false
+        }
+    };
 
-	$scope.loader('show');
+	getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE";
+   // getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4";
+ 
+    $scope.loader('show');
+    
+    $http.post(getPlaceUrl, $scope.FlightRequest).success(function (response) {
+   
+    
+   // $.get('/flight-result.json', function (response) {
+        var currChar = "$";
+        var ctr = 0;
+        console.log(JSON.stringify(response.trips.tripOption));
+      
+        $.each( response.trips.tripOption, function (index, value) {
+            var price, timings;
+            ctr++;
 
-	$scope.flights = getFlights.query();
-    console.log('ho')
-	return;
+            price = currChar + (value.saleTotal).match(/[\d\.]+/g)[0];
+             
+            var departureTime = "";
+            var arrivalTime = "";
 
-	//getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE";
+            var flightRoute = [];
 
-	getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4";
-	$http.jsonp({
-	    method: 'POST',
-	    url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4",
-	    params: FlightRequest,
-	    headers: { 'Content-Type': 'application/json' },
-	}).then(function successCallback(response) {
-	    $scope.loader('hide');
-	    console.log(response);
-	    return;
-	    $.each(response.trips.tripOption, function (index, value) {
-	        flightRecord = {};
-	        flightRecord.flights = [{}];
+            var stops = 0;
 
-	        flightRecord.price = value.saleTotal;
-	        flightRecord.tripType = 'round trip';
-	        flightRecord.type = (value.slice[0].segment.length > 1) ? 'Connected' : 'Nonstop';
-	        flightRecord.bookUrl = 'http://www.expedia.com';
+            $.each(value.slice, function (index, value) {
+                //console.log(value.segment);
+                stops = value.segment.length;
+                duration = $scope.convertTime(value.duration.toString());
 
-	        $.each(value.slice[0].segment, function (i, flight) {
-	            flightRecord.flights.push({
-	                airline: '',
-	                airlineLogo: '',
-	                duration: '',
-	                timings: '',
-	            })
-	        });
+                $.each(value.segment, function (sindex, svalue) {
+                    departuredt = new Date(svalue.leg[0].departureTime);
+                    arrivaldt = new Date(svalue.leg[0].arrivalTime);
 
-	        //console.log(JSON.stringify(flightRecord))
-	        $scope.flights.push(flightRecord);
-	    })
-	}, function errorCallback(response) {
-	    // called asynchronously if an error occurs
-	    // or server returns response with an error status.
-	});
+                    departuredate = (departuredt.getMonth() + 1) + "-" + departuredt.getDate() + "-" + departuredt.getFullYear();
+                    var ampm, hrs = "";
+                    if (departuredt.getHours() >= 12) {
+                        hrs = (departuredt.getHours() == 12) ? '12' : departuredt.getHours() - 12;
+                        ampm = 'pm';
+                    } else {
+                        hrs = departuredt.getHours();
+                        ampm = 'am';
+                    }
+
+                    var mins = (departuredt.getMinutes().length < 2) ? '0' + departuredt.getMinutes() : departuredt.getMinutes();
+
+                    mins = (mins == "0") ? "00" : mins;
+                    hrs = (hrs == "0") ? "00" : hrs;
+
+                    departuretime = hrs + ":" + mins + ampm;
+
+                    arrivaldate = (arrivaldt.getMonth() + 1) + "-" + arrivaldt.getDate() + "-" + arrivaldt.getFullYear();
+                    var ampm, hrs = "";
+                    if (arrivaldt.getHours() >= 12) {
+                        hrs = (arrivaldt.getHours() == 12) ? '12' : arrivaldt.getHours() - 12;
+                        ampm = 'pm';
+                    } else {
+                        hrs = arrivaldt.getHours();
+                        ampm = 'am';
+                    }
+
+                    var mins = (arrivaldt.getMinutes().length < 2) ? '0' + arrivaldt.getMinutes() : arrivaldt.getMinutes();
+
+                    mins = (mins == "0") ? "00" : mins;
+                    hrs = (hrs == "0") ? "00" : hrs;
+
+                    arrivaltime = hrs + ":" + mins + ampm;
+                    
+                    
+                    console.log(JSON.stringify(svalue.leg[0].operatingDisclosure));
+
+                    //airline = 'airfrance';
+                    airline = svalue.leg[0].operatingDisclosure;
+                    
+                    if (airline != undefined)
+                        airline = airline.replace('OPERATED BY ', '');
+                    else
+                        airline = 'AIR FRANCE';
 
 
-	console.log(JSON.stringify($scope.flights));
+
+                    flightRoute.push({
+                        arrival: svalue.leg[0].arrivalTime,
+                        departure: svalue.leg[0].departureTime,
+                        timings: departuretime + "-" + arrivaltime,
+                        duration: (sindex == 0) ? duration : '',
+                        airline: airline,
+                        airlineLogo: '/assets/flight-dummy.png',
+                    });
+                });
+
+                    
+            });
+            //loop for adding a flight ends here.
+
+            var flights = {
+                price: price,
+                tripType: 'round trip',
+                type : (value.slice[0].segment.length > 1) ? 'Connected' : 'Nonstop',
+                bookUrl: 'http://www.expedia.com',
+                flights: {}
+            }
+            flights.flights = flightRoute;
+ 
+            $scope.flights.push(flights);
+        });
+   
+        $scope.loader('hide');
+    });
+
 
 	$scope.deleteflight = function( parentindex, index ){
 		$scope.favorites[parentindex].flights.splice(index, 1);

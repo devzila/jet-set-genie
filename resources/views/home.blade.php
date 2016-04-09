@@ -188,7 +188,7 @@
 		
 	});
 	
-	/* var FlightRequest = {
+	var FlightRequest = {
       "request": {
         "slice": [
           {
@@ -208,25 +208,28 @@
         "refundable": false
       }
     };
- 	
-    $.ajax({
-         type: "POST",
-         //Set up your request URL and API Key.
-         url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE", 
-         contentType: 'application/json', // Set Content-type: application/json
-         dataType: 'json',
-         // The query we want from Google QPX, This will be the variable we created in the beginning
-         data: JSON.stringify(FlightRequest),
-         success: function (data) {
-          //Once we get the result you can either send it to console or use it anywhere you like.
-          console.log(JSON.stringify(data));
-        },
-          error: function(){
-           //Error Handling for our request
-           alert("Access to Google QPX Failed.");
-         }
-    });
+ 	function fetchFlights123(){
+        $.ajax({
+             type: "POST",
+             //Set up your request URL and API Key.
+             url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE", 
+             contentType: 'application/json', // Set Content-type: application/json
+             dataType: 'json',
+             // The query we want from Google QPX, This will be the variable we created in the beginning
+             data: JSON.stringify(FlightRequest),
+             success: function (data) {
+              //Once we get the result you can either send it to console or use it anywhere you like.
+                 return data;
+            },
+              error: function(){
+               //Error Handling for our request
+               alert("Access to Google QPX Failed.");
+             }
+        });
+ 	}
+ 	//fetchFlights123();
 
+    /*
     $.ajax({
         type: "GET",
         //Set up your request URL and API Key.
