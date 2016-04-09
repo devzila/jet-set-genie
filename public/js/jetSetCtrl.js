@@ -1,12 +1,32 @@
+var FlightRequest = '';
+
 app.controller('jetSetGenie', function ($scope, $http) {
     $scope.desttypes = [];
+
+    $scope.sparams = {
+        leaving: '',
+        returning: '',
+        origin: '',
+        origincode: '',
+        destination: '',
+        dest_code: '',
+        type: ''
+    };
+
+    $scope.daysInWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    $scope.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     $scope.loader = function (type) {
         if (type == "show")
             $('.bodyloaders').show();
         else
             $('.bodyloaders').hide();
-    }   
+    }
+
+    $scope.convertDate = function ( date ){
+        var dt = new Date(date);
+        return (dt.getMonth() + 1) + '-' + dt.getDate() + '-' + dt.getFullYear();
+    }
 
     $http.get("http://jetsetgenie.devzila.com/api/destination-types")
     .success(function (data, status, headers, config) {
@@ -18,7 +38,6 @@ app.controller('jetSetGenie', function ($scope, $http) {
     });
 
     $scope.getResults = function (selected_destination) {
-       
         mixpanel.track(
 			"Destination Select",
 			{ "type": selected_destination }
@@ -172,49 +191,71 @@ app.controller('jetSetGenie', function ($scope, $http) {
             time: {
             leaving: {
                         takeoff: {
-                        text: "Sat 12:30 am - Sun 12:30 am",
-                        timeslot: ['0030', '0000']
+                        text: "",
+                        timeslot: ['0030', '2400']
                         },
                 landing: {
                     text: "Sat 12:30 am - Sun 12:30 am",
-                    timeslot: ['0030', '0000']
+                    timeslot: ['0030', '2400']
                 }
             },
                 returning: {
                     takeoff: {
                             text: "Sat 12:30 am - Sun 12:30 am",
-                            timeslot: ['0030', '0000']
+                            timeslot: ['0030', '2400']
                     },
                     landing: {
                         text: "Sat 12:30 am - Sun 12:30 am",
-                        timeslot: ['0030', '0000']
+                        timeslot: ['0030', '2400']
                     }
                 }
             },
-        price: [100, 1000],
+        price: [0, 2000],
         stops: ['nonstop', 'one', 'two', ''],
-        duration: [1, 24]
+        duration: [1, 48]
     };
-    window.console.log($scope.searchfilters.time.leaving.takeoff.text)
+
+   
+    $scope.refineSearch = function () {
+        var leaving_date = $scope.convertDate($scope.sparams.leaving);
+        var returning_date = $scope.convertDate($scope.sparams.returning);
+        var home_airport = $scope.sparams.origin;
+        var type = $scope.sparams.type;
+
+        alert(type);
+
+        url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + type;
+
+        window.location = url;
+    }
+
+
+   // window.console.log($scope.searchfilters.time.leaving.takeoff.text)
 });
 
 app.controller('ctrlFavorites', function($scope, $http){	 
     $scope.pagetitle = 'Favorites';
 });
 
-app.controller('dummy', function ($scope, $http) {
-    $scope.heading = 'This is dummy heading';
-})
 
-app.controller('ctrlSearchResults', function($scope, $http){
-	$scope.sparams = {
-		leaving: sParams.leaving,
-		returning: sParams.returning,
-		origin: sParams.origin,
-		origincode: sParams.origincode,
-		type: sParams.type
-	};
+app.controller('ctrlSearchResults', function ($scope, $log, $http) {
+    var sQuery = (window.location.pathname).split("/");
+    airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
 
+    dt = new Date(sQuery[3]);
+    leavingdt = $scope.daysInWeek[dt.getDay()] + ", " + $scope.months[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
+
+    dt = new Date(sQuery[5]);
+    returningdt = $scope.daysInWeek[dt.getDay()] + ", " + $scope.months[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
+
+    $scope.sparams.leaving = leavingdt;
+    $scope.sparams.returning = returningdt;
+    $scope.sparams.origin = decodeURIComponent(sQuery[7]);
+    $scope.sparams.origincode = airportCode;
+    $scope.sparams.destination = '';
+    $scope.sparams.dest_code = '';
+    $scope.sparams.type = decodeURIComponent(sQuery[9]);
+    
 	$scope.trip_type = function( type ){
 		if(type)
 		return type + ' x ';
@@ -237,23 +278,38 @@ app.controller('ctrlSearchResults', function($scope, $http){
 		url="/flight-results/leaving/"+leavingdt+"/returning/"+returningdt+"/origin/"+home_airport+"/destination/"+destination+"/type/"+destination_type;
 		window.location = url;
 	}
-   
-    getPlaceUrl = "http://jetsetgenie.devzila.com/api/destination-types/" + $scope.sparams.type + "/airport";
-    
-    $scope.loader('show');
+
+	getPlaceUrl = "http://jetsetgenie.devzila.com/api/destination-types/" + $scope.sparams.type + "/airport";
+
+	$scope.loader('show');
 
 	$scope.records = [];
 
-    $http.get(getPlaceUrl)
-    .success(function (data, status, headers, config) {
-        $scope.records = data;
-        $scope.loader('hide');
-    })
-    .error(function (error, status, headers, config) {
-        console.log(status);
-        console.log("Error occured");
-    });
+	$scope.fetchCities = function () {
+	    $http.get(getPlaceUrl)
+        .success(function (data, status, headers, config) {
+            $scope.records = $scope.records.concat(data);
+            console.log($scope.records);
+        })
+        .error(function (error, status, headers, config) {
+            console.log(status);
+            console.log("Error occured");
+        });
+	}
 
+	$(".tag_places").tagsinput();
+
+	des_type = ($scope.sparams.type).split(',');
+
+	angular.forEach(des_type, function (value, key) {
+	    getPlaceUrl = "http://jetsetgenie.devzila.com/api/destination-types/" + value + "/airport";
+	    $scope.fetchCities();
+	    $('.tag_places').tagsinput('add', value);
+	    if (key == des_type.length - 1){
+	        $scope.loader('hide');
+	    }
+	});
+ 
     $scope.setfavorite = function (index, id) {
         if ($scope.isFavorite(id))
         {
@@ -281,9 +337,24 @@ app.controller('ctrlSearchResults', function($scope, $http){
            });
         }
     }
+
+    // Slider options with event handlers
+    $scope.slider = {
+        'options': {
+            start: function (event, ui) {
+                $log.info('Event: Slider start - set with slider options', event);
+            },
+            stop: function (event, ui) {
+                $log.info('Event: Slider stop - set with slider options', event);
+            }
+        }
+    };
+
+
 });
 
-app.controller('ctrlFlightResults', function($scope, $http, $resource){
+app.controller('ctrlFlightResults', function ($scope, $http, getFlights, $resource) {
+ 
 	$scope.sparams = {
 		leaving: sParams.leaving,
 		returning: sParams.returning,
@@ -296,7 +367,7 @@ app.controller('ctrlFlightResults', function($scope, $http, $resource){
 	
 	//alert($scope.sparams.origincode + "" + $scope.sparams.dest_code)
 
-	var FlightRequest = {
+	FlightRequest = {
 	    "request": {
 	        "slice": [
               {
@@ -320,12 +391,9 @@ app.controller('ctrlFlightResults', function($scope, $http, $resource){
 
 	$scope.loader('show');
 
-	$http.defaults.useXDomain = true;
-	fetchFlights = $resource("https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4")
-	flightRAW = fetchFlights.get({ method: "POST", params: FlightRequest });
-
+	$scope.flights = getFlights.query();
+    console.log('ho')
 	return;
-	$scope.flights = [];
 
 	//getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE";
 

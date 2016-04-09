@@ -103,6 +103,7 @@ input[type=date]::-webkit-outer-spin-button {
     min-height: 425px;
 }*/
  
+
 .steps h2 {
     color: #fff;
      font-size: 53px;
@@ -431,6 +432,7 @@ p, h4
     margin-top:10px;
 }
 
+ 
 span.ui-slider-handle.ui-state-default.ui-corner-all {
     background: #fff;
     border-radius: 50%;
@@ -738,6 +740,10 @@ input[type=date] {
 .filter-slider{
     margin-left:10px;
     margin-right:10px;
+}
+
+.price .filter-slider, .duration .filter-slider{
+    margin-top:30px;
 }
 
 .price li, .stops li, .duration li{
