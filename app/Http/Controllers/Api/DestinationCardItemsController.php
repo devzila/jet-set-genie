@@ -46,7 +46,8 @@ class DestinationCardItemsController extends Controller
     {
       $result = DestinationCardItems::create([
         'destination_card_id' => $card_id,
-         'flight_id' => $request->input('flight_id'),
+         'name' => $request->input('name'),
+         'fare' => $request->input('fare'),
 		 'action_date' => $request->input('action_date'),
 		 'action_time' => $request->input('action_time')
 		 ]);
