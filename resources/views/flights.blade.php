@@ -21,7 +21,7 @@
 				</div>				
 			 
 				<div class="col-lg-12 timing-results">
-					<div class="row flight-booking" data-ng-repeat="flight in flights">				 
+					<div class="row flight-booking" data-ng-repeat="flight in flights" >				 
 						<div class="col-lg-8 booking-time">
 							<ul>
 								<li class="count"><h5><strong>@{{ flight.price }}</strong></h5><span>@{{ flight.tripType }}</span></li>
@@ -50,31 +50,5 @@
 @stop
  
 @section('additional-scripts')
-<script>
-	var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-	var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-	var sParams = {};
-	
-
-	var sQuery = (window.location.pathname).split("/"); 
-	airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
-	dest_code = (((decodeURIComponent(sQuery[9])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
-	//console.log(sQuery[9])
-	dt = new Date(sQuery[3]);	
-	leavingdt = days[dt.getDay()] + ", " + months[dt.getMonth()]  + " " + dt.getDate() + ", " + dt.getFullYear();
-	
-	dt = new Date(sQuery[5]);	
-	returningdt = days[dt.getDay()] + ", " + months[dt.getMonth()]  + " " + dt.getDate() + ", " + dt.getFullYear();
-	
-	sParams = {
-		leaving: leavingdt,
-		returning: returningdt,
-		origin: decodeURIComponent(sQuery[7]),
-		origincode: airportCode,
-		type: decodeURIComponent(sQuery[11]),
-		destination: decodeURIComponent(sQuery[9]),
-		dest_code: dest_code
-	}
-	console.log(sParams)
-</script>
+ 
 @stop

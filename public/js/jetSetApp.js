@@ -1,4 +1,4 @@
-var app = angular.module("jetSetGenie", ['ngRoute', 'ngResource', 'ui.slider']).run(function ($rootScope) {
+var app = angular.module("jetSetGenie", ['ngRoute', 'ngResource', 'ui.slider' ]).run(function ($rootScope) {
 	$rootScope.place_bg_colors = [
 	 "#33cccc",
 	 "#ffc000",
@@ -8,10 +8,11 @@ var app = angular.module("jetSetGenie", ['ngRoute', 'ngResource', 'ui.slider']).
 	];
 	
 	$rootScope.randomcolor = function () {
-	    return $rootScope.place_bg_colors[Math.floor(Math.random() * $rootScope.place_bg_colors.length)];
+	    return $rootScope.place_bg_colors[Math.floor(Math.random() * $rootScope.place_bg_colors.length)];	    
 	}
 	
 })
+ 
 
 app.filter('getById', function () {
     return function (input, id) {
@@ -23,10 +24,6 @@ app.filter('getById', function () {
         }
         return null;
     }
-})
-
-app.factory('getFlights', function ($resource) {
-    return $resource('https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE', FlightRequest);
 })
 
 app.filter('myDateFilter', function () {
