@@ -15,7 +15,7 @@ class UpdateDestinationItem2 extends Migration
         Schema::table('destination_card_items', function ($table) {
             $table->string('name');
             $table->string('fare', 20);
-            $table->dropColumn('custom_attribute');
+            //$table->dropColumn('custom_attribute');
         });
     }
 
