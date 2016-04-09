@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class DestinationCards extends Model
 {
-    protected $fillable = ['user_id','destination_id'];
+    protected $fillable = ['user_id','destination_id', 'duration', 'fare'];
 }
