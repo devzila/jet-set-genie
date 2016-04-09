@@ -26,7 +26,7 @@ class CardsController extends Controller
         $select = DB::table('destination_cards')
             ->join('destination', 'destination.id', '=', 'destination_cards.destination_id')
             ->where('destination_cards.user_id', $this->user)
-            ->select('destination.display_name', 'destination.city_name', 'destination.airport_code', 'destination.id');
+            ->select('destination.display_name', 'destination.city_name', 'destination.airport_code', 'destination.id', 'destination_cards.duration', 'destination_cards.fare');
 
        return Response::json($select->get(), 200);
 		 
