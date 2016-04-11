@@ -20,13 +20,10 @@ app.controller('jetSetGenie', function ($scope, $http) {
         else
             $('.bodyloaders').hide();
     }
-
-    
-
-    $scope.convertTime = function ( strTime ){
-         
-        if (strTime < 60) return strTime + "m"; else
-            if (strTime.length == 3) {
+     
+    $scope.convertTime = function ( strTime ){  
+        if (strTime < 60) return strTime + "m"; 
+            else if (strTime.length == 3) {
                 hr = strTime.substr(0, 1);
                 min = strTime.substr(-2);
                 return hr + "h " + min + "m"
@@ -36,8 +33,6 @@ app.controller('jetSetGenie', function ($scope, $http) {
                 return hr + "h " + min + "m"
             }
     }
-
- 
 
     $scope.convertDate = function ( date, flight ){
         var dt = new Date(date);
@@ -87,7 +82,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
 
     $scope.backtodestinations = function () {
         url = "/search-results/leaving/" + $scope.sparams.leaving + "/returning/" + $scope.sparams.returning + "/origin/" + $scope.sparams.origin + "/type/" + $scope.sparams.type;
-         //   window.location = url;
+         
     }
 
     $scope.setDates = function () {
@@ -104,82 +99,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
         }
     }
 
-    $scope.favorites = [
-	{
-	    placeName: "Puerto Vallarta",
-	    shortestFlight: "6hrs 23 mins",
-	    cheapestFlight: "$509",
-	    color: "#33cccc",
-	    flights: [
-            {
-                price: "$509",
-                name: "American",
-                departDate: "Sat, Feb 29 6:55PM"
-            },
-            {
-                price: "$499",
-                name: "United",
-                departDate: "Sat, Feb 29 3:14PM"
-            },
-	    ]
-	},
-		{
-		    placeName: "Los Angeles",
-		    shortestFlight: "6hrs 23 mins",
-		    cheapestFlight: "$509",
-		    color: "#ffc000",
-		    flights: [
-				{
-				    price: "$377",
-				    name: "LAN",
-				    departDate: "Sun, Mar 1 4:32PM"
-				},
-		    ]
-		},
-		{
-		    placeName: "Majorca",
-		    shortestFlight: "6hrs 23 mins",
-		    cheapestFlight: "$509",
-		    color: "#7f7f7f",
-		    flights: []
-		},
-		{
-		    placeName: "Malibu",
-		    shortestFlight: "5hrs 21 mins",
-		    cheapestFlight: "$399",
-		    color: "#028c90",
-		    flights: [
-				{
-				    price: "$509",
-				    name: "American",
-				    departDate: "Sat, Feb 29 6:55PM"
-				},
-				{
-				    price: "$499",
-				    name: "United",
-				    departDate: "Sat, Feb 29 3:14PM"
-				},
-		    ]
-		},
-		{
-		    placeName: "Puerto Vallarta",
-		    shortestFlight: "6hrs 23 mins",
-		    cheapestFlight: "$509",
-		    color: "#2FD280",
-		    flights: [
-				{
-				    price: "$509",
-				    name: "American",
-				    departDate: "Sat, Feb 29 6:55PM"
-				},
-				{
-				    price: "$499",
-				    name: "United",
-				    departDate: "Sat, Feb 29 3:14PM"
-				},
-		    ]
-		}
-    ];
+    $scope.favorites = [];
 
     $scope.isFavorite = function (placeid) {
         var foundFavorite = false;
@@ -202,8 +122,11 @@ app.controller('jetSetGenie', function ($scope, $http) {
     };
     $scope.setfavorite = function (index) {
         //alert($scope.records[index].id);
-        return
-        $scope.favorites.push({ id: "0" });
+        //return
+        //$scope.favorites.push({ id: "0" });
+
+        console.log(index);
+
     };
 
 
