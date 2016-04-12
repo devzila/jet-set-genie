@@ -6,3 +6,11 @@ Homestead.json
 .env
 .DS_Store
 .idea/
+.vs/config/applicationhost.config
+.vs/jetSetGenie/v14/.suo
+public/data/beach.json
+public/data/europe.json
+public/data/latin-america.json
+public/data/mountains.json
+public/data/surprise-me.json
+public/dummy.html
