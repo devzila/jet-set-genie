@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>Api Test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+
+<body>
+<form id="sample" action="http://jetsetgenie.devzila.com/api/cards">
+    Destination Id<input name="destination_id" value="1"/>
+	Duration<input name="duration" value="5 hours(s) 30 minute(s)"/>
+	Fare<input name="fare" value="$50"/>
+
+    <button type="submit">Submit data using Ajax call</button>
+</form>
+
+<script>
+    $("#sample").submit(function(e) {
+        e.preventDefault();
+        $.post('/api/cards', $('#sample').serialize())
+
+    });
+</script>
+</body>
+</html>
