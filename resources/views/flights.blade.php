@@ -17,7 +17,7 @@
 		<div class="row row-centered flight-results"  > 
 		<div class="col-md-9 left-part">			 		
 				<div class="col-md-12 text-center">
-					<h4><a data-ng-class="backtodestinations()" class="pull-left">< Back</a> SHOWING RESULTS TO @{{ destination }}</h4>
+					<h4><a data-ng-class="backtodestinations()" class="pull-left">< Back</a> SHOWING RESULTS TO @{{ sparams.destination }}</h4>
 				</div>				
 			 
 				<div class="col-lg-12 timing-results">
@@ -25,15 +25,19 @@
 
                         <div class="flight-booking" data-ng-repeat="route in flight.flights">
                             <div class="col-lg-8 booking-time">
-							    <ul>
-								    <li class="count"><h5><strong>@{{ flight.price }}</strong></h5><span>@{{ flight.tripType }}</span></li>
-								    <li><a class="star"><i class="fa fa-star-o fa-2x"></i></a></li>
+                                <ul>
+                                    <li class="count"><h5><strong>@{{ $index == 0 ? flight.price : '' }}</strong></h5><span>@{{ $index == 0 ? flight.tripType : '' }}</span></li>
+                                    <li><a class="star" data-ng-click="addFlight( route.price, route.airline, route.departure )"><i class="fa fa-star-o fa-2x"></i></a></li>
                                     <li class="country-logo">
                                         <i class="fa fa-plane fa-2x" style="color:#ccc;"></i>
-                                       <!-- <img data-ng-src="@{{ route.airlineLogo }}" alt="" /> --> </li>
-								    <li class="country"><p><strong>@{{ route.timings }}</strong></p><span>@{{ route.airline }}</span></li>
-								    <li class="currnt-time"><p><i class="fa fa-wifi"></i> @{{ route.duration  }}</p></li>
-							    </ul>
+                                        <!-- <img data-ng-src="@{{ route.airlineLogo }}" alt="" /> -->
+                                    </li>
+                                    <li class="country">
+                                        <p><strong>@{{ route.timings }}</strong></p><span>@{{ route.airline + " | " + route.flightOrigin + " &#8594; " + route.flightDest }}</span><br />
+                                         
+                                    </li>
+                                    <li class="currnt-time"><p><i data-ng-if="$index == 0" class="fa fa-wifi"></i> @{{ route.duration  }}</p></li>
+                                </ul>
 						    </div>						
 						    <div class="col-lg-4 booking">
                                 <p>@{{ flight.type }}</p>

@@ -77,6 +77,14 @@ input[type=date]::-webkit-outer-spin-button {
 	color:#fff;
 }
 
+.star{
+    cursor:pointer;
+}
+
+.booking-time li.count {
+    min-width: 62px;
+}
+
 /*#jsg-content
 {
 	 min-height: 700px;
