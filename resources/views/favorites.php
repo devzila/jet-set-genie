@@ -21,20 +21,21 @@
 			</div>
 			
 			</div>
+         
 			<div class="row">
 				<div class="col-md-3 list-box" data-ng-repeat="favorite in favorites">
 					<div class="box clearfix" data-ng-style="{background: place_bg_colors[$index % place_bg_colors.length]}">
 					<div class="box-detail">
 						<a class="setFavorite"></a>
-						<h5 data-ng-bind="favorite.placeName"></h5>
+						<h5 data-ng-bind="favorite.display_name"></h5>
 						<div class="box-info">
 						<p>Shortest Flight</p>
-						<p>{{ favorite.shortestFlight }}</p>
+						<p>{{ favorite.duration }}</p>
 						<p>Chepest Flight</p>
-						<p data-ng-bind="favorite.cheapestFlight"></p>
+						<p data-ng-bind="favorite.fare"></p>
 						</div>
 					</div>
-					<div class="blank-bg" data-ng-repeat="flight in favorite.flights">                                        	
+					<div class="blank-bg" data-ng-repeat="flight in favorite.items">                                        	
 						<a href="#"> <i class="fa fa-times"></i> </a>
 						<div class="box-info">                                           
 						<h5>FLIGHT</h5>

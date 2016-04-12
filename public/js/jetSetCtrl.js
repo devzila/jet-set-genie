@@ -101,7 +101,8 @@ app.controller('jetSetGenie', function ($scope, $http) {
         }
     }
 
-    $scope.favorites = [];
+    $scope.favorites = $.get("http://jetsetgenie.devzila.com/api/cards");
+    console.log($scope.favorites)
 
     $scope.isFavorite = function (placeid) {
         var foundFavorite = false;
@@ -149,7 +150,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
             }
 
             $.post("http://jetsetgenie.devzila.com/api/cards", $scope.FavRequest, function () {
-                $.get("http://jetsetgenie.devzila.com/api/cards");
+               // $.get("http://jetsetgenie.devzila.com/api/cards");
             });
 
             //$http.post("http://jetsetgenie.devzila.com/api/cards", $scope.FavRequest).success(function (response) {
