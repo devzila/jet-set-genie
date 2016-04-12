@@ -8,11 +8,13 @@ app.controller('jetSetGenie', function ($scope, $http) {
         origincode: '',
         destination: '',
         dest_code: '',
+        dest_id: '',
         type: ''
     };
 
     $scope.daysInWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     $scope.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 
     $scope.loader = function (type) {
         if (type == "show")
@@ -120,15 +122,58 @@ app.controller('jetSetGenie', function ($scope, $http) {
         if (con)
             $scope.favorites.splice(index, 1);
     };
-    $scope.setfavorite = function (index) {
-        //alert($scope.records[index].id);
-        //return
-        //$scope.favorites.push({ id: "0" });
 
-        console.log(index);
+    $scope.setfavorite = function (index, id, duration, fare, placeName) {
+     
+        if ($scope.isFavorite(id)) {
+            var con = window.confirm('Are you sure you want to remove this from favorite');
 
-    };
+            if (!con) return;
 
+            angular.forEach($scope.favorites, function (value, key) {
+                if (value.id == id)
+                    $scope.favorites.splice(key, 1);
+            });
+
+        } else {
+            var getRecord = []
+            angular.forEach($scope.favorites, function (value, key) {
+                if (value.id == id)
+                    getRecord = $scope.favorites[key];
+            });
+            
+            $scope.FavRequest = {
+                "destination_id": id,
+                "duration": duration,
+                "fare": fare
+            }
+
+            $.post("http://jetsetgenie.devzila.com/api/cards", $scope.FavRequest, function () {
+                $.get("http://jetsetgenie.devzila.com/api/cards");
+            });
+
+            //$http.post("http://jetsetgenie.devzila.com/api/cards", $scope.FavRequest).success(function (response) {
+              //  console.log(response);
+            //});
+            
+            $scope.favorites.unshift({
+                id: id,
+                placeName: placeName,
+                shortestFlight: duration,
+                cheapestFlight: fare,
+                flights: []
+            });
+        }
+    }
+
+    $http.get("/api/cards")
+    .success(function (data, status, headers, config) {
+        $scope.favorites = data;
+    })
+    .error(function (error, status, headers, config) {
+        //console.log(status);
+        console.log("Favorite Error");
+    });
 
     $scope.deleteflight = function (parentindex, index) {
         $scope.favorites[parentindex].flights.splice(index, 1);
@@ -170,7 +215,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
         var home_airport = $scope.sparams.origin;
         var type = $scope.sparams.type;
 
-        alert(type);
+        //alert(type);
 
         url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + type;
 
@@ -187,13 +232,18 @@ app.controller('ctrlFavorites', function($scope, $http){
 
 
 app.controller('ctrlSearchResults', function ($scope, $log, $http) {
+
+    
     var sQuery = (window.location.pathname).split("/");
     airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
 
-    dt = new Date(sQuery[3]);
+    
+
+    dt = new Date( sQuery[3].replace(new RegExp('-', 'g'),'/') );
+
     leavingdt = $scope.daysInWeek[dt.getDay()] + ", " + $scope.months[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
 
-    dt = new Date(sQuery[5]);
+    dt = new Date( sQuery[5].replace(new RegExp('-', 'g'), '/') );
     returningdt = $scope.daysInWeek[dt.getDay()] + ", " + $scope.months[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
 
     $scope.sparams.leaving = leavingdt;
@@ -203,6 +253,9 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
     $scope.sparams.destination = '';
     $scope.sparams.dest_code = '';
     $scope.sparams.type = decodeURIComponent(sQuery[9]);
+    $scope.sparams.dest_id = '';
+
+ 
     
 	$scope.trip_type = function( type ){
 		if(type)
@@ -210,7 +263,7 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 		else return '';
 	}
 	
-	$scope.showFlights = function( dest_code, destination ){
+	$scope.showFlights = function( dest_code, destination, dest_id ){
 		leavingdt = new Date($scope.sparams.leaving)
 		leavingdt = (leavingdt.getFullYear() + "-" + (leavingdt.getMonth()+1) + "-" + leavingdt.getDate());
 		//console.log(leavingdt.getMonth());
@@ -223,11 +276,11 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 		destination_type = $scope.sparams.type;
 		home_airport=$scope.sparams.origin;
 		
-		url="/flight-results/leaving/"+leavingdt+"/returning/"+returningdt+"/origin/"+home_airport+"/destination/"+destination+"/type/"+destination_type;
+		url = "/flight-results/leaving/" + leavingdt + "/returning/" + returningdt + "/origin/" + home_airport + "/destination/" + destination + "/type/" + destination_type + "/destid/" + dest_id;
 		window.location = url;
 	}
 
-	getPlaceUrl = "http://jetsetgenie.devzila.com/api/destination-types/" + $scope.sparams.type + "/airport";
+	getPlaceUrl = "/api/destination-types/" + $scope.sparams.type + "/airport";
 
 	$scope.loader('show');
 
@@ -237,7 +290,7 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 	    $http.get(getPlaceUrl)
         .success(function (data, status, headers, config) {
             $scope.records = $scope.records.concat(data);
-            console.log($scope.records);
+            //console.log($scope.records);
         })
         .error(function (error, status, headers, config) {
             console.log(status);
@@ -250,7 +303,7 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 	des_type = ($scope.sparams.type).split(',');
 
 	angular.forEach(des_type, function (value, key) {
-	    getPlaceUrl = "http://jetsetgenie.devzila.com/api/destination-types/" + value + "/airport";
+	    getPlaceUrl = "/api/destination-types/" + value + "/airport";
 	    $scope.fetchCities();
 	    $('.tag_places').tagsinput('add', value);
 	    if (key == des_type.length - 1){
@@ -258,34 +311,6 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 	    }
 	});
  
-    $scope.setfavorite = function (index, id) {
-        if ($scope.isFavorite(id))
-        {
-            var con = window.confirm('Are you sure you want to remove this from favorite');
-            angular.forEach($scope.favorites, function (value, key) {
-                if (value.id == id)
-                    $scope.favorites.splice(key, 1);
-            });
-
-        }else{
-            var getRecord = []
-            angular.forEach($scope.favorites, function (value, key) {
-                if (value.id == id)
-                    getRecord = $scope.favorites[key];
-            });
-
-            //console.log(JSON.stringify(getRecord))
-       
-           $scope.favorites.unshift({
-               id: id,
-               placeName: "Test",
-               shortestFlight: "Test",
-               cheapestFlight: "Test",
-               flights: []
-           });
-        }
-    }
-
     // Slider options with event handlers
     $scope.slider = {
         'options': {
@@ -334,7 +359,9 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
     $scope.sparams.destination = decodeURIComponent(sQuery[9]);
     $scope.sparams.dest_code = dest_code;
     $scope.sparams.type = decodeURIComponent(sQuery[11]);
-	 
+    $scope.sparams.dest_id = sQuery[13];
+	
+   // alert($scope.sparams.dest_id)
 	//alert($scope.sparams.origincode + "" + $scope.sparams.dest_code)
 
     $scope.FlightRequest = {
@@ -354,7 +381,8 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
                 "seniorCount": 0
             },
             "solutions": 20,
-            "refundable": false
+            "refundable": false,
+            "saleCountry": "US"
         }
     };
 
@@ -363,10 +391,10 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
  
     $scope.loader('show');
     
-    $http.post(getPlaceUrl, $scope.FlightRequest).success(function (response) {
+    //$http.post(getPlaceUrl, $scope.FlightRequest).success(function (response) {
    
     
-   // $.get('/flight-result.json', function (response) {
+    $.get('/flight-result.json', function (response) {
         var currChar = "$";
         var ctr = 0;
         console.log(JSON.stringify(response.trips.tripOption));
@@ -428,7 +456,7 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
                     arrivaltime = hrs + ":" + mins + ampm;
                     
                     
-                    console.log(JSON.stringify(svalue.leg[0].operatingDisclosure));
+                   // console.log(JSON.stringify(svalue.leg[0].operatingDisclosure));
 
                     //airline = 'airfrance';
                     airline = svalue.leg[0].operatingDisclosure;
@@ -438,8 +466,6 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
                     else
                         airline = 'AIR FRANCE';
 
-
-
                     flightRoute.push({
                         arrival: svalue.leg[0].arrivalTime,
                         departure: svalue.leg[0].departureTime,
@@ -447,6 +473,8 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
                         duration: (sindex == 0) ? duration : '',
                         airline: airline,
                         airlineLogo: '/assets/flight-dummy.png',
+                        flightOrigin: svalue.leg[0].origin,
+                        flightDest: svalue.leg[0].destination
                     });
                 });
 
@@ -455,6 +483,7 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
             //loop for adding a flight ends here.
 
             var flights = {
+                id: value.id,
                 price: price,
                 tripType: 'round trip',
                 type : (value.slice[0].segment.length > 1) ? 'Connected' : 'Nonstop',
@@ -467,6 +496,7 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
         });
    
         $scope.loader('hide');
+       
     });
 
 
@@ -474,5 +504,48 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
 		$scope.favorites[parentindex].flights.splice(index, 1);
 	};
 
+	$scope.addFlight = function (fare, airline, departure) {
+	    
+	    //Check if the flight if destination card is already added, if not add one
+	    if (!$scope.isFavorite($scope.sparams.dest_id))
+	    {
+	        getPlaceUrl = "/api/destination-types/" + $scope.sparams.type + "/airport";
+
+	        var getPlacedata =  $http.get(getPlaceUrl)
+                .success(function (data, status, headers, config) {
+                    var findPlace = {};
+                    $.each(data, function (key, value) {
+                        if (value.id == $scope.sparams.dest_id) {
+                            findPlace = value
+                        }
+                    });
+
+                    var setfav = $scope.setfavorite('', findPlace.id, findPlace.duration, findPlace.fare, findPlace.display_name);
+
+                    var flightValue = {
+                        "destination_card_id": $scope.sparams.dest_id,
+                        "name": airline,
+                        "fare": fare,
+                        "action_date": "",
+                        "action_time": "",
+                        "updated_at": "2016-04-09 18:01:33",
+                        "created_at": "2016-04-09 18:01:33",
+                        "id": 2
+                    }
+
+                    $http.post("/api/cards", $scope.FavRequest).success(function (response) {
+                        console.log(response);
+                    });
+                    //console.log(JSON.stringify(findPlace));
+                })
+                .error(function (error, status, headers, config) {
+                    console.log(status);
+                    console.log("Error occured");
+                });
+	         
+	    }
+	}
+
+    
 });
 

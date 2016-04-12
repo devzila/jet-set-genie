@@ -7,7 +7,7 @@
 				<div class="list-box" data-ng-repeat="favorite in favorites | limitTo:3" ng-init="parentIndex = $index" >
 					<div class="box clearfix" data-ng-style="{background: place_bg_colors[$index % place_bg_colors.length]}">
 						<div class="box-detail">
-							<a class="setFavorite" onclick="setfavorite()" ><i class="fa fa-star"></i></a>
+							<a class="setFavorite" data-ng-click="setFavorite($index, favorite.id)" ><i class="fa fa-star"></i></a>
 							<h5>@{{ favorite.placeName }}</h5>
 							<div class="box-info">
 							<p>Shortest Flight</p>
@@ -30,8 +30,7 @@
 		</div>
 		<div class="col-md-12 list-box search-options">
 			<div class="box">
-
-				<a href="#">
+				<a>
 					<i class="fa fa-plus" ></i>
 				</a>
 				<div class="box-info">

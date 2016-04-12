@@ -23,8 +23,8 @@
                          
                         <div class="box clearfix" data-ng-style="{ background:  randomcolor }">					
 						<div class="box-detail">
-                                <a class="setFavorite" data-ng-click="setfavorite( $index, record.id )" title="Remove Favorite" ><i class="fa @{{ isFavorite(record.id) ? 'fa-star' : 'fa-star-o' }}"></i></a>
-                                <a class="lnkFlights" data-ng-click="showFlights( record.airport_code, record.display_name );" >
+                                <a class="setFavorite" data-ng-click="setfavorite( $index, record.id, record.duration, record.fare, record.display_name )" title="Remove Favorite" ><i class="fa @{{ isFavorite(record.id) ? 'fa-star' : 'fa-star-o' }}"></i></a>
+                                <a class="lnkFlights" data-ng-click="showFlights( record.airport_code, record.display_name, record.id );" >
                                 <h5>@{{ record.display_name }}</h5>
 								<div class="box-info">
 								<p>Shortest Flight</p>
@@ -90,7 +90,7 @@
 	tagit.tagsinput('add', { "value": 1, "text": "Amsterdam", "continent": "Europe" });
     */
 
-	
+	 
 
 </script>
 @stop
