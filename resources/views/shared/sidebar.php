@@ -8,20 +8,20 @@
 					<div class="box clearfix" data-ng-style="{background: place_bg_colors[$index % place_bg_colors.length]}">
 						<div class="box-detail">
 							<a class="setFavorite" data-ng-click="setFavorite($index, favorite.id)" ><i class="fa fa-star"></i></a>
-							<h5>@{{ favorite.placeName }}</h5>
+							<h5>{{ favorite.placeName }}</h5>
 							<div class="box-info">
 							<p>Shortest Flight</p>
-							<p>@{{ favorite.shortestFlight }}</p>
+							<p>{{ favorite.shortestFlight }}</p>
 							<p>Chepest Flight</p>
-							<p>@{{ favorite.cheapestFlight }}</p>
+							<p>{{ favorite.cheapestFlight }}</p>
 							</div>
 						</div>
 						<div class="blank-bg" data-ng-repeat="flight in favorite.flights"> 							
 							<a ng-click="deleteflight(parentIndex, $index)"> <i class="fa fa-times"></i> </a>
 							<div class="box-info">                                           
 							<h5>FLIGHT</h5>
-							<p>@{{ flight.price + " " + flight.name }}</p>
-							<p>@{{ flight.departDate }}</p>                                            
+							<p>{{ flight.price + " " + flight.name }}</p>
+							<p>{{ flight.departDate }}</p>                                            
 							</div>
 						</div>
 					<div class="clear"></div>
