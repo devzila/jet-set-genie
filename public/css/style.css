@@ -76,10 +76,7 @@ input[type=date]::-webkit-outer-spin-button {
 	cursor:pointer;
 	color:#fff;
 }
-
-.star{
-    cursor:pointer;
-}
+ 
 
 .booking-time li.count {
     min-width: 62px;
@@ -537,7 +534,6 @@ span.ui-slider-handle.ui-state-default.ui-corner-all {
     color: #fff;
 	font-weight:300;
 	font-size:1.4em;
-    min-height: 50px;
 }
 
 .hr {
@@ -728,6 +724,9 @@ input[type=date] {
     border-color: transparent;
     color: #b1b1b1;
 }
+.no-records{
+    transition: all 0.001s;
+}
 .lists .btn-default.active.focus, 
 .lists .btn-default.active:focus, 
 .lists .btn-default.active:hover, 
@@ -883,7 +882,7 @@ a:focus, a:hover {
     font-size: 19px;
     text-transform: uppercase;
 }
-.app-content{ min-height:80%; }
+.app-content{ min-height:80%; margin-bottom: 100px;}
 .jsg-hotel-tabs-inner .left-part {
     padding: 0;
 }
@@ -927,9 +926,12 @@ a:focus, a:hover {
 .star {
     color: #33cccc;
 	display:block;
-	padding:5px;
-	color:#fff;
+	padding:0 5px;
     margin:0 5px;
+    cursor:pointer;
+}
+.star:hover{
+    color:#028c90;
 }
 .country_logo > img {
     background-color: inherit;
@@ -1216,7 +1218,10 @@ a:focus, a:hover {
 
 @media only screen and (max-width:767px)
 {
-	
+.right-part{
+    border:none;
+    clear:both;
+}
 header h1 img {
     max-width: 100%;
 }	
@@ -1534,9 +1539,9 @@ footer {
 		min-height: 505px;
 	}
 	.jsg-footer{
-		position:absolute;
+		/* position:fixed;
 		bottom:0;
-		width:100%;
+		width:100%;*/
 	}
 }
 

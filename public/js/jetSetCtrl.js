@@ -250,6 +250,7 @@ app.controller('ctrlFavorites', function($scope, $http){
 
 app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 
+    $scope.lstCount = 9;
     
     var sQuery = (window.location.pathname).split("/");
     airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
@@ -340,12 +341,18 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
         }
     };
 
-
+    $scope.loadmore = function () {
+        $scope.lstCount += 9;
+    }
 });
 
 app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
 
-    $scope.flights = [{ }];
+    $scope.flights = [{}];
+
+   
+
+
   
     var sQuery = (window.location.pathname).split("/");
 
