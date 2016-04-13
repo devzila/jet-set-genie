@@ -1,4 +1,4 @@
-var app = angular.module("jetSetGenie", ['ngRoute', 'ngResource', 'ui.slider' ]).run(function ($rootScope) {
+var app = angular.module("jetSetGenie", ['ngRoute', 'ngResource', 'ngSanitize', 'ui.slider']).run(function ($rootScope) {
 	$rootScope.place_bg_colors = [
 	 "#33cccc",
 	 "#ffc000",

@@ -349,10 +349,6 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
 
     $scope.flights = [{}];
-
-   
-
-
   
     var sQuery = (window.location.pathname).split("/");
 

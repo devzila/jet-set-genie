@@ -26,6 +26,7 @@
     <script src="{{ asset('js/angular.min.js') }}"></script>
     <script src="{{ asset('js/angular-route.js') }}"></script>
     <script src="{{asset('js/angular-resource.min.js') }}"></script>
+    <script src="http://code.angularjs.org/1.2.0-rc.3/angular-sanitize.min.js"></script>
 
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/typeahead.bundle.js') }}"></script>
