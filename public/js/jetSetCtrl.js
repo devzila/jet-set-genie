@@ -408,10 +408,10 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
  
     $scope.loader('show');
     
-    $http.post(getPlaceUrl, $scope.FlightRequest).success(function (response) {
+    //$http.post(getPlaceUrl, $scope.FlightRequest).success(function (response) {
    
     
-    //$.get('/flight-result.json', function (response) {
+    $.get('/flight-result.json', function (response) {
         var currChar = "$";
         var ctr = 0;
         console.log(JSON.stringify(response.trips.tripOption));

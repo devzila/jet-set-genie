@@ -570,7 +570,14 @@ span.ui-slider-handle.ui-state-default.ui-corner-all {
 .box-info > p {
     color: #fff;
     font-size: 12px;
-    line-height: 13px;
+    line-height: 10px;
+    text-transform:uppercase;
+}
+.box-info > p span{
+    font-size:19px;
+    display:block;
+    text-transform:lowercase;
+    line-height:normal;
 }
 .light-blue
 {
@@ -853,6 +860,7 @@ a:focus, a:hover {
 }
 .booking-time li {
     display: inline-block;
+    vertical-align:top;
 }
 .booking-time span {
     color: #b1b1b1;
@@ -868,7 +876,6 @@ a:focus, a:hover {
 .currnt-time > p {
     display: inline-block;
     margin-left: 2px;
-    margin-top:10px;
 }
 .booking .jsg-submit {
     margin-left: 3px;
@@ -916,10 +923,9 @@ a:focus, a:hover {
     /*float: left;*/
 	text-align: left;
 	float: left;
-    margin-top:7px;
 }
 .star {
-    background-color: #33cccc;
+    color: #33cccc;
 	display:block;
 	padding:5px;
 	color:#fff;
@@ -938,11 +944,7 @@ a:focus, a:hover {
 /*.country_logo {
     width: 35px;
 }*/
-.currnt-time {
-    float: right;
-	margin-top: -4px;
-	/* padding-top: 10px;*/
-}
+ 
 .hotel-img > img {
     max-width: 100%;
 }
