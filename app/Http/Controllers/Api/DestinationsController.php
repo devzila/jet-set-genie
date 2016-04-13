@@ -49,7 +49,7 @@ class DestinationsController extends Controller
                 $hour = intval($duration/60);
                 $min = $duration%60;
 
-                $duration = $min == 0 ? "$hour Hour(s)" : "$hour Hour(s) $min Minute(s)";
+                $duration = $min == 0 ? "$hour Hrs" : "$hour hrs <br/> $min min(s)";
             }
             $data[$key]->duration = $duration;
             $data[$key]->fare = '$' . rand(40, 2000);
