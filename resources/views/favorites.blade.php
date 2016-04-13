@@ -31,15 +31,15 @@
 			</div>
 			<div class="row favorite-container">
 				<div class="col-md-3 col-sm-4 col-xs-6 list-box" data-ng-repeat="favorite in favorites" ng-init="parentIndex = $index" >
-					<div class="box clearfix" data-ng-style="{background: favorite.color}">
+                    <div class="box clearfix" data-ng-style="{ background:  randomcolor }">
 						<div class="box-detail">
-							<a class="setFavorite" data-ng-click="setfavorite( $index )" title="Remove Favorite" ><i class="fa fa-star"></i></a>
-							<h5>@{{ favorite.placeName }}</h5>
+                            <a class="setFavorite" data-ng-click="deleteFavorite( $index )" ><i class="fa fa-star"></i></a>
+                            <h5>@{{ favorite.display_name }}</h5>
 							<div class="box-info">
 							<p>Shortest Flight</p>
-							<p>@{{ favorite.shortestFlight }}</p>
+                                <p>@{{ favorite.duration }}</p>
 							<p>Chepest Flight</p>
-							<p>@{{ favorite.cheapestFlight }}</p>
+                                <p>@{{ favorite.fare }}</p>
 							</div>
 						</div>
 						<div class="blank-bg" data-ng-repeat="flight in favorite.flights"> 							

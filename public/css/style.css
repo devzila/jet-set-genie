@@ -341,6 +341,9 @@ p, h4
 	padding-left:10px;
 	padding-right:10px;
 }
+.flight-result-for{
+    text-transform:uppercase;
+}
 .step-back{
 	display:block;
 	position:absolute;
@@ -487,6 +490,13 @@ span.ui-slider-handle.ui-state-default.ui-corner-all {
 .stops .dropdown-menu span {
     font-weight: normal;
     margin-left: 5px;
+    color:#7f7f7f;
+}
+.bootstrap-tagsinput .tag{
+    background-color:#33cccc;
+}
+.search-results .result-container {
+    padding-top: 28px;
 }
 .stops .dropdown-menu label {
     margin-bottom: 0;
@@ -527,6 +537,7 @@ span.ui-slider-handle.ui-state-default.ui-corner-all {
     color: #fff;
 	font-weight:300;
 	font-size:1.4em;
+    min-height: 50px;
 }
 
 .hr {
@@ -763,7 +774,8 @@ input[type=date] {
 }
 
 .price .dropdown-menu, .duration .dropdown-menu{
-    padding:0 10px 20px 0;
+    padding: 5px 10px 20px 0;
+    width: 230px;
 }
 
 #price-filter, #duration-filter{

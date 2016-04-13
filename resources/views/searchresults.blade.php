@@ -14,8 +14,8 @@
 	</div>
 	</div>    
 	<div class="hr"></div>
-    
-	<div id="resultCont" class="col-lg-7 col-md-7 col-sm-9 col-xs-12 col-centered">    
+
+    <div id="resultCont" class="col-lg-8 col-md-8 col-sm-9 col-xs-12 col-centered">    
 		<div class="row row-centered search-results"  > 
 		<div class="col-md-9 left-part">	 		
 			<div class="row result-container">

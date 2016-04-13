@@ -7,7 +7,7 @@
 @section('content') 
 <section class="app-content container-fluid" data-ng-controller="ctrlFlightResults">
 	<div class="row-centered serch-part">
-		<div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 col-centered">
+        <div class="col-lg-8 col-md-8 col-sm-9 col-xs-12 col-centered">
 			<h3 class="lobster-font text-center">Search Results</h3>
 			@include('shared.searchbox')
 		</div>
@@ -16,11 +16,11 @@
 	<div class="col-lg-8 col-md-8 col-sm-9 col-xs-12 col-centered">    
 		<div class="row row-centered flight-results"  > 
 		<div class="col-md-9 left-part">			 		
-				<div class="col-md-12 text-center">
-					<h4><a data-ng-class="backtodestinations()" class="pull-left">< Back</a> SHOWING RESULTS TO @{{ sparams.destination }}</h4>
+				<div class="col-md-12 text-center flight-result-for">
+					<h4><a href="javascript:()" data-ng-click="backtodestinations()" class="pull-left">< Back</a> SHOWING RESULTS TO @{{ sparams.destination }}</h4>
 				</div>				
 			 
-				<div class="col-lg-12 timing-results">
+				<div class="timing-results">
                     <div class="row flight-booking @{{ flight.type }}" data-ng-repeat="flight in flights">
 
                         <div class="flight-booking" data-ng-repeat="route in flight.flights">

@@ -44,7 +44,7 @@
 		<ul>
 			<li class="time">
 			<div class="dropdown">
-	   <button class="btn btn-default dropdown-toggle" type="button" id="flighttime" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	   <button ng-class="{'active': searchfilters.time.leaving.takeoff.timeslot[0] != 50 || searchfilters.time.leaving.takeoff.timeslot[1] != 2400 || searchfilters.time.leaving.landing.timeslot[0] != 50 || searchfilters.time.leaving.landing.timeslot[1] != 2400 || searchfilters.time.returning.takeoff.timeslot[0] != 50 || searchfilters.time.returning.takeoff.timeslot[1] != 2400 || searchfilters.time.returning.landing.timeslot[0] != 50 || searchfilters.time.returning.landing.timeslot[1] != 2400 }" class="btn btn-default dropdown-toggle" type="button" id="flighttime" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 				<h5>Time</h5> 
 				<span class="fa fa-angle-down"></span>
 			  </button>
@@ -75,14 +75,14 @@
 			
 			<li class="price">
 			<div class="dropdown">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="flightprice" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	  <button class="btn btn-default dropdown-toggle" ng-class="{'active': searchfilters.price[0] != 0 || searchfilters.price[1] != 2000 }"  type="button" id="flightprice" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 		<h5>Price</h5>
 		<span class="fa fa-angle-down"></span>
 	  </button>
      
                 <ul class="dropdown-menu" aria-labelledby="flightprice">
                     <li>
-                        <p><span class="pull-left">{{ searchfilters.price[0] }}</span> <span class="pull-right">{{ searchfilters.price[1] == 2000 ? 'NO LIMIT' : searchfilters.price[1] }}</span></p>
+                        <p><span class="pull-left">${{ searchfilters.price[0] }}</span> <span class="pull-right"><span data-ng-show="searchfilters.price[1] != 2000" data-ng-hide="searchfilters.price[1] == 2000">$</span>{{ searchfilters.price[1] == 2000 ? 'NO LIMIT' : searchfilters.price[1] }}</span></p>
                         <div ui-slider="{range: true}" min="0" max="2000" step="200" ng-model="searchfilters.price" class="filter-slider"></div>
                     </li>
                 </ul>
@@ -90,27 +90,27 @@
    
 			<li class="stops">
 			<div class="dropdown">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="flightstop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	  <button class="btn btn-default dropdown-toggle" ng-class="{'active': searchfilters.stops.nonstop || searchfilters.stops.onestop || searchfilters.stops.twostop || searchfilters.stops.any }" type="button" id="flightstop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 		<h5>Stops</h5>
 		<span class="fa fa-angle-down"></span>
 	  </button>
 	  <ul class="dropdown-menu" aria-labelledby="flightstop">
-		<li><label><input type="checkbox" value="" name=""><span>NONSTOP</span></label></li>
-		<li><label><input type="checkbox" value="" name=""><span>1 STOP</span></label></li>
-		<li><label><input type="checkbox" value="" name=""><span>2 STOPS</span></label></li>
-		<li><label><input type="checkbox" value="" name=""><span>ANY</span></label></li>
+		<li><label><input type="checkbox" value="" data-ng-model="searchfilters.stops.nonstop" name="flightstop"><span>NONSTOP</span></label></li>
+		<li><label><input type="checkbox" value="" data-ng-model="searchfilters.stops.onestop" name="flightstop"><span>1 STOP</span></label></li>
+		<li><label><input type="checkbox" value="" data-ng-model="searchfilters.stops.twostop" name="flightstop"><span>2 STOPS</span></label></li>
+		<li><label><input type="checkbox" value="" data-ng-model="searchfilters.stops.any" name="flightstop"><span>ANY</span></label></li>
 		
 	  </ul>
 	</div></li>
 	
 			<li class="duration">
 			<div class="dropdown">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="flightduration" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	  <button class="btn btn-default dropdown-toggle" ng-class="{'active': searchfilters.duration[0] != 1 || searchfilters.duration[1] != 48 }"  type="button" id="flightduration" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 		<h5>Duration</h5>
 		<span class="fa fa-angle-down"></span>
 	  </button>
         <ul class="dropdown-menu" aria-labelledby="duration">
-            <li><p><span class="pull-left">{{ searchfilters.duration[0] }}hr</span> <span class="pull-right">{{ searchfilters.duration[1] < 48 ? searchfilters.duration[1] + 'hr' : 'NO LIMIT' }}</span></p>
+            <li><p><span class="pull-left">{{ searchfilters.duration[0] }}<span data-ng-show="searchfilters.duration[0] <= 1" data-ng-hide="searchfilters.duration[0] > 1">hr</span><span data-ng-hide="searchfilters.duration[0] <= 1" data-ng-show="searchfilters.duration[0] > 1">hrs</span></span> <span class="pull-right">{{ searchfilters.duration[1] < 48 ? searchfilters.duration[1] : 'NO LIMIT' }}<span data-ng-show="searchfilters.duration[1] <= 1" data-ng-hide="searchfilters.duration[1] > 1">hr</span><span data-ng-hide="searchfilters.duration[1] <= 1" data-ng-show="searchfilters.duration[1] > 1 && searchfilters.duration[1] < 47">hrs</span></span></p>
                 <div ui-slider="{range: true}" min="1" max="48" step="1" ng-model="searchfilters.duration" class="filter-slider"></div>
             </li>
 

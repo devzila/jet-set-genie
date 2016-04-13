@@ -7,16 +7,16 @@
 				<div class="list-box" data-ng-repeat="favorite in favorites | limitTo:3" ng-init="parentIndex = $index" >
 					<div class="box clearfix" data-ng-style="{background: place_bg_colors[$index % place_bg_colors.length]}">
 						<div class="box-detail">
-							<a class="setFavorite" data-ng-click="setFavorite($index, favorite.id)" ><i class="fa fa-star"></i></a>
-							<h5>{{ favorite.placeName }}</h5>
+							<a class="setFavorite" data-ng-click="deleteFavorite($index, favorite.id, favorite.display_name)" ><i class="fa fa-star"></i></a>
+							<h5>{{ favorite.display_name }}</h5>
 							<div class="box-info">
 							<p>Shortest Flight</p>
-							<p>{{ favorite.shortestFlight }}</p>
+							<p>{{ favorite.duration }}</p>
 							<p>Chepest Flight</p>
-							<p>{{ favorite.cheapestFlight }}</p>
+							<p>{{ favorite.fare }}</p>
 							</div>
 						</div>
-						<div class="blank-bg" data-ng-repeat="flight in favorite.flights"> 							
+						<div class="blank-bg" data-ng-repeat="flight in favorite.items"> 							
 							<a ng-click="deleteflight(parentIndex, $index)"> <i class="fa fa-times"></i> </a>
 							<div class="box-info">                                           
 							<h5>FLIGHT</h5>

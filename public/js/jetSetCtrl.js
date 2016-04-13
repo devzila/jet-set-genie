@@ -45,7 +45,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
             return dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
     }
 
-    $http.get("http://jetsetgenie.devzila.com/api/destination-types")
+    $http.get("/api/destination-types")
     .success(function (data, status, headers, config) {
         $scope.desttypes = data;
     })
@@ -72,7 +72,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
 						    browser = $("input[name='browser']").val();
 						    destination_type = selected_destination;
 
-						    url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + destination_type;
+						    url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + destination_type + "/destid/" + $scope.dest_id;
 
 						    window.location = url;
 
@@ -83,8 +83,9 @@ app.controller('jetSetGenie', function ($scope, $http) {
     }
 
     $scope.backtodestinations = function () {
-        url = "/search-results/leaving/" + $scope.sparams.leaving + "/returning/" + $scope.sparams.returning + "/origin/" + $scope.sparams.origin + "/type/" + $scope.sparams.type;
-         
+        //url = "/search-results/leaving/" + $scope.sparams.leaving + "/returning/" + $scope.sparams.returning + "/origin/" + $scope.sparams.origin + "/type/" + $scope.sparams.type + "/destid/" + $scope.dest_id;
+        // window.location = url;
+        window.history.back();
     }
 
     $scope.setDates = function () {
@@ -95,14 +96,11 @@ app.controller('jetSetGenie', function ($scope, $http) {
         if (validleaving && validreturning && validairport) {
             mixpanel.track("JetSet Click");
 
-            $('.step-1').hide('slide', { direction: 'left' }, 200, function () {
-                $('.step-2').show('slide', { direction: 'right' }, 200);
+            $('.step-1').hide('slide', { direction: 'left' }, 500, function () {
+                $('.step-2').show('slide', { direction: 'right' }, 500);
             });
         }
     }
-
-    $scope.favorites = $.get("http://jetsetgenie.devzila.com/api/cards");
-    console.log($scope.favorites)
 
     $scope.isFavorite = function (placeid) {
         var foundFavorite = false;
@@ -110,7 +108,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
             //console.log(JSON.stringify(value))
             //console.log(value.placeName)
             // console.log(value.id + '-----' + placeid)             
-            if (value.id == placeid)
+            if (value.destination_id == placeid)
                 foundFavorite = true;
         });
         //console.log(foundFavorite)
@@ -118,23 +116,27 @@ app.controller('jetSetGenie', function ($scope, $http) {
     };
   
 
-    $scope.deleteFavorite = function (index) {
-        var con = window.confirm('Are you sure you want to remove this from favorite');
-        if (con)
-            $scope.favorites.splice(index, 1);
+    $scope.deleteFavorite = function ( index, id, placeName ) {
+        var con = window.confirm('Are you sure you want to remove "' + placeName + '" card from your favorites?');
+        if (!con) return;
+
+        angular.forEach($scope.favorites, function (value, key) {
+            if (value.id == id)
+                $scope.favorites.splice(key, 1);
+        });
     };
 
     $scope.setfavorite = function (index, id, duration, fare, placeName) {
      
         if ($scope.isFavorite(id)) {
-            var con = window.confirm('Are you sure you want to remove this from favorite');
-
-            if (!con) return;
+             
+            $scope.deleteFavorite(index, id, placeName);
+            /*if (!con) return;
 
             angular.forEach($scope.favorites, function (value, key) {
                 if (value.id == id)
                     $scope.favorites.splice(key, 1);
-            });
+            });*/
 
         } else {
             var getRecord = []
@@ -149,32 +151,39 @@ app.controller('jetSetGenie', function ($scope, $http) {
                 "fare": fare
             }
 
-            $.post("http://jetsetgenie.devzila.com/api/cards", $scope.FavRequest, function () {
-               // $.get("http://jetsetgenie.devzila.com/api/cards");
+            $.post("/api/cards", $scope.FavRequest, function ( response ) {
+                $scope.getFavorites();
+                console.log(JSON.stringify(response))
+                flightRequest = {
+                      "destination_card_id": response.id,
+                      "name": $scope.params.destination,
+                      "fare": response.fare,
+                      "action_date": "",
+                      "action_time": "",
+                      "updated_at": Date(),
+                      "created_at": Date(),
+                      "id": response.destination_id
+                }
+                $.post("/api/cards", $scope.flightRequest, function (response) {
+
+                });
             });
 
-            //$http.post("http://jetsetgenie.devzila.com/api/cards", $scope.FavRequest).success(function (response) {
-              //  console.log(response);
-            //});
             
-            $scope.favorites.unshift({
-                id: id,
-                placeName: placeName,
-                shortestFlight: duration,
-                cheapestFlight: fare,
-                flights: []
-            });
+             
         }
-    }
+    } // Set favorite ends here.
 
-    $http.get("/api/cards")
-    .success(function (data, status, headers, config) {
-        $scope.favorites = data;
-    })
-    .error(function (error, status, headers, config) {
-        //console.log(status);
-        console.log("Favorite Error");
-    });
+    $scope.getFavorites = function () {
+        $http.get("/api/cards")
+        .success(function (data, status, headers, config) {
+            $scope.favorites = data;
+        })
+        .error(function (error, status, headers, config) {
+            //console.log(status);
+            console.log("Favorite Error");
+        });
+    };
 
     $scope.deleteflight = function (parentindex, index) {
         $scope.favorites[parentindex].flights.splice(index, 1);
@@ -205,7 +214,12 @@ app.controller('jetSetGenie', function ($scope, $http) {
                 }
             },
         price: [0, 2000],
-        stops: ['nonstop', 'one', 'two', ''],
+        stops: [{
+            nonstop: 0,
+            onestop: 0,
+            twostop: 0,
+            any: 1
+        }],
         duration: [1, 48]
     };
 
@@ -223,9 +237,11 @@ app.controller('jetSetGenie', function ($scope, $http) {
         window.location = url;
     }
 
-
-   // window.console.log($scope.searchfilters.time.leaving.takeoff.text)
+    $scope.getFavorites();
+   
 });
+
+//main controller closes here
 
 app.controller('ctrlFavorites', function($scope, $http){	 
     $scope.pagetitle = 'Favorites';
@@ -497,6 +513,7 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
         });
    
         $scope.loader('hide');
+        $(".tag_places").tagsinput();
        
     });
 
@@ -531,7 +548,6 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
                         "action_time": "",
                         "updated_at": "2016-04-09 18:01:33",
                         "created_at": "2016-04-09 18:01:33",
-                        "id": 2
                     }
 
                     $http.post("/api/cards", $scope.FavRequest).success(function (response) {
