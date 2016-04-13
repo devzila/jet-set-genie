@@ -232,7 +232,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
 
         //alert(type);
 
-        url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + type;
+        url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + type + "/destid/" + $scope.dest_id;
 
         window.location = url;
     }
