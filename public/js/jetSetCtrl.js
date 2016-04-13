@@ -238,6 +238,20 @@ app.controller('jetSetGenie', function ($scope, $http) {
     }
 
     $scope.getFavorites();
+
+    $scope.clearFilters = function () {
+        $scope.searchfilters.time.leaving.takeoff.timeslot = ['0050', '2400']
+        $scope.searchfilters.time.leaving.landing.timeslot = ['0050', '2400']
+        $scope.searchfilters.time.returning.takeoff.timeslot = ['0050', '2400']
+        $scope.searchfilters.time.returning.landing.timeslot = ['0050', '2400']
+        $scope.searchfilters.price = [0, 2000]
+        $scope.searchfilters.stops.nonstop = false;
+        $scope.searchfilters.stops.onestop = false;
+        $scope.searchfilters.stops.twostop = false;
+        $scope.searchfilters.stops.any = false;
+        $scope.searchfilters.duration = [1, 48];
+        console.log(JSON.stringify($scope.searchfilters));
+    }
    
 });
 
