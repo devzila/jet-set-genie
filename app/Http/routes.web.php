@@ -26,7 +26,7 @@ Route::get('/flight-results', function () {
     return view('flights');
 });
 
-Route::get('/flight-results/leaving/{leaving}/returning/{returning}/origin/{origin}/destination/{destination}/type/{type}', function () {
+Route::get('/flight-results/leaving/{leaving}/returning/{returning}/origin/{origin}/destination/{destination}/type/{type}/destid/{destid}', function () {
     return view('flights');
 });
 
