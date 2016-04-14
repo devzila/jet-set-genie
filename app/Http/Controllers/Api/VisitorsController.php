@@ -23,8 +23,7 @@ class VisitorsController extends Controller
      */
     public function index() 
     {
-         $visitors = Visitor::all();
-		 return $visitors->toJson();
+         return Response::json(['visitor_id' => $this->user], 200);
 		 
     }
 
