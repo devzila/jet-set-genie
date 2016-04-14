@@ -1,4 +1,4 @@
-var app = angular.module("jetSetGenie", ['ngRoute', 'ngResource', 'ui.slider' ]).run(function ($rootScope) {
+var app = angular.module("jetSetGenie", ['ngRoute', 'ngResource', 'ngSanitize', 'ui.slider']).run(function ($rootScope) {
 	$rootScope.place_bg_colors = [
 	 "#33cccc",
 	 "#ffc000",
@@ -93,5 +93,12 @@ app.filter('myDateFilter', function () {
         ampm = (timeValue == 2400) ? "am" : "pm";
 
         return scope.daysInWeek[date.getDay()] + " " + time + ampm + ' - ' + scope.daysInWeek[dayIndex] + " " + to + ampm;
+    };
+});
+
+
+app.filter('html', function ($sce) {
+    return function (val) {
+        return $sce.trustAsHtml(val);
     };
 });

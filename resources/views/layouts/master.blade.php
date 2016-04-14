@@ -26,6 +26,7 @@
     <script src="{{ asset('js/angular.min.js') }}"></script>
     <script src="{{ asset('js/angular-route.js') }}"></script>
     <script src="{{asset('js/angular-resource.min.js') }}"></script>
+    <script src="http://code.angularjs.org/1.2.0-rc.3/angular-sanitize.min.js"></script>
 
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/typeahead.bundle.js') }}"></script>
@@ -65,7 +66,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 footer-copyright">
-                    <div class="pull-left copyright"> <p>Copyright reserved 2016, <a href="/">JetSetGenie</a></p></div>
+                    <div class="pull-left copyright"><p>Copyright reserved 2016, <a href="/">JetSetGenie</a></p></div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 footer-nav">
                     <div class="social-icons clearfix text-right">

@@ -9,11 +9,9 @@
 						<div class="box-detail">
 							<a class="setFavorite" data-ng-click="deleteFavorite($index, favorite.id, favorite.display_name)" ><i class="fa fa-star"></i></a>
 							<h5>{{ favorite.display_name }}</h5>
-							<div class="box-info">
-							<p>Shortest Flight</p>
-							<p>{{ favorite.duration }}</p>
-							<p>Chepest Flight</p>
-							<p>{{ favorite.fare }}</p>
+							<div class="box-info row">
+                                <p class="col-xs-6">Cheapest <span>{{ favorite.fare }}</span></p>
+							    <p class="col-xs-6">Shortest <span>{{ favorite.duration }}</span></p>							   
 							</div>
 						</div>
 						<div class="blank-bg" data-ng-repeat="flight in favorite.items"> 							

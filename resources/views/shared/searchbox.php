@@ -123,7 +123,7 @@
 </div>
 
 <div class="col-md-4 clear-text">
-	<button data-ng-click="clearFilters">Clear</button>
+	<button data-ng-click="clearFilters()">Clear</button>
 </div>
 
 </div>

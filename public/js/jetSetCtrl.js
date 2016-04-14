@@ -232,12 +232,26 @@ app.controller('jetSetGenie', function ($scope, $http) {
 
         //alert(type);
 
-        url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + type;
+        url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + type + "/destid/" + $scope.dest_id;
 
         window.location = url;
     }
 
     $scope.getFavorites();
+
+    $scope.clearFilters = function () {
+        $scope.searchfilters.time.leaving.takeoff.timeslot = ['0050', '2400']
+        $scope.searchfilters.time.leaving.landing.timeslot = ['0050', '2400']
+        $scope.searchfilters.time.returning.takeoff.timeslot = ['0050', '2400']
+        $scope.searchfilters.time.returning.landing.timeslot = ['0050', '2400']
+        $scope.searchfilters.price = [0, 2000]
+        $scope.searchfilters.stops.nonstop = false;
+        $scope.searchfilters.stops.onestop = false;
+        $scope.searchfilters.stops.twostop = false;
+        $scope.searchfilters.stops.any = false;
+        $scope.searchfilters.duration = [1, 48];
+        console.log(JSON.stringify($scope.searchfilters));
+    }
    
 });
 
@@ -250,6 +264,7 @@ app.controller('ctrlFavorites', function($scope, $http){
 
 app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 
+    $scope.lstCount = 9;
     
     var sQuery = (window.location.pathname).split("/");
     airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
@@ -340,12 +355,14 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
         }
     };
 
-
+    $scope.loadmore = function () {
+        $scope.lstCount += 9;
+    }
 });
 
 app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
 
-    $scope.flights = [{ }];
+    $scope.flights = [{}];
   
     var sQuery = (window.location.pathname).split("/");
 
