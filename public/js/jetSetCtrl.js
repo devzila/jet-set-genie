@@ -126,7 +126,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
         });
     };
 
-    $scope.setfavorite = function (index, id, duration, fare, placeName) {
+    $scope.setfavorite = function (index, id, duration, fare, placeName, withFlight) {
      
         if ($scope.isFavorite(id)) {
              
@@ -153,9 +153,13 @@ app.controller('jetSetGenie', function ($scope, $http) {
 
             $.post("/api/cards", $scope.FavRequest, function ( response ) {
                 $scope.getFavorites();
-                console.log(JSON.stringify(response))
+                // console.log(JSON.stringify(response))
+
+                if (!withFlight)
+                    return;
+
                 flightRequest = {
-                      "destination_card_id": response.id,
+                      "destination_card_id": response.card_id,
                       "name": $scope.params.destination,
                       "fare": response.fare,
                       "action_date": "",
@@ -164,9 +168,11 @@ app.controller('jetSetGenie', function ($scope, $http) {
                       "created_at": Date(),
                       "id": response.destination_id
                 }
-                $.post("/api/cards", $scope.flightRequest, function (response) {
+
+                $.post("/api/cards/" + response.card_id + "/items", $scope.flightRequest, function (response) {
 
                 });
+
             });
 
             
@@ -269,8 +275,6 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
     var sQuery = (window.location.pathname).split("/");
     airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
 
-    
-
     dt = new Date( sQuery[3].replace(new RegExp('-', 'g'),'/') );
 
     leavingdt = $scope.daysInWeek[dt.getDay()] + ", " + $scope.months[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
@@ -340,8 +344,10 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 	    $('.tag_places').tagsinput('add', value);
 	    if (key == des_type.length - 1){
 	        $scope.loader('hide');
+	        
 	    }
 	});
+ 
  
     // Slider options with event handlers
     $scope.slider = {
@@ -425,10 +431,10 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
  
     $scope.loader('show');
     
-    $http.post(getPlaceUrl, $scope.FlightRequest).success(function (response) {
+    //$http.post(getPlaceUrl, $scope.FlightRequest).success(function (response) {
    
     
-    //$.get('/flight-result.json', function (response) {
+    $.get('/flight-result.json', function (response) {
         var currChar = "$";
         var ctr = 0;
         console.log(JSON.stringify(response.trips.tripOption));
@@ -540,7 +546,8 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
 	};
 
 	$scope.addFlight = function (fare, airline, departure) {
-	    
+	    var setfav = '';
+
 	    //Check if the flight if destination card is already added, if not add one
 	    if (!$scope.isFavorite($scope.sparams.dest_id))
 	    {
@@ -555,29 +562,32 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
                         }
                     });
 
-                    var setfav = $scope.setfavorite('', findPlace.id, findPlace.duration, findPlace.fare, findPlace.display_name);
-
-                    var flightValue = {
-                        "destination_card_id": $scope.sparams.dest_id,
-                        "name": airline,
-                        "fare": fare,
-                        "action_date": "",
-                        "action_time": "",
-                        "updated_at": "2016-04-09 18:01:33",
-                        "created_at": "2016-04-09 18:01:33",
-                    }
-
-                    $http.post("/api/cards", $scope.FavRequest).success(function (response) {
-                        console.log(response);
-                    });
+                    $scope.setfavorite('', findPlace.id, findPlace.duration, findPlace.fare, findPlace.display_name, true);
                     //console.log(JSON.stringify(findPlace));
+
+
                 })
                 .error(function (error, status, headers, config) {
                     console.log(status);
                     console.log("Error occured");
-                });
-	         
+                });	         
+	    } 
+
+	    var flightValue = {
+	        "destination_card_id": $scope.sparams.dest_id,
+	        "name": airline,
+	        "fare": fare,
+	        "action_date": "",
+	        "action_time": "",
+	        "updated_at": Date(),
+	        "created_at": Date(),
 	    }
+
+	   
+
+	    $http.post("/api/cards", $scope.FavRequest).success(function (response) {
+	        console.log(response);
+	    });
 	}
 
     

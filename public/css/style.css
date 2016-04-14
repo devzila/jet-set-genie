@@ -569,7 +569,7 @@ span.ui-slider-handle.ui-state-default.ui-corner-all {
     line-height: 10px;
     text-transform:uppercase;
 }
-.box-info > p span{
+.box-info > p span span{
     font-size:19px;
     display:block;
     text-transform:lowercase;
@@ -801,7 +801,36 @@ input[type=date] {
     text-decoration: none;
 }
 
+.destinationCard .box .lnkFlights{
+    height:170px;
+    display:table;
+    width:100%;
+}
 
+.destinationCard .box .lnkFlights h5{
+    display:table-row;
+    height:62%;
+}
+
+.destinationCard .box .lnkFlights h5 span{
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.destinationCard .box .lnkFlights .box-info{
+    display:table;
+    width:100%;
+}
+
+.destinationCard .box .lnkFlights .box-info p{
+    display:table-row;
+}
+
+.destinationCard .box .lnkFlights .box-info p > span{
+    display:table-cell;
+    vertical-align:bottom;
+    width:50%;
+}
 
 a:focus, a:hover {
     text-decoration: none;

@@ -95,10 +95,3 @@ app.filter('myDateFilter', function () {
         return scope.daysInWeek[date.getDay()] + " " + time + ampm + ' - ' + scope.daysInWeek[dayIndex] + " " + to + ampm;
     };
 });
-
-
-app.filter('html', function ($sce) {
-    return function (val) {
-        return $sce.trustAsHtml(val);
-    };
-});

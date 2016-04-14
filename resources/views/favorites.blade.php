@@ -62,7 +62,7 @@
 @section('additional-scripts')
 <script src="{{ asset('js/masonry.pkgd.min.js') }}" ></script>
 <script>
-	var favoriteMsnry;
+	/* var favoriteMsnry;
 	$(document).ready(function(){		
 		favoriteMsnry = $('.favorite-container').masonry({
 			itemSelector: '.list-box',			
@@ -71,5 +71,6 @@
 	$( window ).resize(function() {
 		 favoriteMsnry.masonry('reloadItems');		 
 	});
+    */
 </script>
 @stop
