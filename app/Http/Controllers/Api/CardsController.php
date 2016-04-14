@@ -22,11 +22,13 @@ class CardsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $user = $request->input('visitor_id') ? $request->input('visitor_id') : $this->user;
+
         $select = DB::table('destination_cards')
             ->join('destination', 'destination.id', '=', 'destination_cards.destination_id')
-            ->where('destination_cards.user_id', $this->user)
+            ->where('destination_cards.user_id', $user)
             ->select('destination.id as destination_id', 'destination.display_name', 'destination.city_name', 'destination.airport_code', 'destination_cards.id as card_id', 'destination_cards.duration', 'destination_cards.fare');
 
 
