@@ -20,13 +20,13 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="pull-left back">
-                        <a href="/">
+                        <a href="javascript://" data-ng-click="backtodestinations()">
                             <i class="fa fa-angle-left"></i>
                             <span>BACK TO RESULTS</span>
                         </a>
                     </div>
                     <div class="pull-right fav-share">
-                        <button class="btn btn-default jsg-submit" type="submit">SHARE</button>
+                        <button class="btn btn-default jsg-submit" data-ng-click="shareFavorites()">SHARE</button>
                     </div>
                 </div>
             </div>

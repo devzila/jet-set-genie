@@ -265,6 +265,8 @@ app.controller('jetSetGenie', function ($scope, $http) {
 
 app.controller('ctrlFavorites', function($scope, $http){	 
     $scope.pagetitle = 'Favorites';
+
+   
 });
 
 
@@ -547,6 +549,9 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
 
 	$scope.addFlight = function (fare, airline, departure) {
 	    var setfav = '';
+
+	    alert(departure);
+	    return;
 
 	    //Check if the flight if destination card is already added, if not add one
 	    if (!$scope.isFavorite($scope.sparams.dest_id))
