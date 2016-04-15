@@ -9,7 +9,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
         origincode: '',
         destination: '',
         dest_code: '',
-        dest_id: '',
+        dest_id: '0',
         type: ''
     };
 
@@ -247,7 +247,8 @@ app.controller('ctrlFavorites', function($scope, $http){
     $scope.shareFavorites = function () {
         $http.get("http://jetsetgenie.dev/api/visitors")
         .success(function (data, status, headers, config) {
-            console.log(data);
+            //console.log(data);
+            window.location = "/shared-dashboard/" + data.visitor_id;
         })
         .error(function (error, status, headers, config) {
             console.log(status);
@@ -443,10 +444,10 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
  
     $scope.loader('show');
     
-    //$http.post(getPlaceUrl, $scope.FlightRequest).success(function (response) {
+    $http.post(getPlaceUrl, $scope.FlightRequest).success(function (response) {
    
     
-    $.get('/flight-result.json', function (response) {
+   // $.get('/flight-result.json', function (response) {
         var currChar = "$";
         var ctr = 0;
         console.log(JSON.stringify(response.trips.tripOption));
@@ -637,3 +638,13 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
     
 });
 
+app.controller('ctrlSharedDestinations', function ($scope, $http, $resource) {
+    $scope.pagetitle = "Shared Dashboard";
+    //visitor_id = '5710b39dbe0d7';
+    var sQuery = (window.location.pathname).split("/");
+    visitor_id = sQuery[2];
+     
+    $http.get("/api/cards?visitor_id=" + visitor_id).success(function (response) {
+        $scope.getFavorites();
+    });
+});

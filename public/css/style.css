@@ -16,7 +16,7 @@ body{
 }
 
 
-.deleteType, .lnkFlights{
+.deleteType, a.lnkFlights{
 	cursor: pointer;
 }
 

@@ -42,6 +42,11 @@ Route::get('/favorites', function () {
     return view('favorites');
 });
 
+Route::get('/shared-dashboard/{visitorid}', function () {
+    return view('shareddestinations');
+});
+
+
 Route::get('/email', function () {
     return view('email');
 });

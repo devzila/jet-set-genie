@@ -29,7 +29,7 @@
                                     <li class="count"><p>@{{ $index == 0 ? flight.price : '' }}</p><span>@{{ $index == 0 ? flight.tripType : '' }}</span></li>
                                     <li>
                                         <a data-ng-show="$index == 0" data-ng-hide="$index != 0" class="star" data-ng-click="addFlight( flight.price, route.airline, route.departure )">
-                                            <i class="fa fa-star-o fa-2x"></i>
+                                            <i class="fa fa-2x @{{ hasFlight(record.id) ? 'fa-star' : 'fa-star-o' }}"></i>
                                         </a>
                                         <a data-ng-show="$index != 0" data-ng-hide="$index == 0" class="star"></a>
                                     </li>
