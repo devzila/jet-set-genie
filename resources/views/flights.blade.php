@@ -27,14 +27,19 @@
                             <div class="col-lg-8 booking-time">
                                 <ul>
                                     <li class="count"><p>@{{ $index == 0 ? flight.price : '' }}</p><span>@{{ $index == 0 ? flight.tripType : '' }}</span></li>
-                                    <li><a class="star" data-ng-click="addFlight( route.price, route.airline, route.departure )"><i class="fa fa-star-o fa-2x"></i></a></li>
+                                    <li>
+                                        <a data-ng-show="$index == 0" data-ng-hide="$index != 0" class="star" data-ng-click="addFlight( flight.price, route.airline, route.departure )">
+                                            <i class="fa fa-star-o fa-2x"></i>
+                                        </a>
+                                        <a data-ng-show="$index != 0" data-ng-hide="$index == 0" class="star"></a>
+                                    </li>
                                     <li class="country-logo">
                                         <i class="fa fa-plane fa-2x" style="color:#ccc;"></i>
                                         <!-- <img data-ng-src="@{{ route.airlineLogo }}" alt="" /> -->
                                     </li>
                                     <li class="country">
                                         <p>@{{ route.timings }}</p><span>@{{ route.airline + " | " + route.flightOrigin + " &#8594; " + route.flightDest }}</span><br />
-                                         
+
                                     </li>
                                     <li class="currnt-time"><p><i data-ng-if="$index == 0" class="fa fa-wifi"></i> @{{ route.duration  }}</p></li>
                                 </ul>

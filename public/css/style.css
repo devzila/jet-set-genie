@@ -561,13 +561,15 @@ span.ui-slider-handle.ui-state-default.ui-corner-all {
     width: 100%;
 }
 
-
-
 .box-info > p {
     color: #fff;
     font-size: 12px;
     line-height: 10px;
     text-transform:uppercase;
+}
+.flight-info .farename{
+    font-size:16px;
+    line-height:normal;
 }
 .box-info > p span span{
     font-size:19px;
@@ -958,6 +960,7 @@ a:focus, a:hover {
 	padding:0 5px;
     margin:0 5px;
     cursor:pointer;
+    min-width: 36px;
 }
 .star:hover{
     color:#028c90;

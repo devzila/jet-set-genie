@@ -1,4 +1,4 @@
-<div class="col-md-3 right-part">
+<div class="col-md-3 right-part" data-ng-controller="ctrlsideBar">
     <div class="row">
         <div class="col-md-12 text-center">
             <h4>FAVORITES</h4>
@@ -20,10 +20,10 @@
                     </div>
                     <div class="blank-bg" data-ng-repeat="flight in favorite.items">
                         <a ng-click="deleteflight(parentIndex, $index)"> <i class="fa fa-times"></i> </a>
-                        <div class="box-info">
+                        <div class="box-info flight-info">
                             <h5>FLIGHT</h5>
-                            <p>{{ flight.price + " " + flight.name }}</p>
-                            <p>{{ flight.departDate }}</p>
+                            <p class="farename">{{ flight.fare + " " + flight.name }}</p>
+                            <p>{{ flight.action_date +  " " + flight.action_time }}</p>
                         </div>
                     </div>
                     <div class="clear"></div>
