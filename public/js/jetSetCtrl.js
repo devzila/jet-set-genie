@@ -266,7 +266,18 @@ app.controller('jetSetGenie', function ($scope, $http) {
 app.controller('ctrlFavorites', function($scope, $http){	 
     $scope.pagetitle = 'Favorites';
 
-   
+    $scope.shareFavorites = function () {
+        $http.get("http://jetsetgenie.dev/api/visitors")
+        .success(function (data, status, headers, config) {
+            //$scope.records = $scope.records.concat(data);
+            //console.log($scope.records);
+            console.log(data);
+        })
+        .error(function (error, status, headers, config) {
+            console.log(status);
+            console.log("Error occured");
+        }); 
+    }   
 });
 
 
