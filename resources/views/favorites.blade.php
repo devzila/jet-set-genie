@@ -17,7 +17,7 @@
         </div>
         <div class="hr"></div>
         <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 col-centered">
-            <div class="row">
+            <div class="row" data-ng-show="favorites.length != 0" ng-hide >
                 <div class="col-xs-12">
                     <div class="pull-left back">
                         <a href="javascript://" data-ng-click="backtodestinations()">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row favorite-container">
+            <div class="row favorite-container">                
                 <div class="col-md-3 col-sm-4 col-xs-6 list-box destinationCard" data-ng-repeat="favorite in favorites" ng-init="parentIndex = $index">
                     <div class="box clearfix" data-ng-style="{ background:  randomcolor }">
                         <div class="box-detail">
@@ -63,6 +63,7 @@
                         <div class="clear"></div>
                     </div>
                 </div>
+                <p data-ng-show="favorites.length == 0" ng-hide class="text-center no-results">Sorry, no results found in your Favorites dashboard. Please search for destinations and mark favorite..</p>
             </div>
         </div>
     </div>

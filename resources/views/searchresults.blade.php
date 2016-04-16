@@ -23,7 +23,8 @@
 
                         <div class="box clearfix" data-ng-style="{ background:  randomcolor }">
                             <div class="box-detail">
-                                <a class="setFavorite" data-ng-click="setfavorite( $index, record.id, record.duration, record.fare, record.display_name)" title="Remove Favorite"><i class="fa @{{ isFavorite(record.id) ? 'fa-star' : 'fa-star-o' }}"></i></a>
+                                <a class="setFavorite" data-ng-click="deleteFavorite( $index, record.id, record.display_name)" title="Remove from Favorite" data-ng-hide="!isFavorite(record.id)" data-ng-show="isFavorite(record.id)"><i class="fa  fa-star"></i></a>
+                                <a class="setFavorite" data-ng-click="setfavorite( $index, record.id, record.duration, record.fare, record.display_name)" title="Add to Favorite" data-ng-show="!isFavorite(record.id)" data-ng-hide="isFavorite(record.id)"><i class="fa fa-star-o"></i></a>
                                 <a class="lnkFlights" data-ng-click="showFlights( record.airport_code, record.display_name, record.id );">
                                     <h5><span>@{{ record.display_name }}</span></h5>
                                     <div class="box-info">
@@ -44,7 +45,7 @@
                         </div>
                     </div>
 
-                    <p data-ng-show="records.length == 0" ng-hide class="text-center no-results">Sorry, no results found for selected criteria. Please select again.</p>
+                    <p data-ng-show="records.length === 0"  class="text-center no-results">Sorry, no results found for selected criteria. Please select again.</p>
 
                     <div class="col-md-12 text-center load-more" data-ng-hide="records.length <= lstCount" data-ng-show="records.length > lstCount">
                         <a href="javascript://" data-ng-click="loadmore()">LOAD MORE</a>

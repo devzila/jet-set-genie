@@ -1,5 +1,4 @@
-angular.module('bootstrap-tagsinput', [])
-.directive('bootstrapTagsinput', [function() {
+app.directive('bootstrapTagsinput', [function() {
 
   function getItemProperty(scope, property) {
     if (!property)

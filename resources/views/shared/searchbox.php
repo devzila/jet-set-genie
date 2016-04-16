@@ -9,6 +9,7 @@
   
 <div class="col-lg-5 col-md-6">
     <input type="text" class="tag_places form-control" data-ng-model="sparams.type" width="100%" />
+    
   </div>
  </div>
 </div>

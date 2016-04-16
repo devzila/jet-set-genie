@@ -13,19 +13,8 @@ app.controller('jetSetGenie', function ($scope, $http) {
         type: ''
     };
 
-    $scope.$watch(
-        function watchFoo(scope) {
-            // Return the "result" of the watch expression.
-            return (scope.sparams);
-        },
-        function handleFooChange(newValue, oldValue) {
-            console.log("fn( vm.fooCount ):", newValue);
-        }
-    );
-
     $scope.daysInWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     $scope.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
 
     $scope.loader = function (type) {
         if (type == "show")
@@ -87,7 +76,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
 
 						    window.location = url;
 
-						    mixpanel.track("Beta Wall View");
+						   // mixpanel.track("Beta Wall View");
 						}, 1000);
             });
         });
@@ -129,15 +118,20 @@ app.controller('jetSetGenie', function ($scope, $http) {
 
     $scope.deleteFavorite = function ( index, id, placeName ) {
         var con = window.confirm('Are you sure you want to remove "' + placeName + '" card from your favorites?');
+        
         if (!con) return;
 
         angular.forEach($scope.favorites, function (value, key) {
-            if (value.id == id)
+            if (value.destination_id == id) {
                 $scope.favorites.splice(key, 1);
+            }
         });
     };
 
     $scope.setfavorite = function (index, id, duration, fare, placeName, withFlight) {
+            
+        if ($scope.isFavorite(id))
+            return false;
 
             var getRecord = []
             angular.forEach($scope.favorites, function (value, key) {
@@ -215,7 +209,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
 
         //alert(type);
 
-        url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + type + "/destid/" + $scope.sparams.dest_id;
+        url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + type + "/destid/" + (( ($scope.sparams.dest_id).length == 0 ) ? '0' : $scope.sparams.dest_id);
 
         window.location = url;
     }
@@ -239,11 +233,44 @@ app.controller('jetSetGenie', function ($scope, $http) {
    
 });
 
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function createCookie(name, value, days) {
+    var date, expires;
+    if (days) {
+        date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    } else {
+        expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
 //main controller closes here
 
 app.controller('ctrlFavorites', function($scope, $http){	 
     $scope.pagetitle = 'Favorites';
 
+    var getSearchCookie = JSON.parse(readCookie('sparams'));
+    $scope.sparams.leaving = getSearchCookie.leaving;
+    $scope.sparams.returning = getSearchCookie.returning;
+    $scope.sparams.origin = getSearchCookie.origin;
+    $scope.sparams.origincode = getSearchCookie.origincode;
+    $scope.sparams.destination = getSearchCookie.destination;
+    $scope.sparams.dest_code = (getSearchCookie.dest_code == '') ? 0 : getSearchCookie.dest_code;
+    $scope.sparams.dest_id = getSearchCookie.dest_id;
+    $scope.sparams.type = getSearchCookie.type;
+    
     $scope.shareFavorites = function () {
         window.location = "mailto: ?subject=Check out my favorite destination!&body=Hi,%0D%0A%0D%0ACheck out following link to see my favorite destinations:%0D%0A" + $scope.sharedURL + "%0D%0A%0D%0ACheers!%0D%0A-Shared using JetSetGenie - Start a trip to your favorite destinations";
     }
@@ -260,6 +287,10 @@ app.controller('ctrlFavorites', function($scope, $http){
     document.getElementById("shareFav").addEventListener("click", function () {
         copyToClipboard($scope.sharedURL);
     });
+    $(".tag_places").tagsinput();
+    $(".tag_places").on('change', function () {
+        $scope.sparams.type = $(this).val();
+    })
 });
 
 
@@ -305,7 +336,7 @@ function copyToClipboard(siteurl) {
 app.controller('ctrlsideBar', function ($scope, $log, $http) {
 
     $scope.showFlights = function (dest_code, destination, dest_id) {
-        alert($scope.sparams.dest_id); return;
+        //alert(dest_id); return;
 
         leavingdt = new Date($scope.sparams.leaving)
         leavingdt = (leavingdt.getFullYear() + "-" + (leavingdt.getMonth() + 1) + "-" + leavingdt.getDate());
@@ -318,8 +349,7 @@ app.controller('ctrlsideBar', function ($scope, $log, $http) {
         destination = destination + " (" + dest_code + ")";
         destination_type = $scope.sparams.type;
         home_airport = $scope.sparams.origin;
-        dest_id = $scope.sparams.dest_id;
-        
+        $scope.sparams.dest_id = dest_id;
 
         url = "/flight-results/leaving/" + leavingdt + "/returning/" + returningdt + "/origin/" + home_airport + "/destination/" + destination + "/type/" + destination_type + "/destid/" + dest_id;
         window.location = url;
@@ -349,7 +379,7 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
     $scope.sparams.type = decodeURIComponent(sQuery[9]);
     $scope.sparams.dest_id = '';
 
- 
+    createCookie('sparams', JSON.stringify($scope.sparams), 1);
     
 	$scope.trip_type = function( type ){
 		if(type)
@@ -393,6 +423,11 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 	}
 
 	$(".tag_places").tagsinput();
+	$(".tag_places").on('change', function () {
+	    $scope.sparams.type = $(this).val();
+	})
+
+	//$scope.sparams.type = $(".tag_places").val();
 
 	des_type = ($scope.sparams.type).split(',');
 
@@ -459,6 +494,7 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
     $scope.sparams.type = decodeURIComponent(sQuery[11]);
     $scope.sparams.dest_id = sQuery[13];
 	
+    createCookie('sparams', JSON.stringify($scope.sparams), 1);
    // alert($scope.sparams.dest_id)
 	//alert($scope.sparams.origincode + "" + $scope.sparams.dest_code)
 
@@ -595,6 +631,9 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
    
         $scope.loader('hide');
         $(".tag_places").tagsinput();
+        $(".tag_places").on('change', function () {
+            $scope.sparams.type = $(this).val();
+        })
        
     });
 

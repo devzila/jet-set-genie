@@ -6,14 +6,14 @@
         <div class="col-md-12 favorite-container">
             <div class="list-box destinationCard" data-ng-repeat="favorite in favorites | limitTo:3" ng-init="parentIndex = $index">
                 <div class="box clearfix" data-ng-style="{background: place_bg_colors[$index % place_bg_colors.length]}">
-                    <div class="box-detail">
-                        <a class="setFavorite" data-ng-click="deleteFavorite($index, favorite.id, favorite.display_name)"><i class="fa fa-star"></i></a>
-                        <a class="lnkFlights" data-ng-click="showFlights( favorite.airport_code, favorite.display_name, favorite.id );">
+                    <div class="box-detail">                         
+                        <a class="setFavorite" data-ng-click="deleteFavorite($index, favorite.destination_id, favorite.display_name)"><i class="fa fa-star"></i></a>
+                        <a class="lnkFlights" data-ng-click="showFlights( favorite.airport_code, favorite.display_name, favorite.destination_id );">
                             <h5><span>{{ favorite.display_name }}</span></h5>
                             <div class="box-info">
                                 <p>
                                     <span>Cheapest <span >{{ favorite.fare }}</span></span>
-                                    <span>Shortest <span data-ng-bind-html="record.duration"></span></span>
+                                    <span>Shortest <span data-ng-bind-html="favorite.duration"></span></span>
                                 </p>
                             </div>
                         </a>
