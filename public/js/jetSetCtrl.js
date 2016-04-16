@@ -250,7 +250,7 @@ app.controller('ctrlFavorites', function($scope, $http){
 
     $http.get("/api/visitors")
     .success(function (data, status, headers, config) {
-        $scope.sharedURL = document.URL + "/shared-dashboard/" + data.visitor_id;
+        $scope.sharedURL = window.location.protocol + "//" + window.location.host + "/shared-dashboard/" + data.visitor_id;
     })
     .error(function (error, status, headers, config) {
         console.log(status);
