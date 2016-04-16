@@ -245,17 +245,62 @@ app.controller('ctrlFavorites', function($scope, $http){
     $scope.pagetitle = 'Favorites';
 
     $scope.shareFavorites = function () {
-        $http.get("http://jetsetgenie.dev/api/visitors")
-        .success(function (data, status, headers, config) {
-            //console.log(data);
-            window.location = "/shared-dashboard/" + data.visitor_id;
-        })
-        .error(function (error, status, headers, config) {
-            console.log(status);
-            console.log("Error occured in fetching visitors API");
-        }); 
-    }   
+        window.location = "mailto: ?subject=Check out my favorite destination!&body=Hi,%0D%0A%0D%0ACheck out following link to see my favorite destinations:%0D%0A" + $scope.sharedURL + "%0D%0A%0D%0ACheers!%0D%0A-Shared using JetSetGenie - Start a trip to your favorite destinations";
+    }
+
+    $http.get("/api/visitors")
+    .success(function (data, status, headers, config) {
+        $scope.sharedURL = document.URL + "/shared-dashboard/" + data.visitor_id;
+    })
+    .error(function (error, status, headers, config) {
+        console.log(status);
+        console.log("Error occured in fetching visitors API");
+    });
+
+    document.getElementById("shareFav").addEventListener("click", function () {
+        copyToClipboard($scope.sharedURL);
+    });
 });
+
+
+
+function copyToClipboard(siteurl) {
+    // create hidden text element, if it doesn't already exist
+    var targetId = "_hiddenCopyText_";
+    var origSelectionStart, origSelectionEnd;
+    target = document.getElementById(targetId);
+    if (!target) {
+        var target = document.createElement("textarea");
+        target.style.position = "absolute";
+        target.style.left = "-9999px";
+        target.style.top = "0";
+        target.id = targetId;
+        document.body.appendChild(target);
+    }
+    target.textContent = siteurl;
+    // select the content
+    var currentFocus = document.activeElement;
+    target.focus();
+    target.setSelectionRange(0, target.value.length);
+
+    // copy the selection
+    var succeed;
+    try {
+        succeed = document.execCommand("copy");
+    } catch (e) {
+        succeed = false;
+    }
+    // restore original focus
+    if (currentFocus && typeof currentFocus.focus === "function") {
+        currentFocus.focus();
+    }
+
+    target.textContent = "";
+
+    $('.favcopied').fadeIn(500).delay(3000).fadeOut(500);
+        
+    return succeed;
+}
 
 app.controller('ctrlsideBar', function ($scope, $log, $http) {
 

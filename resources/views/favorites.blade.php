@@ -26,7 +26,8 @@
                         </a>
                     </div>
                     <div class="pull-right fav-share">
-                        <button class="btn btn-default jsg-submit" data-ng-click="shareFavorites()">SHARE</button>
+                        <span class="favcopied" style="display:none;">Copied!</span>&nbsp;&nbsp;&nbsp;
+                        <button id="shareFav" rel="/shared-dashboard/" class="btn btn-default jsg-submit" data-ng-click="shareFavorites()">SHARE</button>
                     </div>
                 </div>
             </div>
