@@ -51,22 +51,22 @@
 			  </button>
 	  <ul class="dropdown-menu time-filter container-fluid slidercontainer" aria-labelledby="flighttime">
         <li class="col-sm-6">
-                <h4>TAKE OFF {{ sparams.origincode != ' ' ? '[' + sparams.origincode + ']' : '' }}</h4>
+                <h4>TAKE OFF {{ sparams.origincode != '' ? '' + sparams.origincode + '' : 'Origin' }}</h4>
                 <small>{{ searchfilters.time.leaving.takeoff.timeslot | myDateFilter:this:sparams.leaving }}</small>
                 <div ui-slider="{range: true}" min="0050" max="2400" step="50" use-decimals ng-model="searchfilters.time.leaving.takeoff.timeslot" class="filter-slider"></div>
                  
-                <h4>LAND {{ sparams.dest_code != ' ' ? '[' + sparams.dest_code + ']' : '' }}</h4>
+                <h4>LAND {{ sparams.dest_code != '' ? '' + sparams.dest_code + '' : 'Destination' }}</h4>
                 <small>{{ searchfilters.time.leaving.landing.timeslot | myDateFilter:this:sparams.leaving }}</small>
                 <div ui-slider="{range: true}" min="0050" max="2400" step="50" use-decimals ng-model="searchfilters.time.leaving.landing.timeslot" class="filter-slider"></div>
 		</li>
 			
 		<li class="col-sm-6">
  
-                <h4>TAKE OFF {{ sparams.dest_code != ' ' ? '[' + sparams.dest_code + ']' : '' }}</h4>
+                <h4>TAKE OFF {{ sparams.dest_code != '' ? '' + sparams.dest_code + '' : 'Origin' }}</h4>
                 <small>{{ searchfilters.time.returning.takeoff.timeslot | myDateFilter:this:sparams.returning }}</small>
                 <div ui-slider="{range: true}" min="0050" max="2400" step="50" use-decimals ng-model="searchfilters.time.returning.takeoff.timeslot" class="filter-slider"></div>
                  
-                <h4>LAND {{ sparams.origincode != ' ' ? '[' + sparams.origincode + ']' : '' }}</h4>
+                <h4>LAND {{ sparams.origincode != '' ? '' + sparams.origincode + '' : 'Destination' }}</h4>
                 <small>{{ searchfilters.time.returning.landing.timeslot | myDateFilter:this:sparams.returning }}</small>
                 <div ui-slider="{range: true}" min="0050" max="2400" step="50" use-decimals ng-model="searchfilters.time.returning.landing.timeslot" class="filter-slider"></div>
 		</li>	 

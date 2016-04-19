@@ -27,14 +27,8 @@
     <script src="{{ asset('js/angular-route.js') }}"></script>
     <script src="{{ asset('js/angular-resource.min.js') }}"></script>
     <script src="{{ asset('js/angular-sanitize.min.js') }}"></script>
-
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/typeahead.bundle.js') }}"></script>
-    <script src="{{asset('js/wow.js') }}"></script>
-
-    <link rel='stylesheet' href="{{ asset('css/bootstrap-tagsinput.css') }}" type='text/css' media='all' />
-    <script src="{{asset('js/bootstrap-tagsinput.js') }}"></script>
- 
+	<script src="{{ asset('js/jetSetApp.js') }}"></script>
+    <script src="{{ asset('js/jetSetCtrl.js') }}"></script>
 
     <!-- start Mixpanel -->
     <script type="text/javascript">
@@ -80,10 +74,12 @@
             </div>
         </div>
     </footer>
+	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/typeahead.bundle.js') }}"></script>
+    <script src="{{asset('js/wow.js') }}"></script>
+    <link rel='stylesheet' href="{{ asset('css/bootstrap-tagsinput.css') }}" type='text/css' media='all' />
+    <script src="{{asset('js/bootstrap-tagsinput.js') }}"></script>	
     <div class="bodyloaders"><i class="fa fa-spinner fa-pulse fa-3x"></i></div>
-
-    <script src="{{ asset('js/jetSetApp.js') }}"></script>
-    <script src="{{ asset('js/jetSetCtrl.js') }}"></script>
     <script src="{{asset('js/angular-ui-slider.js') }}"></script>
 </body>
 </html>

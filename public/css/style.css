@@ -15,7 +15,22 @@ body{
 	height:35px;
 }
 
+.btn-default {
+    border:1px solid #33cccc;
+    border-radius:0;
+    color:#33cccc;
+}
 
+.framebutton{
+    display:block;
+}
+
+.btn{
+    
+    font-size:16px;
+    text-align:center;
+    text-transform: uppercase;
+}
 .deleteType, a.lnkFlights{
 	cursor: pointer;
 }
@@ -87,7 +102,7 @@ input[type=date]::-webkit-outer-spin-button {
 	 min-height: 700px;
 }*/
 .jsg-banner {
-    background: rgba(0, 0, 0, 0) url("../assets/jet-set-genie.jpg") no-repeat scroll 100% center / cover ;
+    background: rgba(0, 0, 0, 0) url("/assets/jet-set-genie.jpg") no-repeat scroll 100% center / cover ;
 	min-height: 400px;
 	position:relative;
 	top:0;
@@ -104,7 +119,7 @@ input[type=date]::-webkit-outer-spin-button {
     padding: 160px 0 0;
 }
 .jsg-banner {
-    background: rgba(0, 0, 0, 0) url("../assets/sunset-plane.png") no-repeat scroll 100% center / cover ;
+    background: rgba(0, 0, 0, 0) url("/assets/sunset-plane.png") no-repeat scroll 100% center / cover ;
     min-height: 425px;
 }*/
  
@@ -348,7 +363,7 @@ p, h4
 	width:53px;
 	height:100%;
 	top:0;
-	background:url("../assets/step-back.png") no-repeat center center;
+	background:url("/assets/step-back.png") no-repeat center center;
 	z-index:100;
 }
 .step-1 .jsg-submit 
@@ -363,7 +378,7 @@ p, h4
     border-color: #028c90;
     color: #fff;	
 }
-.btn.active.focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn:active:focus, .btn:focus {
+/*.btn.active.focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn:active:focus, .btn:focus {
     outline:none;
     outline-offset:0px;
 }
@@ -371,7 +386,7 @@ p, h4
     background-color: #028c90;
     border-color: #028c90;
     color: #fff;
-}
+}*/
 
 
 .step-4 .modal-content p
@@ -421,16 +436,16 @@ p, h4
 	margin: 0 5px;
     padding: 10px 15px;
 	display:inline-block;
+    border:none;
 }
 
-.lists li:hover,
-.lists li:active,
-.lists li:focus
+.lists li button:hover,
+.lists li button:active,
+.lists li button:focus
  {
     background-color: #33cbcc;
     color: #fff;
 }
-
 
 .clear{
 	clear:both;
@@ -703,7 +718,9 @@ input[type=date] {
 }
 .lists > ul {
     margin: 0;
+    padding:0;
 }
+
 .lists .dropdown, .lists .dropup {
     display: inline;
     position: relative;
@@ -716,7 +733,7 @@ input[type=date] {
 .lists .dropdown .fa {
     color: #7f7f7f;
 }
-.lists .btn-default {
+/*.lists .btn-default {
     background-color: transparent;
     border-color: transparent;
     color: #b1b1b1;
@@ -725,11 +742,11 @@ input[type=date] {
     background-color: transparent;
     border-color: transparent;
     color: #b1b1b1;
-}
+}*/
 .no-records{
     transition: all 0.001s;
 }
-.lists .btn-default.active.focus, 
+/*.lists .btn-default.active.focus, 
 .lists .btn-default.active:focus, 
 .lists .btn-default.active:hover, 
 .lists .btn-default.focus:active, 
@@ -752,7 +769,7 @@ input[type=date] {
     background-color: transparent;
     border-color: transparent;
     color: #333;
-}
+}*/
 .lists .time .dropdown-menu {
 	min-width: 400px;
     padding:0 10px 25px 0;

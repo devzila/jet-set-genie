@@ -1,6 +1,7 @@
 app.controller('jetSetGenie', function ($scope, $http) {
     scope = this;
     $scope.desttypes = [];
+    $scope.showShare = true;
 
     $scope.sparams = {
         leaving: '',
@@ -72,7 +73,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
 						    browser = $("input[name='browser']").val();
 						    destination_type = selected_destination;
 
-						    url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + destination_type + "/destid/" + $scope.sparams.dest_id;
+						    url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + destination_type + "/destid/" + ((($scope.sparams.dest_id).length == 0) ? '0' : $scope.sparams.dest_id);
 
 						    window.location = url;
 
@@ -231,7 +232,8 @@ app.controller('jetSetGenie', function ($scope, $http) {
     }
 
    
-});
+   
+});//main controller closes here
 
 function readCookie(name) {
     var nameEQ = name + "=";
@@ -256,21 +258,10 @@ function createCookie(name, value, days) {
     document.cookie = name + "=" + value + expires + "; path=/";
 }
 
-//main controller closes here
 
-app.controller('ctrlFavorites', function($scope, $http){	 
-    $scope.pagetitle = 'Favorites';
 
-    var getSearchCookie = JSON.parse(readCookie('sparams'));
-    $scope.sparams.leaving = getSearchCookie.leaving;
-    $scope.sparams.returning = getSearchCookie.returning;
-    $scope.sparams.origin = getSearchCookie.origin;
-    $scope.sparams.origincode = getSearchCookie.origincode;
-    $scope.sparams.destination = getSearchCookie.destination;
-    $scope.sparams.dest_code = (getSearchCookie.dest_code == '') ? 0 : getSearchCookie.dest_code;
-    $scope.sparams.dest_id = getSearchCookie.dest_id;
-    $scope.sparams.type = getSearchCookie.type;
-    
+app.controller('ctrlFavorites', function ($scope, $http) {
+
     $scope.shareFavorites = function () {
         window.location = "mailto: ?subject=Check out my favorite destination!&body=Hi,%0D%0A%0D%0ACheck out following link to see my favorite destinations:%0D%0A" + $scope.sharedURL + "%0D%0A%0D%0ACheers!%0D%0A-Shared using JetSetGenie - Start a trip to your favorite destinations";
     }
@@ -287,6 +278,21 @@ app.controller('ctrlFavorites', function($scope, $http){
     document.getElementById("shareFav").addEventListener("click", function () {
         copyToClipboard($scope.sharedURL);
     });
+
+    $scope.showShare = false;
+
+    $scope.pagetitle = 'Favorites';
+
+    var getSearchCookie = JSON.parse(readCookie('sparams'));
+    $scope.sparams.leaving = getSearchCookie.leaving;
+    $scope.sparams.returning = getSearchCookie.returning;
+    $scope.sparams.origin = getSearchCookie.origin;
+    $scope.sparams.origincode = getSearchCookie.origincode;
+    $scope.sparams.destination = getSearchCookie.destination;
+    $scope.sparams.dest_code = (getSearchCookie.dest_code == '') ? 0 : getSearchCookie.dest_code;
+    $scope.sparams.dest_id = getSearchCookie.dest_id;
+    $scope.sparams.type = getSearchCookie.type;
+
     $(".tag_places").tagsinput();
     $(".tag_places").on('change', function () {
         $scope.sparams.type = $(this).val();
@@ -334,6 +340,23 @@ function copyToClipboard(siteurl) {
 }
 
 app.controller('ctrlsideBar', function ($scope, $log, $http) {
+
+    $scope.shareFavorites = function () {
+        window.location = "mailto: ?subject=Check out my favorite destination!&body=Hi,%0D%0A%0D%0ACheck out following link to see my favorite destinations:%0D%0A" + $scope.sharedURL + "%0D%0A%0D%0ACheers!%0D%0A-Shared using JetSetGenie - Start a trip to your favorite destinations";
+    }
+
+    $http.get("/api/visitors")
+    .success(function (data, status, headers, config) {
+        $scope.sharedURL = window.location.protocol + "//" + window.location.host + "/shared-dashboard/" + data.visitor_id;
+    })
+    .error(function (error, status, headers, config) {
+        console.log(status);
+        console.log("Error occured in fetching visitors API");
+    });
+
+    document.getElementById("shareFav").addEventListener("click", function () {
+        copyToClipboard($scope.sharedURL);
+    });
 
     $scope.showFlights = function (dest_code, destination, dest_id) {
         //alert(dest_id); return;
@@ -467,11 +490,11 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
 
     airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
     dest_code = (((decodeURIComponent(sQuery[9])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
-    //console.log(sQuery[9])
-    dt = new Date(sQuery[3]);
+
+    dt = new Date(sQuery[3].replace(/-/g, '/'));
     leavingdt = $scope.daysInWeek[dt.getDay()] + ", " + $scope.months[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
 
-    dt = new Date(sQuery[5]);
+    dt = new Date(sQuery[5].replace(/-/g, '/'));
     returningdt = $scope.daysInWeek[dt.getDay()] + ", " + $scope.months[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
 
     sParams = {
@@ -528,10 +551,23 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
     $http.post(getPlaceUrl, $scope.FlightRequest).success(function (response) {
    
     
-   // $.get('/flight-result.json', function (response) {
+    //$.get('/flight-result.json', function (response) {
         var currChar = "$";
         var ctr = 0;
-        console.log(JSON.stringify(response.trips.tripOption));
+        //console.log(JSON.stringify(response.trips.tripOption));
+         
+        if (!response.hasOwnProperty("trips") ) {
+            $scope.loader('hide');
+            $('.no-results').show();
+            $('.load-more').hide();
+            return;
+        } else if (!response.trips.hasOwnProperty("tripOption")) {
+            $scope.loader('hide');
+            $('.no-results').show();
+            $('.load-more').hide();
+            return;
+        }
+
       
         $.each( response.trips.tripOption, function (index, value) {
             var price, timings;
@@ -732,3 +768,21 @@ app.controller('ctrlSharedDestinations', function ($scope, $http, $resource) {
         $scope.getFavorites();
     });
 });
+
+
+// all other functions
+
+// This should work in node.js and other ES5 compliant implementations.
+function isEmptyObject(obj) {
+    return !Object.keys(obj).length;
+}
+
+// This should work both there and elsewhere.
+function isEmptyObject(obj) {
+    for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            return false;
+        }
+    }
+    return true;
+}

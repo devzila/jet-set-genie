@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-                    <p data-ng-show="records.length === 0"  class="text-center no-results">Sorry, no results found for selected criteria. Please select again.</p>
+                    <p data-ng-show="records.length === 0" data-ng-hide="records.length != 0" class="text-center no-results alert alert-info">Sorry, no results found for selected criteria. Please select again.</p>
 
                     <div class="col-md-12 text-center load-more" data-ng-hide="records.length <= lstCount" data-ng-show="records.length > lstCount">
                         <a href="javascript://" data-ng-click="loadmore()">LOAD MORE</a>

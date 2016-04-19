@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-
+                <p  class="text-center no-results alert alert-info" style="display:none;">Sorry, no results found for selected criteria. Please select again.</p>
                 <div class="col-md-12 text-center load-more">
 					<a href="#">LOAD MORE</a>
 				</div>
