@@ -2,7 +2,7 @@
 
 
 @section('jsg-page-title')
-	<title>JetSetGenie | My Favorites?</title>
+	<title>JetSetGenie | My Favorites</title>
 @stop
 
 @section('content') 
@@ -11,7 +11,7 @@
     <div class="row row-centered favorites-section">
         <div class="row-centered serch-part">
             <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 col-centered">
-                <h3 class="lobster-font text-center">@{{ pagetitle }}</h3>
+                <h3 class="lobster-font text-center">Favorites</h3>
                 @include('shared.searchbox')
             </div>
         </div>
@@ -63,7 +63,9 @@
                         <div class="clear"></div>
                     </div>
                 </div>
-                <p data-ng-show="favorites.length == 0" ng-hide class="text-center no-results">Sorry, no results found in your Favorites dashboard. Please search for destinations and mark favorite..</p>
+                <div class="col-md-12">
+                    <p data-ng-show="favorites.length === 0" data-ng-hide="favorites.length != 0" class="text-center no-results alert alert-info">Sorry, no results found in your Favorites dashboard. Please search for destinations and mark favorite..</p>
+                </div>
             </div>
         </div>
     </div>
@@ -73,7 +75,7 @@
 @section('additional-scripts')
 <script src="{{ asset('js/masonry.pkgd.min.js') }}" ></script>
 <script>
-	/* var favoriteMsnry;
+	var favoriteMsnry;
 	$(document).ready(function(){		
 		favoriteMsnry = $('.favorite-container').masonry({
 			itemSelector: '.list-box',			
@@ -81,7 +83,6 @@
 	});
 	$( window ).resize(function() {
 		 favoriteMsnry.masonry('reloadItems');		 
-	});
-    */
+	});    
 </script>
 @stop

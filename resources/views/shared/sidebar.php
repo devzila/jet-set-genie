@@ -30,8 +30,10 @@
                 </div>
             </div>
         </div>
-        <a class="btn btn-default framebutton" data-ng-click="showFavorites()" data-ng-show="favorites" data-ng-hide="favorites.length == 0 " >View Favorites</a>
-        <a class="btn btn-default framebutton" id="shareFav" data-ng-click="shareFavorites()" data-ng-show="favorites && showShare == true" data-ng-hide="favorites.length == 0">Share</a>
+        <div class="col-md-12">
+            <a class="btn btn-default framebutton" data-ng-click="showFavorites()" data-ng-show="favorites" data-ng-hide="favorites.length == 0 ">View Favorites</a>
+            <a class="btn btn-default framebutton" id="shareFav" data-ng-click="shareFavorites()" data-ng-show="favorites && showShare == true" data-ng-hide="favorites.length == 0" href="javascript://">Share</a>
+        </div>
         <div class="col-md-12 list-box search-options">
             <div class="box">
                 <a>

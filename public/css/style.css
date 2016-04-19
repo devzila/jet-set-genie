@@ -23,6 +23,7 @@ body{
 
 .framebutton{
     display:block;
+    margin:5px 0;
 }
 
 .btn{

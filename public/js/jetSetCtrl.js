@@ -260,7 +260,23 @@ function createCookie(name, value, days) {
 
 
 
-app.controller('ctrlFavorites', function ($scope, $http) {
+app.controller('ctrlFavorites', function ($scope, $http) {    
+    $scope.showShare = false;
+    $scope.pagetitle = 'Favorites';
+    var getSearchCookie = JSON.parse(readCookie('sparams'));
+    $scope.sparams.leaving = getSearchCookie.leaving;
+    $scope.sparams.returning = getSearchCookie.returning;
+    $scope.sparams.origin = getSearchCookie.origin;
+    $scope.sparams.origincode = getSearchCookie.origincode;
+    $scope.sparams.destination = getSearchCookie.destination;
+    $scope.sparams.dest_code = (getSearchCookie.dest_code == '') ? 0 : getSearchCookie.dest_code;
+    $scope.sparams.dest_id = getSearchCookie.dest_id;
+    $scope.sparams.type = getSearchCookie.type;
+
+    $(".tag_places").tagsinput();
+    $(".tag_places").on('change', function () {
+        $scope.sparams.type = $(this).val();
+    })
 
     $scope.shareFavorites = function () {
         window.location = "mailto: ?subject=Check out my favorite destination!&body=Hi,%0D%0A%0D%0ACheck out following link to see my favorite destinations:%0D%0A" + $scope.sharedURL + "%0D%0A%0D%0ACheers!%0D%0A-Shared using JetSetGenie - Start a trip to your favorite destinations";
@@ -279,24 +295,6 @@ app.controller('ctrlFavorites', function ($scope, $http) {
         copyToClipboard($scope.sharedURL);
     });
 
-    $scope.showShare = false;
-
-    $scope.pagetitle = 'Favorites';
-
-    var getSearchCookie = JSON.parse(readCookie('sparams'));
-    $scope.sparams.leaving = getSearchCookie.leaving;
-    $scope.sparams.returning = getSearchCookie.returning;
-    $scope.sparams.origin = getSearchCookie.origin;
-    $scope.sparams.origincode = getSearchCookie.origincode;
-    $scope.sparams.destination = getSearchCookie.destination;
-    $scope.sparams.dest_code = (getSearchCookie.dest_code == '') ? 0 : getSearchCookie.dest_code;
-    $scope.sparams.dest_id = getSearchCookie.dest_id;
-    $scope.sparams.type = getSearchCookie.type;
-
-    $(".tag_places").tagsinput();
-    $(".tag_places").on('change', function () {
-        $scope.sparams.type = $(this).val();
-    })
 });
 
 
@@ -357,6 +355,10 @@ app.controller('ctrlsideBar', function ($scope, $log, $http) {
     document.getElementById("shareFav").addEventListener("click", function () {
         copyToClipboard($scope.sharedURL);
     });
+
+    $scope.showFavorites = function () {
+        window.location = window.location.protocol + "//" + window.location.host + "/favorites";
+    }
 
     $scope.showFlights = function (dest_code, destination, dest_id) {
         //alert(dest_id); return;
