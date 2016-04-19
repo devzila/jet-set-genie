@@ -156,6 +156,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
         $http.get("/api/cards")
         .success(function (data, status, headers, config) {
             $scope.favorites = data;
+            console.log($scope.favorites);
         })
         .error(function (error, status, headers, config) {
             //console.log(status);
@@ -215,8 +216,6 @@ app.controller('jetSetGenie', function ($scope, $http) {
         window.location = url;
     }
 
-    $scope.getFavorites();
-
     $scope.clearFilters = function () {
         $scope.searchfilters.time.leaving.takeoff.timeslot = ['0050', '2400']
         $scope.searchfilters.time.leaving.landing.timeslot = ['0050', '2400']
@@ -260,9 +259,13 @@ function createCookie(name, value, days) {
 
 
 
-app.controller('ctrlFavorites', function ($scope, $http) {    
+app.controller('ctrlFavorites', function ($scope, $http) {
+
+    $scope.getFavorites();
+
     $scope.showShare = false;
     $scope.pagetitle = 'Favorites';
+
     var getSearchCookie = JSON.parse(readCookie('sparams'));
     $scope.sparams.leaving = getSearchCookie.leaving;
     $scope.sparams.returning = getSearchCookie.returning;
@@ -338,6 +341,8 @@ function copyToClipboard(siteurl) {
 }
 
 app.controller('ctrlsideBar', function ($scope, $log, $http) {
+
+    $scope.getFavorites();
 
     $scope.shareFavorites = function () {
         window.location = "mailto: ?subject=Check out my favorite destination!&body=Hi,%0D%0A%0D%0ACheck out following link to see my favorite destinations:%0D%0A" + $scope.sharedURL + "%0D%0A%0D%0ACheers!%0D%0A-Shared using JetSetGenie - Start a trip to your favorite destinations";
@@ -767,7 +772,7 @@ app.controller('ctrlSharedDestinations', function ($scope, $http, $resource) {
     visitor_id = sQuery[2];
      
     $http.get("/api/cards?visitor_id=" + visitor_id).success(function (response) {
-        $scope.getFavorites();
+        $scope.favorites = response;
     });
 });
 
