@@ -96,10 +96,13 @@ class DestinationCardItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($card_id, $id)
     {
         //
+
 		$card = DestinationCardItems::find($id);
 		$card->delete();
+        return Response::json(['status' => "ok"], 200);
+
     }
 }
