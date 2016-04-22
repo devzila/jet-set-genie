@@ -28,7 +28,7 @@
     <script src="{{ asset('js/angular-resource.min.js') }}"></script>
     <script src="{{ asset('js/angular-sanitize.min.js') }}"></script>
 	<script src="{{ asset('js/jetSetApp.js') }}"></script>
-    <script src="{{ asset('js/jetSetCtrl.js') }}"></script>
+    <script src="{{asset('js/jetSetCtrl.js') }}"></script>
 
     <!-- start Mixpanel -->
     <script type="text/javascript">
@@ -43,7 +43,7 @@
         mixpanel.init("f97b2eb9569581304a1d8dcaa66e1793");</script><!-- end Mixpanel -->
 
 </head>
-<body data-ng-app="jetSetGenie" data-ng-controller="jetSetGenie">
+<body data-ng-app="jetSetGenie" data-ng-controller="jetSetGenie" ng-cloak>
     <header class="jsg-header">
         <div class="container">
             <h1><a href="/" class="animated wow fadeIn"><img src="{{ asset('assets/Logo.png') }}" alt="Jet set Genie" /></a></h1>

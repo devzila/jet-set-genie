@@ -3,6 +3,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
     $scope.desttypes = [];
     $scope.showShare = true;
     
+    $scope.validForm = true;
 
     $scope.sparams = {
         leaving: '',
@@ -72,7 +73,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
 						    home_airport = $("input[name='home_airport']").val();
 						    ip = $("input[name='ip']").val();
 						    browser = $("input[name='browser']").val();
-						    destination_type = selected_destination;
+						    destination_type = (selected_destination == '') ? 'Beach' : selected_destination;
 
 						    url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + destination_type + "/destid/" + ((($scope.sparams.dest_id).length == 0) ? '0' : $scope.sparams.dest_id);
 
@@ -126,6 +127,17 @@ app.controller('jetSetGenie', function ($scope, $http) {
         angular.forEach($scope.favorites, function (value, key) {
             if (value.destination_id == id) {
                 $scope.favorites.splice(key, 1);
+                console.log("/api/cards/" + value.card_id);
+                $http.post("/api/cards/" + value.card_id)
+                .success(function (data, status, headers, config) {
+                    //$scope.favorites = data;
+                    //console.log($scope.favorites);
+                    console.log(data);
+                })
+                .error(function (error, status, headers, config) {
+                    //console.log(status);
+                    console.log("Favorite Error");
+                });
             }
         });
     };
@@ -211,6 +223,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
         var type = $scope.sparams.type;
 
         //alert(type);
+        type = (type == '') ? 'Beach' : type;
 
         url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + type + "/destid/" + (( ($scope.sparams.dest_id).length == 0 ) ? '0' : $scope.sparams.dest_id);
 
@@ -699,7 +712,7 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
                     flightRoute.push({
                         arrival: svalue.leg[0].arrivalTime,
                         departure: svalue.leg[0].departureTime,
-                        departTime: departure_date_time, 
+                        departTime: departuredt,
                         timings: departuretime + "-" + arrivaltime,
                         duration: (sindex == 0) ? duration : '',
                         airline: getCarrier,
@@ -742,8 +755,8 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
 	$scope.addFlight = function (fare, airline, departure) {
 	    var setfav = '';
 	    var destination_id = $scope.sparams.dest_id;
-	    console.log(departure); 
-
+	    //console.log('destination_id:' + destination_id);
+	     
 	    //Check if the flight if destination card is already added, if not add one
 	    if (!$scope.isFavorite(destination_id))
 	    {
@@ -795,6 +808,8 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
                     console.log("Error occured");
                 });	         
 	    } else {
+
+	        
 	        angular.forEach($scope.favorites, function (value, key) {          
 	            if (value.destination_id == destination_id) {
 	                setfav = value;

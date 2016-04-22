@@ -64,6 +64,13 @@ body{
     text-align:center;
     text-transform: uppercase;
 }
+.btn-disabled{
+    padding: 6px 30px;
+    border-radius: 0;
+    color: #999;
+    cursor: not-allowed;
+}
+}
 .deleteType, a.lnkFlights{
 	cursor: pointer;
 }

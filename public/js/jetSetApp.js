@@ -95,3 +95,18 @@ app.filter('myDateFilter', function () {
         return scope.daysInWeek[date.getDay()] + " " + time + ampm + ' - ' + scope.daysInWeek[dayIndex] + " " + to + ampm;
     };
 });
+
+app.directive('searchForm', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, element, attr, mCtrl) {
+            function myValidation(value) {
+                if (value == "")
+                    scope.validForm = false;
+                else
+                    scope.validForm = true;
+            }
+            mCtrl.$parsers.push(myValidation);
+        }
+    };
+});

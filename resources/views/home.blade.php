@@ -80,7 +80,7 @@
                         <h3 class="lobster-font wow animated fadeIn">How Does Jet<span class="light">Set</span>Genie Work?</h3>
                     </div>
                     <div class="col-md-12 modal-video">
-                        <a href="#" data-toggle="modal" data-target="#video"><i class="fa fa-play-circle fa-3x" aria-hidden="true"></i><br /> Watch Video</a>
+                        <a href="#" data-toggle="modal" data-target="#video" onclick='mixpanel.track("Video Click")'><i class="fa fa-play-circle fa-3x" aria-hidden="true"></i><br /> Watch Video</a>
                         <div id="video" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">

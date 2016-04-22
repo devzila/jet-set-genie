@@ -31,6 +31,7 @@
                                         <a data-ng-show="$index == 0" data-ng-hide="$index != 0" class="star" data-ng-click="addFlight( flight.price, route.airline, route.departTime )">
                                             <i class="fa fa-2x @{{ hasFlight(record.id) ? 'fa-star' : 'fa-star-o' }}"></i>
                                         </a>
+                                        
                                         <a data-ng-show="$index != 0" data-ng-hide="$index == 0" class="star"></a>
                                     </li>
                                     <li class="country-logo">
@@ -54,7 +55,7 @@
                 <div class="col-md-12">
                     <p class="text-center no-results alert alert-info" style="display:none;">Sorry, no results found for selected criteria. Please select again.</p>
                 </div>
-                <div class="col-md-12 text-center load-more">
+                <div class="col-md-12 text-center load-more" style="display:none;">
                     <a href="#">LOAD MORE</a>
                 </div>
 
