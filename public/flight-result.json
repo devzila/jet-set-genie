@@ -1,1 +1,2626 @@
-{}
+{
+ "kind": "qpxExpress#tripsSearch",
+ "trips": {
+  "kind": "qpxexpress#tripOptions",
+  "requestId": "uay40UvU7pz3tdXD70OCJe",
+  "data": {
+   "kind": "qpxexpress#data",
+   "airport": [
+    {
+     "kind": "qpxexpress#airportData",
+     "code": "BOS",
+     "city": "BOS",
+     "name": "Boston Logan International"
+    },
+    {
+     "kind": "qpxexpress#airportData",
+     "code": "EWR",
+     "city": "EWR",
+     "name": "Newark Liberty International"
+    },
+    {
+     "kind": "qpxexpress#airportData",
+     "code": "FLL",
+     "city": "FLL",
+     "name": "Fort Lauderdale International"
+    },
+    {
+     "kind": "qpxexpress#airportData",
+     "code": "IAD",
+     "city": "WAS",
+     "name": "Washington Dulles International"
+    },
+    {
+     "kind": "qpxexpress#airportData",
+     "code": "JAX",
+     "city": "JAX",
+     "name": "Jacksonville International"
+    },
+    {
+     "kind": "qpxexpress#airportData",
+     "code": "JFK",
+     "city": "NYC",
+     "name": "New York John F Kennedy International"
+    },
+    {
+     "kind": "qpxexpress#airportData",
+     "code": "LGA",
+     "city": "NYC",
+     "name": "New York La Guardia"
+    },
+    {
+     "kind": "qpxexpress#airportData",
+     "code": "TPA",
+     "city": "TPA",
+     "name": "Tampa International"
+    }
+   ],
+   "city": [
+    {
+     "kind": "qpxexpress#cityData",
+     "code": "BOS",
+     "name": "Boston"
+    },
+    {
+     "kind": "qpxexpress#cityData",
+     "code": "EWR",
+     "name": "Newark"
+    },
+    {
+     "kind": "qpxexpress#cityData",
+     "code": "FLL",
+     "name": "Fort Lauderdale"
+    },
+    {
+     "kind": "qpxexpress#cityData",
+     "code": "JAX",
+     "name": "Jacksonville"
+    },
+    {
+     "kind": "qpxexpress#cityData",
+     "code": "NYC",
+     "name": "New York"
+    },
+    {
+     "kind": "qpxexpress#cityData",
+     "code": "TPA",
+     "name": "Tampa"
+    },
+    {
+     "kind": "qpxexpress#cityData",
+     "code": "WAS",
+     "name": "Washington"
+    }
+   ],
+   "aircraft": [
+    {
+     "kind": "qpxexpress#aircraftData",
+     "code": "319",
+     "name": "Airbus A319"
+    },
+    {
+     "kind": "qpxexpress#aircraftData",
+     "code": "320",
+     "name": "Airbus A320"
+    },
+    {
+     "kind": "qpxexpress#aircraftData",
+     "code": "32B",
+     "name": "Airbus A321 (Sharklets)"
+    },
+    {
+     "kind": "qpxexpress#aircraftData",
+     "code": "738",
+     "name": "Boeing 737"
+    },
+    {
+     "kind": "qpxexpress#aircraftData",
+     "code": "739",
+     "name": "Boeing 737"
+    },
+    {
+     "kind": "qpxexpress#aircraftData",
+     "code": "73G",
+     "name": "Boeing 737"
+    },
+    {
+     "kind": "qpxexpress#aircraftData",
+     "code": "CR7",
+     "name": "Canadair RJ 700"
+    },
+    {
+     "kind": "qpxexpress#aircraftData",
+     "code": "DH2",
+     "name": "De Havilland-Bombardier Dash-8"
+    },
+    {
+     "kind": "qpxexpress#aircraftData",
+     "code": "E90",
+     "name": "Embraer RJ-190"
+    },
+    {
+     "kind": "qpxexpress#aircraftData",
+     "code": "ERJ",
+     "name": "Embraer ERJ-135/145"
+    },
+    {
+     "kind": "qpxexpress#aircraftData",
+     "code": "SF3",
+     "name": "SAAB SF 340"
+    }
+   ],
+   "tax": [
+    {
+     "kind": "qpxexpress#taxData",
+     "id": "ZP",
+     "name": "US Flight Segment Tax"
+    },
+    {
+     "kind": "qpxexpress#taxData",
+     "id": "AY_001",
+     "name": "US September 11th Security Fee"
+    },
+    {
+     "kind": "qpxexpress#taxData",
+     "id": "US_001",
+     "name": "US Transportation Tax"
+    },
+    {
+     "kind": "qpxexpress#taxData",
+     "id": "XF",
+     "name": "US Passenger Facility Charge"
+    }
+   ],
+   "carrier": [
+    {
+     "kind": "qpxexpress#carrierData",
+     "code": "B6",
+     "name": "Jetblue Airways Corporation"
+    },
+    {
+     "kind": "qpxexpress#carrierData",
+     "code": "NK",
+     "name": "Spirit Airlines"
+    },
+    {
+     "kind": "qpxexpress#carrierData",
+     "code": "UA",
+     "name": "United Airlines, Inc."
+    }
+   ]
+  },
+  "tripOption": [
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD215.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS004",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 185,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 185,
+        "flight": {
+         "carrier": "B6",
+         "number": "325"
+        },
+        "id": "GKiYoF039-yFf18o",
+        "cabin": "COACH",
+        "bookingCode": "M",
+        "bookingCodeCount": 7,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LHipYrUiVNu1vkgc",
+          "aircraft": "320",
+          "arrivalTime": "2016-04-26T22:34-04:00",
+          "departureTime": "2016-04-26T19:29-04:00",
+          "origin": "JFK",
+          "destination": "TPA",
+          "originTerminal": "5",
+          "duration": 185,
+          "onTimePerformance": 50,
+          "mileage": 1005,
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "ANhj5O51aLaZb9az3mp24ooTHi3brqHzDXyLi9M76mOU",
+        "carrier": "B6",
+        "origin": "NYC",
+        "destination": "TPA",
+        "basisCode": "MH3ABEN"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "ANhj5O51aLaZb9az3mp24ooTHi3brqHzDXyLi9M76mOU",
+        "segmentId": "GKiYoF039-yFf18o"
+       }
+      ],
+      "baseFareTotal": "USD186.98",
+      "saleFareTotal": "USD186.98",
+      "saleTaxTotal": "USD28.12",
+      "saleTotal": "USD215.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD14.02"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "JFK B6 TPA 186.98MH3ABEN USD 186.98 END ZP JFK XT 14.02US 4.00ZP 5.60AY 4.50XF JFK4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD215.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS002",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 176,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 176,
+        "flight": {
+         "carrier": "B6",
+         "number": "225"
+        },
+        "id": "GiIa+D6GB77rMwhO",
+        "cabin": "COACH",
+        "bookingCode": "M",
+        "bookingCodeCount": 7,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LQDfqoMUna6abyb9",
+          "aircraft": "320",
+          "arrivalTime": "2016-04-27T00:26-04:00",
+          "departureTime": "2016-04-26T21:30-04:00",
+          "origin": "JFK",
+          "destination": "TPA",
+          "originTerminal": "5",
+          "duration": 176,
+          "onTimePerformance": 40,
+          "mileage": 1005,
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "ANhj5O51aLaZb9az3mp24ooTHi3brqHzDXyLi9M76mOU",
+        "carrier": "B6",
+        "origin": "NYC",
+        "destination": "TPA",
+        "basisCode": "MH3ABEN"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "ANhj5O51aLaZb9az3mp24ooTHi3brqHzDXyLi9M76mOU",
+        "segmentId": "GiIa+D6GB77rMwhO"
+       }
+      ],
+      "baseFareTotal": "USD186.98",
+      "saleFareTotal": "USD186.98",
+      "saleTaxTotal": "USD28.12",
+      "saleTotal": "USD215.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD14.02"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "JFK B6 TPA 186.98MH3ABEN USD 186.98 END ZP JFK XT 14.02US 4.00ZP 5.60AY 4.50XF JFK4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD215.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS001",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 174,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 174,
+        "flight": {
+         "carrier": "B6",
+         "number": "1717"
+        },
+        "id": "Goux7hAxCEgsoLOq",
+        "cabin": "COACH",
+        "bookingCode": "M",
+        "bookingCodeCount": 7,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "L9CMTt6AlQQsaE8b",
+          "aircraft": "320",
+          "arrivalTime": "2016-04-26T10:24-04:00",
+          "departureTime": "2016-04-26T07:30-04:00",
+          "origin": "LGA",
+          "destination": "TPA",
+          "originTerminal": "B",
+          "duration": 174,
+          "onTimePerformance": 70,
+          "mileage": 1011,
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "ALi9KbVISwCnoru9YeY572h7kDsRYUXyyQRxfvFDLE6s",
+        "carrier": "B6",
+        "origin": "NYC",
+        "destination": "TPA",
+        "basisCode": "MH3ABEN"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "ALi9KbVISwCnoru9YeY572h7kDsRYUXyyQRxfvFDLE6s",
+        "segmentId": "Goux7hAxCEgsoLOq"
+       }
+      ],
+      "baseFareTotal": "USD186.98",
+      "saleFareTotal": "USD186.98",
+      "saleTaxTotal": "USD28.12",
+      "saleTotal": "USD215.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD14.02"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "LGA B6 TPA 186.98MH3ABEN USD 186.98 END ZP LGA XT 14.02US 4.00ZP 5.60AY 4.50XF LGA4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD215.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS003",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 184,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 184,
+        "flight": {
+         "carrier": "B6",
+         "number": "925"
+        },
+        "id": "GxQEoU1V8mxLQKPL",
+        "cabin": "COACH",
+        "bookingCode": "M",
+        "bookingCodeCount": 7,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LAWbNXfOUE-7UOyw",
+          "aircraft": "320",
+          "arrivalTime": "2016-04-26T17:33-04:00",
+          "departureTime": "2016-04-26T14:29-04:00",
+          "origin": "JFK",
+          "destination": "TPA",
+          "originTerminal": "5",
+          "duration": 184,
+          "onTimePerformance": 80,
+          "mileage": 1005,
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "ANhj5O51aLaZb9az3mp24ooTHi3brqHzDXyLi9M76mOU",
+        "carrier": "B6",
+        "origin": "NYC",
+        "destination": "TPA",
+        "basisCode": "MH3ABEN"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "ANhj5O51aLaZb9az3mp24ooTHi3brqHzDXyLi9M76mOU",
+        "segmentId": "GxQEoU1V8mxLQKPL"
+       }
+      ],
+      "baseFareTotal": "USD186.98",
+      "saleFareTotal": "USD186.98",
+      "saleTaxTotal": "USD28.12",
+      "saleTotal": "USD215.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD14.02"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "JFK B6 TPA 186.98MH3ABEN USD 186.98 END ZP JFK XT 14.02US 4.00ZP 5.60AY 4.50XF JFK4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD231.60",
+    "id": "GPjUAof8IeSOfnu64gLAFS00H",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 445,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 185,
+        "flight": {
+         "carrier": "NK",
+         "number": "171"
+        },
+        "id": "GJuNWapt1UUsb0mQ",
+        "cabin": "COACH",
+        "bookingCode": "K",
+        "bookingCodeCount": 4,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "L8cIKohZx+aIva3c",
+          "aircraft": "32B",
+          "arrivalTime": "2016-04-26T18:35-04:00",
+          "departureTime": "2016-04-26T15:30-04:00",
+          "origin": "LGA",
+          "destination": "FLL",
+          "originTerminal": "B",
+          "destinationTerminal": "4",
+          "duration": 185,
+          "onTimePerformance": 60,
+          "mileage": 1077,
+          "secure": true
+         }
+        ],
+        "connectionDuration": 204
+       },
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 56,
+        "flight": {
+         "carrier": "NK",
+         "number": "615"
+        },
+        "id": "GqdtlW-cXVLLqJm0",
+        "cabin": "COACH",
+        "bookingCode": "K",
+        "bookingCodeCount": 4,
+        "marriedSegmentGroup": "1",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "L9Ss6XSpdCf5Xz8r",
+          "aircraft": "320",
+          "arrivalTime": "2016-04-26T22:55-04:00",
+          "departureTime": "2016-04-26T21:59-04:00",
+          "origin": "FLL",
+          "destination": "TPA",
+          "originTerminal": "4",
+          "duration": 56,
+          "mileage": 196,
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "AnsLlcoBDHkny1iqyRIcwjw4JLBMjvAphTRJhIJJ0Aio",
+        "carrier": "NK",
+        "origin": "NYC",
+        "destination": "TPA",
+        "basisCode": "K3Z5NR"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "AnsLlcoBDHkny1iqyRIcwjw4JLBMjvAphTRJhIJJ0Aio",
+        "segmentId": "GJuNWapt1UUsb0mQ"
+       },
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "AnsLlcoBDHkny1iqyRIcwjw4JLBMjvAphTRJhIJJ0Aio",
+        "segmentId": "GqdtlW-cXVLLqJm0"
+       }
+      ],
+      "baseFareTotal": "USD194.41",
+      "saleFareTotal": "USD194.41",
+      "saleTaxTotal": "USD37.19",
+      "saleTotal": "USD231.60",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD14.59"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD9.00"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD8.00"
+       }
+      ],
+      "fareCalculation": "NYC NK X/FLL Q4.65 NK TPA Q4.65 Q NYCTPA18.60 166.51K3Z5NR USD 194.41 END ZP LGA FLL XT 14.59US 8.00ZP 5.60AY 9.00XF LGA4.50 FLL4.50",
+      "latestTicketingTime": "2016-04-23T00:18-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD247.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS005",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 179,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 179,
+        "flight": {
+         "carrier": "B6",
+         "number": "525"
+        },
+        "id": "G9NVE87Zmr8euHfN",
+        "cabin": "COACH",
+        "bookingCode": "R",
+        "bookingCodeCount": 4,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LzIkJpI92-GNQBzl",
+          "aircraft": "320",
+          "arrivalTime": "2016-04-26T11:29-04:00",
+          "departureTime": "2016-04-26T08:30-04:00",
+          "origin": "JFK",
+          "destination": "TPA",
+          "originTerminal": "5",
+          "duration": 179,
+          "onTimePerformance": 60,
+          "mileage": 1005,
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "AL9rRK23iu6kYga/UuuL72CZQ2AefTbdSgtYR8D0IpKbr1Emv5e09HEofkt+b1s4Ooo4HLScJDmjOOLiCPM9qCpvhgpCW6qBTUyPvoNo7E0p7XRiOHbEI7jtX6KZ6j+UL4mgXK86/n9M7IE",
+        "carrier": "B6",
+        "origin": "NYC",
+        "destination": "TPA",
+        "basisCode": "RH3AUEN5",
+        "private": true
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "AL9rRK23iu6kYga/UuuL72CZQ2AefTbdSgtYR8D0IpKbr1Emv5e09HEofkt+b1s4Ooo4HLScJDmjOOLiCPM9qCpvhgpCW6qBTUyPvoNo7E0p7XRiOHbEI7jtX6KZ6j+UL4mgXK86/n9M7IE",
+        "segmentId": "G9NVE87Zmr8euHfN"
+       }
+      ],
+      "baseFareTotal": "USD216.74",
+      "saleFareTotal": "USD216.74",
+      "saleTaxTotal": "USD30.36",
+      "saleTotal": "USD247.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD16.26"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "JFK B6 TPA 216.74RH3AUEN5 USD 216.74 END ZP JFK XT 16.26US 4.00ZP 5.60AY 4.50XF JFK4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD255.60",
+    "id": "GPjUAof8IeSOfnu64gLAFS00I",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 419,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 64,
+        "flight": {
+         "carrier": "B6",
+         "number": "518"
+        },
+        "id": "G+UsQx4-10MtQ9Iw",
+        "cabin": "COACH",
+        "bookingCode": "W",
+        "bookingCodeCount": 7,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "L6AoCl8RK7QP0kCS",
+          "aircraft": "E90",
+          "arrivalTime": "2016-04-26T13:04-04:00",
+          "departureTime": "2016-04-26T12:00-04:00",
+          "origin": "JFK",
+          "destination": "BOS",
+          "originTerminal": "5",
+          "destinationTerminal": "C",
+          "duration": 64,
+          "onTimePerformance": 90,
+          "mileage": 186,
+          "secure": true
+         }
+        ],
+        "connectionDuration": 153
+       },
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 202,
+        "flight": {
+         "carrier": "B6",
+         "number": "391"
+        },
+        "id": "G8fFX0v8heW3HGzW",
+        "cabin": "COACH",
+        "bookingCode": "W",
+        "bookingCodeCount": 7,
+        "marriedSegmentGroup": "1",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "L-SaG4deXbfoUodV",
+          "aircraft": "320",
+          "arrivalTime": "2016-04-26T18:59-04:00",
+          "departureTime": "2016-04-26T15:37-04:00",
+          "origin": "BOS",
+          "destination": "TPA",
+          "originTerminal": "C",
+          "duration": 202,
+          "onTimePerformance": 60,
+          "mileage": 1185,
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "ApTrupJ+N5ZKqW/p0VY8NJeHY7iTuahJeSxPRa8GBm4g",
+        "carrier": "B6",
+        "origin": "NYC",
+        "destination": "TPA",
+        "basisCode": "WH3AUEN"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "ApTrupJ+N5ZKqW/p0VY8NJeHY7iTuahJeSxPRa8GBm4g",
+        "segmentId": "G8fFX0v8heW3HGzW"
+       },
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "ApTrupJ+N5ZKqW/p0VY8NJeHY7iTuahJeSxPRa8GBm4g",
+        "segmentId": "G+UsQx4-10MtQ9Iw"
+       }
+      ],
+      "baseFareTotal": "USD216.75",
+      "saleFareTotal": "USD216.75",
+      "saleTaxTotal": "USD38.85",
+      "saleTotal": "USD255.60",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD16.25"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD9.00"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD8.00"
+       }
+      ],
+      "fareCalculation": "JFK B6 X/BOS B6 TPA 216.74WH3AUEN 1S0.01 USD 216.75 END ZP JFK BOS XT 16.25US 8.00ZP 5.60AY 9.00XF JFK4.50 BOS4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD255.60",
+    "id": "GPjUAof8IeSOfnu64gLAFS00F",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 347,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 68,
+        "flight": {
+         "carrier": "B6",
+         "number": "318"
+        },
+        "id": "GGDueN42utGShkS1",
+        "cabin": "COACH",
+        "bookingCode": "W",
+        "bookingCodeCount": 1,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LhDvjogn89Txc8xB",
+          "aircraft": "E90",
+          "arrivalTime": "2016-04-26T07:41-04:00",
+          "departureTime": "2016-04-26T06:33-04:00",
+          "origin": "JFK",
+          "destination": "BOS",
+          "originTerminal": "5",
+          "destinationTerminal": "C",
+          "duration": 68,
+          "onTimePerformance": 80,
+          "mileage": 186,
+          "secure": true
+         }
+        ],
+        "connectionDuration": 74
+       },
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 205,
+        "flight": {
+         "carrier": "B6",
+         "number": "2191"
+        },
+        "id": "GOloQ4qVwxrhX2S6",
+        "cabin": "COACH",
+        "bookingCode": "W",
+        "bookingCodeCount": 7,
+        "marriedSegmentGroup": "1",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LWTDynCpR8ymIO2L",
+          "aircraft": "320",
+          "arrivalTime": "2016-04-26T12:20-04:00",
+          "departureTime": "2016-04-26T08:55-04:00",
+          "origin": "BOS",
+          "destination": "TPA",
+          "originTerminal": "C",
+          "duration": 205,
+          "onTimePerformance": 70,
+          "mileage": 1185,
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "ApTrupJ+N5ZKqW/p0VY8NJeHY7iTuahJeSxPRa8GBm4g",
+        "carrier": "B6",
+        "origin": "NYC",
+        "destination": "TPA",
+        "basisCode": "WH3AUEN"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "ApTrupJ+N5ZKqW/p0VY8NJeHY7iTuahJeSxPRa8GBm4g",
+        "segmentId": "GOloQ4qVwxrhX2S6"
+       },
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "ApTrupJ+N5ZKqW/p0VY8NJeHY7iTuahJeSxPRa8GBm4g",
+        "segmentId": "GGDueN42utGShkS1"
+       }
+      ],
+      "baseFareTotal": "USD216.75",
+      "saleFareTotal": "USD216.75",
+      "saleTaxTotal": "USD38.85",
+      "saleTotal": "USD255.60",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD16.25"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD9.00"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD8.00"
+       }
+      ],
+      "fareCalculation": "JFK B6 X/BOS B6 TPA 216.74WH3AUEN 1S0.01 USD 216.75 END ZP JFK BOS XT 16.25US 8.00ZP 5.60AY 9.00XF JFK4.50 BOS4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD255.60",
+    "id": "GPjUAof8IeSOfnu64gLAFS00G",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 385,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 69,
+        "flight": {
+         "carrier": "B6",
+         "number": "118"
+        },
+        "id": "GzSjZKnou1JqB2ai",
+        "cabin": "COACH",
+        "bookingCode": "W",
+        "bookingCodeCount": 7,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "L2sj1aDJkeiI4xQL",
+          "aircraft": "E90",
+          "arrivalTime": "2016-04-26T15:08-04:00",
+          "departureTime": "2016-04-26T13:59-04:00",
+          "origin": "JFK",
+          "destination": "BOS",
+          "originTerminal": "5",
+          "destinationTerminal": "C",
+          "duration": 69,
+          "onTimePerformance": 60,
+          "mileage": 186,
+          "secure": true
+         }
+        ],
+        "connectionDuration": 112
+       },
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 204,
+        "flight": {
+         "carrier": "B6",
+         "number": "2291"
+        },
+        "id": "GbNfVnh0x0bAP-Q9",
+        "cabin": "COACH",
+        "bookingCode": "W",
+        "bookingCodeCount": 7,
+        "marriedSegmentGroup": "1",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LZwlIBRrBTh9qs9f",
+          "aircraft": "320",
+          "arrivalTime": "2016-04-26T20:24-04:00",
+          "departureTime": "2016-04-26T17:00-04:00",
+          "origin": "BOS",
+          "destination": "TPA",
+          "originTerminal": "C",
+          "duration": 204,
+          "mileage": 1185,
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "ApTrupJ+N5ZKqW/p0VY8NJeHY7iTuahJeSxPRa8GBm4g",
+        "carrier": "B6",
+        "origin": "NYC",
+        "destination": "TPA",
+        "basisCode": "WH3AUEN"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "ApTrupJ+N5ZKqW/p0VY8NJeHY7iTuahJeSxPRa8GBm4g",
+        "segmentId": "GzSjZKnou1JqB2ai"
+       },
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "ApTrupJ+N5ZKqW/p0VY8NJeHY7iTuahJeSxPRa8GBm4g",
+        "segmentId": "GbNfVnh0x0bAP-Q9"
+       }
+      ],
+      "baseFareTotal": "USD216.75",
+      "saleFareTotal": "USD216.75",
+      "saleTaxTotal": "USD38.85",
+      "saleTotal": "USD255.60",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD16.25"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD9.00"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD8.00"
+       }
+      ],
+      "fareCalculation": "JFK B6 X/BOS B6 TPA 216.74WH3AUEN 1S0.01 USD 216.75 END ZP JFK BOS XT 16.25US 8.00ZP 5.60AY 9.00XF JFK4.50 BOS4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD268.60",
+    "id": "GPjUAof8IeSOfnu64gLAFS00E",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 315,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 85,
+        "flight": {
+         "carrier": "UA",
+         "number": "6261"
+        },
+        "id": "GW8HBsJHQlFKMCuP",
+        "cabin": "COACH",
+        "bookingCode": "S",
+        "bookingCodeCount": 1,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "L3GtuNsjTuc3K55i",
+          "aircraft": "CR7",
+          "arrivalTime": "2016-04-26T20:54-04:00",
+          "departureTime": "2016-04-26T19:29-04:00",
+          "origin": "LGA",
+          "destination": "IAD",
+          "originTerminal": "B",
+          "duration": 85,
+          "operatingDisclosure": "OPERATED BY MESA AIRLINES DBA UNITED EXPRESS",
+          "mileage": 228,
+          "secure": true
+         }
+        ],
+        "connectionDuration": 90
+       },
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 140,
+        "flight": {
+         "carrier": "UA",
+         "number": "580"
+        },
+        "id": "GA8bQMDgkTPZesm-",
+        "cabin": "COACH",
+        "bookingCode": "S",
+        "bookingCodeCount": 1,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "L09uSdIGmHxhsMJ0",
+          "aircraft": "738",
+          "arrivalTime": "2016-04-27T00:44-04:00",
+          "departureTime": "2016-04-26T22:24-04:00",
+          "origin": "IAD",
+          "destination": "TPA",
+          "duration": 140,
+          "onTimePerformance": 80,
+          "mileage": 811,
+          "meal": "Food and Beverages for Purchase",
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "AVe7TJMbs0atcfemyDLVPnBTjs8WpsKyL7c5F9uLlDXM",
+        "carrier": "UA",
+        "origin": "NYC",
+        "destination": "TPA",
+        "basisCode": "SAA03AHN"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "AVe7TJMbs0atcfemyDLVPnBTjs8WpsKyL7c5F9uLlDXM",
+        "segmentId": "GA8bQMDgkTPZesm-"
+       },
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "AVe7TJMbs0atcfemyDLVPnBTjs8WpsKyL7c5F9uLlDXM",
+        "segmentId": "GW8HBsJHQlFKMCuP"
+       }
+      ],
+      "baseFareTotal": "USD228.84",
+      "saleFareTotal": "USD228.84",
+      "saleTaxTotal": "USD39.76",
+      "saleTotal": "USD268.60",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD17.16"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD9.00"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD8.00"
+       }
+      ],
+      "fareCalculation": "NYC UA X/WAS UA TPA 228.84SAA03AHN USD 228.84 END ZP LGA IAD XT 17.16US 8.00ZP 5.60AY 9.00XF LGA4.50 IAD4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD312.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS007",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 172,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 172,
+        "flight": {
+         "carrier": "B6",
+         "number": "573"
+        },
+        "id": "GpFCoF7ILoYozoZS",
+        "cabin": "COACH",
+        "bookingCode": "V",
+        "bookingCodeCount": 7,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LmSwQZsLvYr61xGO",
+          "aircraft": "320",
+          "arrivalTime": "2016-04-26T15:37-04:00",
+          "departureTime": "2016-04-26T12:45-04:00",
+          "origin": "EWR",
+          "destination": "TPA",
+          "originTerminal": "A",
+          "duration": 172,
+          "onTimePerformance": 80,
+          "mileage": 998,
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "A6U+24n1lB57SaeE2tbjpo2r7tsoZvNqV6ya2yVebQd6pRxZ8nX2WeYNtI7onmdQCAAZWd6bcGjh7wU8AFuCzomQsxrcmsLTJRMDaTVUf+ompsrmvB62+o2JW30ID9tAkQJfUyNkMEa6eCU",
+        "carrier": "B6",
+        "origin": "EWR",
+        "destination": "TPA",
+        "basisCode": "VH3AUEN5",
+        "private": true
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "A6U+24n1lB57SaeE2tbjpo2r7tsoZvNqV6ya2yVebQd6pRxZ8nX2WeYNtI7onmdQCAAZWd6bcGjh7wU8AFuCzomQsxrcmsLTJRMDaTVUf+ompsrmvB62+o2JW30ID9tAkQJfUyNkMEa6eCU",
+        "segmentId": "GpFCoF7ILoYozoZS"
+       }
+      ],
+      "baseFareTotal": "USD277.21",
+      "saleFareTotal": "USD277.21",
+      "saleTaxTotal": "USD34.89",
+      "saleTotal": "USD312.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD20.79"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "EWR B6 TPA 277.21VH3AUEN5 USD 277.21 END ZP EWR XT 20.79US 4.00ZP 5.60AY 4.50XF EWR4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD312.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS00A",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 178,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 178,
+        "flight": {
+         "carrier": "UA",
+         "number": "1915"
+        },
+        "id": "G+pO-z5rId9e4gif",
+        "cabin": "COACH",
+        "bookingCode": "Q",
+        "bookingCodeCount": 9,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LqfW76WJAdu2s4Xw",
+          "aircraft": "739",
+          "arrivalTime": "2016-04-26T10:27-04:00",
+          "departureTime": "2016-04-26T07:29-04:00",
+          "origin": "EWR",
+          "destination": "TPA",
+          "originTerminal": "C",
+          "duration": 178,
+          "mileage": 998,
+          "meal": "Food and Beverages for Purchase",
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "carrier": "UA",
+        "origin": "EWR",
+        "destination": "TPA",
+        "basisCode": "QAA03AHS"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "segmentId": "G+pO-z5rId9e4gif"
+       }
+      ],
+      "baseFareTotal": "USD277.21",
+      "saleFareTotal": "USD277.21",
+      "saleTaxTotal": "USD34.89",
+      "saleTotal": "USD312.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD20.79"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "EWR UA TPA 277.21QAA03AHS USD 277.21 END ZP EWR XT 20.79US 4.00ZP 5.60AY 4.50XF EWR4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD312.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS006",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 171,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 171,
+        "flight": {
+         "carrier": "UA",
+         "number": "371"
+        },
+        "id": "GUJoOxctJ9sOVqtG",
+        "cabin": "COACH",
+        "bookingCode": "Q",
+        "bookingCodeCount": 9,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LrVlIKmhDNkgqj1Z",
+          "aircraft": "739",
+          "arrivalTime": "2016-04-26T15:21-04:00",
+          "departureTime": "2016-04-26T12:30-04:00",
+          "origin": "EWR",
+          "destination": "TPA",
+          "originTerminal": "C",
+          "duration": 171,
+          "mileage": 998,
+          "meal": "Food and Beverages for Purchase",
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "carrier": "UA",
+        "origin": "EWR",
+        "destination": "TPA",
+        "basisCode": "QAA03AHS"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "segmentId": "GUJoOxctJ9sOVqtG"
+       }
+      ],
+      "baseFareTotal": "USD277.21",
+      "saleFareTotal": "USD277.21",
+      "saleTaxTotal": "USD34.89",
+      "saleTotal": "USD312.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD20.79"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "EWR UA TPA 277.21QAA03AHS USD 277.21 END ZP EWR XT 20.79US 4.00ZP 5.60AY 4.50XF EWR4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD312.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS008",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 176,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 176,
+        "flight": {
+         "carrier": "UA",
+         "number": "799"
+        },
+        "id": "Gyw14iP002KJsRkx",
+        "cabin": "COACH",
+        "bookingCode": "Q",
+        "bookingCodeCount": 9,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LtjmARQi0qHLTHm3",
+          "aircraft": "738",
+          "arrivalTime": "2016-04-26T19:15-04:00",
+          "departureTime": "2016-04-26T16:19-04:00",
+          "origin": "EWR",
+          "destination": "TPA",
+          "originTerminal": "C",
+          "duration": 176,
+          "mileage": 998,
+          "meal": "Food and Beverages for Purchase",
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "carrier": "UA",
+        "origin": "EWR",
+        "destination": "TPA",
+        "basisCode": "QAA03AHS"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "segmentId": "Gyw14iP002KJsRkx"
+       }
+      ],
+      "baseFareTotal": "USD277.21",
+      "saleFareTotal": "USD277.21",
+      "saleTaxTotal": "USD34.89",
+      "saleTotal": "USD312.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD20.79"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "EWR UA TPA 277.21QAA03AHS USD 277.21 END ZP EWR XT 20.79US 4.00ZP 5.60AY 4.50XF EWR4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD312.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS00D",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 184,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 184,
+        "flight": {
+         "carrier": "UA",
+         "number": "1640"
+        },
+        "id": "G6uOtIWGKRAq7WzV",
+        "cabin": "COACH",
+        "bookingCode": "Q",
+        "bookingCodeCount": 9,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LDniKczSbCCpcWdS",
+          "aircraft": "739",
+          "arrivalTime": "2016-04-26T22:09-04:00",
+          "departureTime": "2016-04-26T19:05-04:00",
+          "origin": "EWR",
+          "destination": "TPA",
+          "originTerminal": "C",
+          "duration": 184,
+          "mileage": 998,
+          "meal": "Food and Beverages for Purchase",
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "carrier": "UA",
+        "origin": "EWR",
+        "destination": "TPA",
+        "basisCode": "QAA03AHS"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "segmentId": "G6uOtIWGKRAq7WzV"
+       }
+      ],
+      "baseFareTotal": "USD277.21",
+      "saleFareTotal": "USD277.21",
+      "saleTaxTotal": "USD34.89",
+      "saleTotal": "USD312.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD20.79"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "EWR UA TPA 277.21QAA03AHS USD 277.21 END ZP EWR XT 20.79US 4.00ZP 5.60AY 4.50XF EWR4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD312.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS00C",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 184,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 184,
+        "flight": {
+         "carrier": "UA",
+         "number": "1167"
+        },
+        "id": "GDidQVB8CBEk4UBS",
+        "cabin": "COACH",
+        "bookingCode": "Q",
+        "bookingCodeCount": 9,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LGYkEthB3F5Qmhye",
+          "aircraft": "73G",
+          "arrivalTime": "2016-04-27T00:33-04:00",
+          "departureTime": "2016-04-26T21:29-04:00",
+          "origin": "EWR",
+          "destination": "TPA",
+          "originTerminal": "C",
+          "duration": 184,
+          "mileage": 998,
+          "meal": "Food and Beverages for Purchase",
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "carrier": "UA",
+        "origin": "EWR",
+        "destination": "TPA",
+        "basisCode": "QAA03AHS"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "segmentId": "GDidQVB8CBEk4UBS"
+       }
+      ],
+      "baseFareTotal": "USD277.21",
+      "saleFareTotal": "USD277.21",
+      "saleTaxTotal": "USD34.89",
+      "saleTotal": "USD312.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD20.79"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "EWR UA TPA 277.21QAA03AHS USD 277.21 END ZP EWR XT 20.79US 4.00ZP 5.60AY 4.50XF EWR4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD312.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS00B",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 179,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 179,
+        "flight": {
+         "carrier": "UA",
+         "number": "1783"
+        },
+        "id": "G0q66BmEZIXFs9om",
+        "cabin": "COACH",
+        "bookingCode": "Q",
+        "bookingCodeCount": 9,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LJ4X0nCmd15PEuF-",
+          "aircraft": "319",
+          "arrivalTime": "2016-04-26T17:44-04:00",
+          "departureTime": "2016-04-26T14:45-04:00",
+          "origin": "EWR",
+          "destination": "TPA",
+          "originTerminal": "C",
+          "duration": 179,
+          "onTimePerformance": 60,
+          "mileage": 998,
+          "meal": "Food and Beverages for Purchase",
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "carrier": "UA",
+        "origin": "EWR",
+        "destination": "TPA",
+        "basisCode": "QAA03AHS"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "segmentId": "G0q66BmEZIXFs9om"
+       }
+      ],
+      "baseFareTotal": "USD277.21",
+      "saleFareTotal": "USD277.21",
+      "saleTaxTotal": "USD34.89",
+      "saleTotal": "USD312.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD20.79"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "EWR UA TPA 277.21QAA03AHS USD 277.21 END ZP EWR XT 20.79US 4.00ZP 5.60AY 4.50XF EWR4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD312.10",
+    "id": "GPjUAof8IeSOfnu64gLAFS009",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 178,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 178,
+        "flight": {
+         "carrier": "UA",
+         "number": "1890"
+        },
+        "id": "GF5hyrd8zec6Q2Dh",
+        "cabin": "COACH",
+        "bookingCode": "Q",
+        "bookingCodeCount": 9,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "Lq7-XLt0-ONXed-p",
+          "aircraft": "739",
+          "arrivalTime": "2016-04-26T13:45-04:00",
+          "departureTime": "2016-04-26T10:47-04:00",
+          "origin": "EWR",
+          "destination": "TPA",
+          "originTerminal": "C",
+          "duration": 178,
+          "mileage": 998,
+          "meal": "Food and Beverages for Purchase",
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "carrier": "UA",
+        "origin": "EWR",
+        "destination": "TPA",
+        "basisCode": "QAA03AHS"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "segmentId": "GF5hyrd8zec6Q2Dh"
+       }
+      ],
+      "baseFareTotal": "USD277.21",
+      "saleFareTotal": "USD277.21",
+      "saleTaxTotal": "USD34.89",
+      "saleTotal": "USD312.10",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD20.79"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD4.50"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD4.00"
+       }
+      ],
+      "fareCalculation": "EWR UA TPA 277.21QAA03AHS USD 277.21 END ZP EWR XT 20.79US 4.00ZP 5.60AY 4.50XF EWR4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD320.60",
+    "id": "GPjUAof8IeSOfnu64gLAFS00K",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 290,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 93,
+        "flight": {
+         "carrier": "UA",
+         "number": "4931"
+        },
+        "id": "G8m0JxOrpMNQGgK8",
+        "cabin": "COACH",
+        "bookingCode": "Q",
+        "bookingCodeCount": 6,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LDiu5KL1Kfqx0LQ+",
+          "aircraft": "DH2",
+          "arrivalTime": "2016-04-26T07:34-04:00",
+          "departureTime": "2016-04-26T06:01-04:00",
+          "origin": "EWR",
+          "destination": "IAD",
+          "originTerminal": "C",
+          "duration": 93,
+          "operatingDisclosure": "OPERATED BY COMMUTAIR DBA UNITED EXPRESS",
+          "mileage": 212,
+          "secure": true
+         }
+        ],
+        "connectionDuration": 50
+       },
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 147,
+        "flight": {
+         "carrier": "UA",
+         "number": "2002"
+        },
+        "id": "GM2MusZoW+uhKQeJ",
+        "cabin": "COACH",
+        "bookingCode": "Q",
+        "bookingCodeCount": 6,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LczxRFjpzKRud-Jf",
+          "aircraft": "738",
+          "arrivalTime": "2016-04-26T10:51-04:00",
+          "departureTime": "2016-04-26T08:24-04:00",
+          "origin": "IAD",
+          "destination": "TPA",
+          "duration": 147,
+          "onTimePerformance": 80,
+          "mileage": 811,
+          "meal": "Food and Beverages for Purchase",
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "carrier": "UA",
+        "origin": "EWR",
+        "destination": "TPA",
+        "basisCode": "QAA03AHS"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "segmentId": "GM2MusZoW+uhKQeJ"
+       },
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "segmentId": "G8m0JxOrpMNQGgK8"
+       }
+      ],
+      "baseFareTotal": "USD277.21",
+      "saleFareTotal": "USD277.21",
+      "saleTaxTotal": "USD43.39",
+      "saleTotal": "USD320.60",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD20.79"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD9.00"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD8.00"
+       }
+      ],
+      "fareCalculation": "EWR UA X/WAS UA TPA 277.21QAA03AHS USD 277.21 END ZP EWR IAD XT 20.79US 8.00ZP 5.60AY 9.00XF EWR4.50 IAD4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   },
+   {
+    "kind": "qpxexpress#tripOption",
+    "saleTotal": "USD320.60",
+    "id": "GPjUAof8IeSOfnu64gLAFS00J",
+    "slice": [
+     {
+      "kind": "qpxexpress#sliceInfo",
+      "duration": 271,
+      "segment": [
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 156,
+        "flight": {
+         "carrier": "UA",
+         "number": "4377"
+        },
+        "id": "G400Ef0SqRmiRilK",
+        "cabin": "COACH",
+        "bookingCode": "Q",
+        "bookingCodeCount": 9,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "LeO3jYYxHAZcOsB7",
+          "aircraft": "ERJ",
+          "arrivalTime": "2016-04-26T18:05-04:00",
+          "departureTime": "2016-04-26T15:29-04:00",
+          "origin": "EWR",
+          "destination": "JAX",
+          "originTerminal": "A",
+          "duration": 156,
+          "operatingDisclosure": "OPERATED BY EXPRESSJET AIRLINES DBA UNITED EXPRESS",
+          "onTimePerformance": 80,
+          "mileage": 820,
+          "meal": "Food and Beverages for Purchase",
+          "secure": true
+         }
+        ],
+        "connectionDuration": 50
+       },
+       {
+        "kind": "qpxexpress#segmentInfo",
+        "duration": 65,
+        "flight": {
+         "carrier": "UA",
+         "number": "3072"
+        },
+        "id": "GEsRWW3RpGPoNLTL",
+        "cabin": "COACH",
+        "bookingCode": "Q",
+        "bookingCodeCount": 4,
+        "marriedSegmentGroup": "0",
+        "leg": [
+         {
+          "kind": "qpxexpress#legInfo",
+          "id": "Lt7tUuFwofRPgg-P",
+          "aircraft": "SF3",
+          "arrivalTime": "2016-04-26T20:00-04:00",
+          "departureTime": "2016-04-26T18:55-04:00",
+          "origin": "JAX",
+          "destination": "TPA",
+          "duration": 65,
+          "operatingDisclosure": "OPERATED BY SILVER AIRWAYS CORP",
+          "mileage": 181,
+          "secure": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "pricing": [
+     {
+      "kind": "qpxexpress#pricingInfo",
+      "fare": [
+       {
+        "kind": "qpxexpress#fareInfo",
+        "id": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "carrier": "UA",
+        "origin": "EWR",
+        "destination": "TPA",
+        "basisCode": "QAA03AHS"
+       }
+      ],
+      "segmentPricing": [
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "segmentId": "G400Ef0SqRmiRilK"
+       },
+       {
+        "kind": "qpxexpress#segmentPricing",
+        "fareId": "A/yl2VBn98bcogjlKioElHbMGJDS8EifjUeztK5rMXDQ",
+        "segmentId": "GEsRWW3RpGPoNLTL"
+       }
+      ],
+      "baseFareTotal": "USD277.21",
+      "saleFareTotal": "USD277.21",
+      "saleTaxTotal": "USD43.39",
+      "saleTotal": "USD320.60",
+      "passengers": {
+       "kind": "qpxexpress#passengerCounts",
+       "adultCount": 1
+      },
+      "tax": [
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "US_001",
+        "chargeType": "GOVERNMENT",
+        "code": "US",
+        "country": "US",
+        "salePrice": "USD20.79"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "AY_001",
+        "chargeType": "GOVERNMENT",
+        "code": "AY",
+        "country": "US",
+        "salePrice": "USD5.60"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "XF",
+        "chargeType": "GOVERNMENT",
+        "code": "XF",
+        "country": "US",
+        "salePrice": "USD9.00"
+       },
+       {
+        "kind": "qpxexpress#taxInfo",
+        "id": "ZP",
+        "chargeType": "GOVERNMENT",
+        "code": "ZP",
+        "country": "US",
+        "salePrice": "USD8.00"
+       }
+      ],
+      "fareCalculation": "EWR UA X/JAX UA TPA 277.21QAA03AHS USD 277.21 END ZP EWR JAX XT 20.79US 8.00ZP 5.60AY 9.00XF EWR4.50 JAX4.50",
+      "latestTicketingTime": "2016-04-23T23:59-04:00",
+      "ptc": "ADT"
+     }
+    ]
+   }
+  ]
+ }
+}

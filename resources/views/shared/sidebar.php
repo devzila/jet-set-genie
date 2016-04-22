@@ -15,7 +15,7 @@
                                     <span>Cheapest <span >{{ favorite.fare }}</span></span>
                                     <span>Shortest <span data-ng-bind-html="favorite.duration"></span></span>
                                 </p>
-                            </div>
+                            </div> 
                         </a>
                     </div>
                     <div class="blank-bg" data-ng-repeat="flight in favorite.items">

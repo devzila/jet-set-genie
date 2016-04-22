@@ -36,7 +36,7 @@
                     <div class="box clearfix" data-ng-style="{ background:  randomcolor }">
                         <div class="box-detail">
                             <a class="setFavorite" data-ng-click="deleteFavorite( $index )"><i class="fa fa-star"></i></a>
-                            <a class="lnkFlights" data-ng-click="showFlights( record.airport_code, record.display_name, record.id );">
+                            <a class="lnkFlights" data-ng-click="showFlights( favorite.airport_code, favorite.display_name, favorite.id );">
                                 <h5><span>@{{ favorite.display_name }}</span></h5>
                                 <div class="box-info">
                                     <p>
@@ -52,17 +52,19 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="blank-bg" data-ng-repeat="flight in favorite.flights">
-                            <a class="removeicon" data-ng-click="deleteflight(parentIndex, $index)" title="Remove Flight"> <i class="fa fa-times"></i> </a>
-                            <div class="box-info">
+                        <div class="blank-bg" data-ng-repeat="flight in favorite.items">
+                            <a ng-click="deleteflight(parentIndex, $index)">
+                                <i class="fa fa-times"></i>
+                            </a>
+                            <div class="box-info flight-info">
                                 <h5>FLIGHT</h5>
-                                <p>@{{ flight.price + " " + flight.name }}</p>
-                                <p>@{{ flight.departDate }}</p>
+                                <p class="farename">@{{ flight.fare + " " + flight.name }}</p>
+                                <p>@{{ flight.action_date +  " " + flight.action_time }}</p>
                             </div>
                         </div>
                         <div class="clear"></div>
                     </div>
-                </div>
+                </div> 
                 <div class="col-md-12">
                     <p data-ng-show="favorites.length === 0" data-ng-hide="favorites.length != 0" class="text-center no-results alert alert-info">Sorry, no results found in your Favorites dashboard. Please search for destinations and mark favorite..</p>
                 </div>
@@ -74,15 +76,4 @@
  
 @section('additional-scripts')
 <script src="{{ asset('js/masonry.pkgd.min.js') }}" ></script>
-<script>
-	var favoriteMsnry;
-	$(document).ready(function(){		
-		favoriteMsnry = $('.favorite-container').masonry({
-			itemSelector: '.list-box',			
-		});
-	});
-	$( window ).resize(function() {
-		 favoriteMsnry.masonry('reloadItems');		 
-	});    
-</script>
 @stop
