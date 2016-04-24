@@ -100,6 +100,7 @@ class DestinationCardItemsController extends Controller
     {
         //
 
+
 		$card = DestinationCardItems::find($id);
 		$card->delete();
         return Response::json(['status' => "ok"], 200);

@@ -71,3 +71,5 @@ Route::post('/post_login', 'HomeController@post_login');
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+Route::get('/test_flight', 'TestController@flight');
