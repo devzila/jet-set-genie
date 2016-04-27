@@ -162,8 +162,6 @@
     <Compile Include="public\js\wow.js" />
     <Compile Include="public\.htaccess" />
     <Compile Include="public\deploy.php" />
-    <Compile Include="public\dummy.html" />
-    <Compile Include="public\emailtemplate.php" />
     <Compile Include="public\favicon.ico" />
     <Compile Include="public\index.php" />
     <Compile Include="public\robots.txt" />
