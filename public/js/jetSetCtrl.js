@@ -4,7 +4,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
     $scope.showShare = true;
     
     $scope.validForm = true;
-
+     
     $scope.sparams = {
         leaving: '',
         returning: '',
@@ -41,7 +41,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
 
     $scope.convertDate = function ( date, flight ){
         var dt = new Date(date);
- 
+
         if(!flight)
             return (dt.getMonth() + 1) + '-' + dt.getDate() + '-' + dt.getFullYear();
         else
@@ -127,8 +127,8 @@ app.controller('jetSetGenie', function ($scope, $http) {
         angular.forEach($scope.favorites, function (value, key) {
             if (value.destination_id == id) {
                 $scope.favorites.splice(key, 1);
-                console.log("/api/cards/" + value.card_id);
-                $http.post("/api/cards/" + value.card_id)
+               // console.log("/api/cards/" + value.card_id);
+                $http.delete("/api/cards/" + value.card_id)
                 .success(function (data, status, headers, config) {
                     //$scope.favorites = data;
                     //console.log($scope.favorites);
@@ -177,10 +177,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
         });
     };
 
-    $scope.deleteflight = function (parentindex, index) {
-        $scope.favorites[parentindex].flights.splice(index, 1);
-        favoriteMsnry.masonry('reloadItems');
-    };
+    
     
     $scope.searchfilters = {
             time: {
@@ -217,6 +214,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
 
    
     $scope.refineSearch = function () {
+        //console.log($scope.sparams.leaving);
         var leaving_date = $scope.convertDate($scope.sparams.leaving);
         var returning_date = $scope.convertDate($scope.sparams.returning);
         var home_airport = $scope.sparams.origin;
@@ -345,6 +343,24 @@ app.controller('ctrlFavorites', function ($scope, $http) {
         window.location = url;
         //console.log(url)
     }
+
+    $scope.deleteflight = function (parentindex, index, pid, fid) {
+        var con = window.confirm('Are you sure you want to remove flight card from your favorites?');
+
+        if (!con) return;
+
+        $http.delete("/api/cards/" + pid + "/items/" + fid)
+        .success(function (data, status, headers, config) {
+            //$scope.favorites = data;
+            //console.log($scope.favorites);
+            $scope.favorites[parentindex].items.splice(index, 1);
+        })
+        .error(function (error, status, headers, config) {
+            //console.log(status);
+            console.log("Favorite Error");
+        });
+    };
+
 });
 
 
@@ -389,6 +405,23 @@ function copyToClipboard(siteurl) {
 
 app.controller('ctrlsideBar', function ($scope, $log, $http) {
 
+    $scope.deleteflight = function (parentindex, index, pid, fid) {
+        var con = window.confirm('Are you sure you want to remove flight card from your favorites?');
+        
+        if (!con) return;
+
+        $http.delete("/api/cards/" + pid + "/items/" + fid)
+        .success(function (data, status, headers, config) {
+            //$scope.favorites = data;
+            //console.log($scope.favorites);
+            $scope.favorites[parentindex].items.splice(index, 1);
+        })
+        .error(function (error, status, headers, config) {
+            //console.log(status);
+            console.log("Favorite Error");
+        });
+    };
+
     $scope.getFavorites();
 
     $scope.shareFavorites = function () {
@@ -431,6 +464,32 @@ app.controller('ctrlsideBar', function ($scope, $log, $http) {
         url = "/flight-results/leaving/" + leavingdt + "/returning/" + returningdt + "/origin/" + home_airport + "/destination/" + destination + "/type/" + destination_type + "/destid/" + dest_id;
         window.location = url;
     }
+});
+
+app.controller('ctrlRefineSearch', function ($scope, $log, $http) {
+    $(".leavedate").datepicker({
+        minDate: 0,
+        defaultDate: "+1w",
+        changeMonth: false,
+        numberOfMonths: 1,
+        dateFormat: 'D, M dd, yy',
+        onClose: function (selectedDate) {
+            $(".returndate").datepicker("option", "minDate", selectedDate);
+            console.log(selectedDate);
+            $scope.sparams.leaving = selectedDate;
+        }
+    });
+
+    $(".returndate").datepicker({
+        defaultDate: "+1w",
+        changeMonth: false,
+        numberOfMonths: 1,
+        dateFormat: 'D, M dd, yy',
+        onClose: function (selectedDate) {
+            //$(".leavedate").datepicker("option", "maxDate", selectedDate);
+            $scope.sparams.returning = selectedDate;
+        }
+    });
 });
 
 app.controller('ctrlSearchResults', function ($scope, $log, $http) {
@@ -492,12 +551,91 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
         .success(function (data, status, headers, config) {
             $scope.records = $scope.records.concat(data);
             //console.log($scope.records);
+            $scope.fetchInfo();
         })
         .error(function (error, status, headers, config) {
             console.log(status);
             console.log("Error occured");
         });
 	}
+
+    testctr = 0;
+
+	$scope.fetchInfo = function () {
+	    angular.forEach($scope.records, function (value, key) {
+	        value.duration = '...';
+	        value.fare = '...';
+
+	        setTimeout(function(){
+	         
+	        var origin = $scope.sparams.origincode;
+	        var destination = value.airport_code;
+	        var leavingdt = new Date($scope.sparams.leaving);
+	         
+	        var leavingdt = leavingdt.getFullYear() + '-' + (parseInt(leavingdt.getMonth())+1) + '-' + leavingdt.getDate();
+
+	        var infoRequest = {
+	            "request": {
+	                "passengers": {
+	                    "adultCount": 1
+	                },
+	                "slice": [
+                        {
+                            "origin": origin,
+                            "destination": destination,
+                            "date": leavingdt
+                        }
+	                ],
+	                "solutions": 20,
+	                "refundable": false,
+	                "saleCountry": "US"
+	            }
+	        }
+
+	   //     console.log(JSON.stringify(infoRequest) );
+	        
+	        
+
+	        loopNode = $(this);
+	        var durationContainer = $('.durationInfo', '#card-' + value.id);
+	        var priceContainer = $('.priceInfo', '#card-' + value.id);
+	   //     console.log(durationContainer);
+
+	        var url = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCMCG3JaUmNbKhKHFdZ4bUNu2SopqA_MqY";
+	        $.ajax({
+	            type: "POST",
+	            url: url,
+	            data: JSON.stringify(infoRequest),
+	            contentType: "application/json; charset=utf-8",
+	            dataType: "json",
+	            success: function (data) {
+	                console.log(data);
+	                //priceContainer.html(data.trips.tripOption[0].saleTotal);
+	                priceContainer.html('$' + parseInt((data.trips.tripOption[0].saleTotal).match(/\d+/), 10));
+	                
+	                if (data.trips.tripOption[0].slice[0].duration) {
+	                    minutes = data.trips.tripOption[0].slice[0].duration
+	                    hr = parseInt(minutes / 60);
+	                    minutes = minutes % 60;
+
+	                    
+	                    durationContainer.html(hr + " hr " + minutes + " min");
+	                    //durationContainer.html(hr + " hr " + minutes + " min");	                    
+
+	                }
+
+	            },
+	            failure: function (errMsg) {
+	                alert(errMsg);
+	            }
+	        });
+
+	        }, 500);
+            //timeout
+
+	    });
+	}
+ 
 
 	$(".tag_places").tagsinput();
 	$(".tag_places").on('change', function () {
@@ -598,25 +736,26 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
         }
     };
 
-	getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE";
+	//getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE";
    // getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4";
- 
+    getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCMCG3JaUmNbKhKHFdZ4bUNu2SopqA_MqY"
+
     $scope.loader('show');
     
-    //$http.post(getPlaceUrl, $scope.FlightRequest).success(function (response) {
-    $scope.checkCarrier = function (code) {
-        //return $scope.carriers;
-        carrier_name = '';
-        angular.forEach($scope.carriers, function (value, key) {
-            if (value.code == code) {
-                carrier_name = value.name;
-            }
-        });
-        return carrier_name;
-    }
+    $http.post(getPlaceUrl, $scope.FlightRequest).success(function (response) {
+        $scope.checkCarrier = function (code) {
+            //return $scope.carriers;
+            carrier_name = '';
+            angular.forEach($scope.carriers, function (value, key) {
+                if (value.code == code) {
+                    carrier_name = value.name;
+                }
+            });
+            return carrier_name;
+        }
    
     tempResults = '';
-    $.get('/flight-result.json', function (response) {
+    //$.get('/flight-result.json', function (response) {
         var currChar = "$";
         var ctr = 0;
         //console.log(JSON.stringify(response.trips.tripOption));
@@ -660,11 +799,13 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
 
                 $.each(value.segment, function (sindex, svalue) {
 
-                    console.log(svalue.flight.carrier)
+                    //console.log(svalue.flight.carrier)
                     var getCarrier = $scope.checkCarrier(svalue.flight.carrier);
                     //console.log(getCarrier);
-
+                    //console.log(svalue.leg[0].departureTime);
                     departuredt = new Date(svalue.leg[0].departureTime);
+                    //console.log(departuredt);
+                    //console.log('-----')
                     arrivaldt = new Date(svalue.leg[0].arrivalTime);
 
                     departuredate = (departuredt.getMonth() + 1) + "-" + departuredt.getDate() + "-" + departuredt.getFullYear();
@@ -684,8 +825,8 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
 
                     departuretime = hrs + ":" + mins + ampm;
                     
-                    departure_date_time = $scope.daysInWeek[departuredt.getDay()] + ", " + $scope.months[departuredt.getMonth() + 1] + " " + departuredt.getDate(); + " at " + hrs + ":" + mins + ampm;
-                     
+                    departure_date_time = $scope.daysInWeek[departuredt.getDay()] + ", " + $scope.months[departuredt.getMonth() + 1] + " " + departuredt.getDate() + " at " + hrs + ":" + mins + ampm;
+                    //console.log(departure_date_time);
                     arrivaldate = (arrivaldt.getMonth() + 1) + "-" + arrivaldt.getDate() + "-" + arrivaldt.getFullYear();
                     var ampm, hrs = "";
                     if (arrivaldt.getHours() >= 12) {
@@ -712,7 +853,7 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
                     flightRoute.push({
                         arrival: svalue.leg[0].arrivalTime,
                         departure: svalue.leg[0].departureTime,
-                        departTime: departuredt,
+                        departTime: departure_date_time,
                         timings: departuretime + "-" + arrivaltime,
                         duration: (sindex == 0) ? duration : '',
                         airline: getCarrier,
@@ -737,6 +878,7 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
             flights.flights = flightRoute;
  
             $scope.flights.push(flights);
+          //  console.log( ">> " + JSON.stringify($scope.flights) );
         });
    
         $scope.loader('hide');
@@ -748,9 +890,7 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
     });
 
 
-	$scope.deleteflight = function( parentindex, index ){
-		$scope.favorites[parentindex].flights.splice(index, 1);
-	};
+	
 
 	$scope.addFlight = function (fare, airline, departure) {
 	    var setfav = '';

@@ -1,24 +1,4 @@
 $(document).ready(function(){
-	$( ".leavedate" ).datepicker({
-		minDate: 0,
-		defaultDate: "+1w",
-		changeMonth: false,
-		numberOfMonths: 1,
-		dateFormat: 'D, M dd, yy',
-		onClose: function( selectedDate ) {
-			$( ".returning" ).datepicker( "option", "minDate", selectedDate );
-		}
-	});
-
-	$( ".returndate" ).datepicker({
-		defaultDate: "+1w",
-		changeMonth: false,
-		numberOfMonths: 1,
-		dateFormat: 'D, M dd, yy',
-		onClose: function( selectedDate ) {
-			$( ".leaving" ).datepicker( "option", "maxDate", selectedDate );
-		}
-	});
 	$.widget( "custom.catcomplete", $.ui.autocomplete, {
 		_create: function() {
 		  this._super();

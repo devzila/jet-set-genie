@@ -1,4 +1,4 @@
-function getFlight(origin, destination, priceContainer, durationContainer){
+function getFlight(origin, destination, leaving, priceContainer, durationContainer){
     var url = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBJvpzl_XUZnc_9-1kz8CnCPfQdfF3DMls";
     var request = {
         "request": {
@@ -9,7 +9,7 @@ function getFlight(origin, destination, priceContainer, durationContainer){
                 {
                     "origin": origin,
                     "destination": destination,
-                    "date": "2016-05-01"
+                    "date": leaving
                 }
             ]
         }

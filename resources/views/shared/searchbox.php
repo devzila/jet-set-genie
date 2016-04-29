@@ -1,4 +1,4 @@
-
+ <div class="searchform-top" data-ng-controller="ctrlRefineSearch"> 
     <div class="row">
         <div class="col-lg-12 col-sm-12">
             <div class="row form-group">
@@ -8,7 +8,7 @@
                 </div>
 
                 <div class="col-lg-5 col-md-6">
-                    <input type="text" class="tag_places form-control" data-ng-model="sparams.type" width="100%" required search-form />
+                    <input type="text" class="tag_places form-control" data-ng-model="sparams.type" width="100%" placeholder="+ Add" required search-form />
 
                 </div>
             </div>
@@ -136,3 +136,4 @@
         </div>
 
     </div>
+</div>

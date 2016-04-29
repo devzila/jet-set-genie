@@ -53,11 +53,11 @@
                             </a>
                         </div>
                         <div class="blank-bg" data-ng-repeat="flight in favorite.items">
-                            <a ng-click="deleteflight(parentIndex, $index)">
+                            <a href="javascript://" ng-click="deleteflight(parentIndex, $index, favorite.card_id, flight.id)">
                                 <i class="fa fa-times"></i>
                             </a>
                             <div class="box-info flight-info">
-                                <h5>FLIGHT</h5>
+                                <small>FLIGHT</small>
                                 <p class="farename">@{{ flight.fare + " " + flight.name }}</p>
                                 <p>@{{ flight.action_date +  " " + flight.action_time }}</p>
                             </div>

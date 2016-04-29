@@ -25,6 +25,8 @@ app.filter('getById', function () {
     }
 })
 
+
+
 app.filter('myDateFilter', function () {
     return function (value, scope, dt) {
         var date = new Date(dt);

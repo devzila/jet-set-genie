@@ -860,10 +860,15 @@ input[type=date] {
     text-decoration: none;
 }
 
+.destinationCard .box .lnkFlights .box-info p > span:nth-child(2) {
+    padding-left: 20px;
+}
+
 .destinationCard .box .lnkFlights{
     height:170px;
     display:table;
     width:100%;
+    cursor:pointer;
 }
 
 .destinationCard .box .lnkFlights h5{
@@ -915,6 +920,9 @@ a:focus, a:hover {
     text-align: left;
 	min-height: 15px;
 	margin:0;
+}
+.flight-info small{
+    color: #028c90;
 }
 .box-detail > img {
     float: right;
@@ -1567,6 +1575,11 @@ footer {
 .flight-info {
     width: 100%;
 }
+
+.flight-info h5{
+    font-size:12px !important;
+}
+
 .booking-flight {
     width: 100%;
 }

@@ -19,7 +19,7 @@
         <div class="row row-centered search-results">
             <div class="col-md-9 left-part">
                 <div class="row result-container">
-                    <div class="col-md-4 col-sm-4 col-xs-6 list-box destinationCard" data-ng-repeat="record in records | limitTo: lstCount" ng-init="parentIndex = $index">
+                    <div id="card-@{{ record.id }}" class="col-md-4 col-sm-4 col-xs-6 list-box destinationCard" data-ng-repeat="record in records | limitTo: lstCount" ng-init="parentIndex = $index">
 
                         <div class="box clearfix" data-ng-style="{ background:  randomcolor }">
                             <div class="box-detail">
@@ -31,11 +31,11 @@
                                         <p>
                                             <span>
                                                 Cheapest
-                                                <span class="cardinfo">@{{ record.fare }}</span>
+                                                <span class="cardinfo priceInfo">@{{ record.fare }}</span>
                                             </span>
                                             <span>
                                                 Shortest
-                                                <span data-ng-bind-html="record.duration" class="cardinfo"></span>
+                                                <span data-ng-bind-html="record.duration" class="cardinfo durationInfo"></span>
                                             </span>
                                         </p>
                                     </div>

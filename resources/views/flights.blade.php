@@ -22,8 +22,9 @@
 
                 <div class="timing-results">
                     <div class="row flight-booking @{{ flight.type }}" data-ng-repeat="flight in flights">
-
+                  
                         <div class="flight-booking" data-ng-repeat="route in flight.flights">
+                           
                             <div class="col-lg-8 booking-time">
                                 <ul>
                                     <li class="count"><p>@{{ $index == 0 ? flight.price : '' }}</p><span>@{{ $index == 0 ? flight.tripType : '' }}</span></li>
