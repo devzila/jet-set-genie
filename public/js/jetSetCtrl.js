@@ -48,6 +48,11 @@ app.controller('jetSetGenie', function ($scope, $http) {
             return dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
     }
 
+    $scope.expediaDate = function ( date ){
+        var dt = new Date(date);
+        return dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear();
+    }
+
     $http.get("/api/destination-types")
     .success(function (data, status, headers, config) {
         $scope.desttypes = data;
@@ -156,12 +161,16 @@ app.controller('jetSetGenie', function ($scope, $http) {
             $scope.FavRequest = {
                 "destination_id": id,
                 "duration": duration,
-                "fare": fare
+                "fare": fare,
+                "updated_at": Date(),
+                "created_at": Date()
             }
 
             $.post("/api/cards", $scope.FavRequest, function ( response ) {
                 $scope.getFavorites();
             });
+
+            mixpanel.track("Destination Starred");
               
     } // Set favorite ends here.
 
@@ -561,8 +570,10 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 
     testctr = 0;
 
-	$scope.fetchInfo = function () {
-	    angular.forEach($scope.records, function (value, key) {
+    $scope.fetchInfo = function (data) {
+        $scope.setRecords = $scope.records;
+        $scope.setRecords = [];
+        angular.forEach($scope.setRecords, function (value, key) {
 	        value.duration = '...';
 	        value.fare = '...';
 
@@ -609,8 +620,9 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 	            contentType: "application/json; charset=utf-8",
 	            dataType: "json",
 	            success: function (data) {
-	                console.log(data);
+	                //console.log( JSON.stringify(data) );
 	                //priceContainer.html(data.trips.tripOption[0].saleTotal);
+
 	                priceContainer.html('$' + parseInt((data.trips.tripOption[0].saleTotal).match(/\d+/), 10));
 	                
 	                if (data.trips.tripOption[0].slice[0].duration) {
@@ -872,7 +884,8 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
                 price: price,
                 tripType: 'round trip',
                 type : (value.slice[0].segment.length > 1) ? 'Connected' : 'Nonstop',
-                bookUrl: 'http://www.expedia.com',
+                bookUrl: 'http://domestic-air-tickets.expedia.co.in/flights/results?from=' + $scope.sparams.origincode + '&to=' + $scope.sparams.dest_code + '&depart_date=' + $scope.expediaDate($scope.sparams.leaving) + '&return_date=' + $scope.expediaDate($scope.sparams.leaving) + '&adults=1&childs=0&infants=0&dep_time=0&class=Economy&airline=&carrier=&x=57&y=16&intl=y',
+                //bookUrl: 'http://domestic-air-tickets.expedia.co.in/flights/results?from=ALB&to=LCY&depart_date=28/05/2016&return_date=30/06/2016&adults=1&childs=0&infants=0&dep_time=0&class=Economy&airline=&carrier=&x=57&y=16&intl=y',
                 flights: {}
             }
             flights.flights = flightRoute;
@@ -970,8 +983,12 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
 	            $scope.getFavorites();
 	        });
 	    }
+	    mixpanel.track("Flight Added to Card");
 	}
 
+	$(document).on('click', '.btn-booking', function () {
+	    mixpanel.track("Book Flight Click");
+	});
     
 });
 

@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-lg-4 booking">
                                 <p>@{{ flight.type }}</p>
-                                <a data-ng-href="@{{ flight.bookUrl }}" class="btn btn-default jsg-submit" title="Book Flight" target="_blank">Book</a>
+                                <a data-ng-href="@{{ flight.bookUrl }}" class="btn btn-default jsg-submit btn-booking" title="Book Flight" target="_blank">Book</a>
                             </div>
                         </div>
                     </div>
@@ -68,5 +68,5 @@
 @stop
  
 @section('additional-scripts')
- 
+
 @stop
