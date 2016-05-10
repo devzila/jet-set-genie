@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Response;
 use App\Models\DestinationCardItems;
+use App\Models\DestinationCards;
 
 class DestinationCardItemsController extends Controller
 {
@@ -51,7 +52,11 @@ class DestinationCardItemsController extends Controller
 		 'action_date' => $request->input('action_date'),
 		 'action_time' => $request->input('action_time')
 		 ]);
-        return Response::json($result, 200);
+
+      $card = DestinationCards::find($card_id);
+      $card->updated_at = date("Y-m-d H:i:s");
+      $card->save();
+      return Response::json($result, 200);
     }
 
     /**
