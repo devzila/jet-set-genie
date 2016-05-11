@@ -6,14 +6,12 @@
 
                     <input id="homeairport" class="form-control" type="text" name="" data-ng-model="sparams.origin" data-origin-code="{{ sparams.origincode }}" required search-form />
                 </div>
-
+                 
                 <div class="col-lg-5 col-md-6">
                     <input type="text" class="tag_places form-control" data-ng-model="sparams.type" width="100%" placeholder="+ Add" required search-form />
-
                 </div>
             </div>
         </div>
-
         <div class="col-lg-12 col-sm-12">
             <div class="row form-group">
                 <div class="col-lg-5 col-md-6">
@@ -96,16 +94,15 @@
 
                 <li class="stops">
                     <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" ng-class="{'active': searchfilters.stops.nonstop || searchfilters.stops.onestop || searchfilters.stops.twostop || searchfilters.stops.any }" type="button" id="flightstop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <button class="btn btn-default dropdown-toggle" ng-class="{'active': searchfilters.stops != 'any'}" type="button" id="flightstop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <h5>Stops</h5>
                             <span class="fa fa-angle-down"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="flightstop">
-                            <li><label><input type="checkbox" value="" data-ng-model="searchfilters.stops.nonstop" name="flightstop"><span>NONSTOP</span></label></li>
-                            <li><label><input type="checkbox" value="" data-ng-model="searchfilters.stops.onestop" name="flightstop"><span>1 STOP</span></label></li>
-                            <li><label><input type="checkbox" value="" data-ng-model="searchfilters.stops.twostop" name="flightstop"><span>2 STOPS</span></label></li>
-                            <li><label><input type="checkbox" value="" data-ng-model="searchfilters.stops.any" name="flightstop"><span>ANY</span></label></li>
-
+                            <li><label><input type="radio" value="0" data-ng-model="searchfilters.stops" name="flightstop"><span>NONSTOP</span></label></li>
+                            <li><label><input type="radio" value="1" data-ng-model="searchfilters.stops" name="flightstop"><span>1 STOP</span></label></li>
+                            <li><label><input type="radio" value="2" data-ng-model="searchfilters.stops" name="flightstop"><span>2 STOPS</span></label></li>
+                            <li><label><input type="radio" value="any" data-ng-model="searchfilters.stops" name="flightstop"><span>ANY</span></label></li>
                         </ul>
                     </div>
                 </li>

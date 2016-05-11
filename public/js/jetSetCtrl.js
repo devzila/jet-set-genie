@@ -1,8 +1,10 @@
 app.controller('jetSetGenie', function ($scope, $http) {
     scope = this;
     $scope.desttypes = [];
+    $scope.records = [];
+
     $scope.showShare = true;
-    
+  
     $scope.validForm = true;
      
     $scope.sparams = {
@@ -25,6 +27,84 @@ app.controller('jetSetGenie', function ($scope, $http) {
         else
             $('.bodyloaders').hide();
     }
+
+    $scope.fetchInfo = function () {
+ 
+        angular.forEach($scope.records, function (value, key) {
+            value.duration = '...';
+            value.fare = '...';
+
+            setTimeout(function () {
+
+                var origin = $scope.sparams.origincode;
+                var destination = value.airport_code;
+                var leavingdt = new Date($scope.sparams.leaving);
+
+                var leavingdt = leavingdt.getFullYear() + '-' + (parseInt(leavingdt.getMonth()) + 1) + '-' + leavingdt.getDate();
+
+                var infoRequest = {
+                    "request": {
+                        "passengers": {
+                            "adultCount": 1
+                        },
+                        "slice": [
+                            {
+                                "origin": origin,
+                                "destination": destination,
+                                "date": leavingdt
+                            }
+                        ],
+                        "solutions": 20,
+                        "refundable": false,
+                        "saleCountry": "US"
+                    }
+                }
+
+                //     console.log(JSON.stringify(infoRequest) );
+
+
+
+                loopNode = $(this);
+                var durationContainer = $('.durationInfo', '#card-' + value.id);
+                var priceContainer = $('.priceInfo', '#card-' + value.id);
+                //     console.log(durationContainer);
+
+                var url = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCMCG3JaUmNbKhKHFdZ4bUNu2SopqA_MqY";
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: JSON.stringify(infoRequest),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        //console.log( JSON.stringify(data) );
+                        //priceContainer.html(data.trips.tripOption[0].saleTotal);
+                        value.fare = parseInt((data.trips.tripOption[0].saleTotal).match(/\d+/), 10);
+
+                        priceContainer.html('$' + parseInt((data.trips.tripOption[0].saleTotal).match(/\d+/), 10));
+
+                        if (data.trips.tripOption[0].slice[0].duration) {
+                            minutes = data.trips.tripOption[0].slice[0].duration
+                            hr = parseInt(minutes / 60);
+                            minutes = minutes % 60;
+
+                            value.duration = hr + " hr " + minutes + " min";
+                            durationContainer.html(hr + " hr " + minutes + " min");
+                            //durationContainer.html(hr + " hr " + minutes + " min");	                    
+
+                        }
+
+                    },
+                    failure: function (errMsg) {
+                        alert(errMsg);
+                    }
+                });
+
+            }, 500);
+            //timeout
+
+        });
+    } //fetchinfo
      
     $scope.convertTime = function ( strTime ){  
         if (strTime < 60) return strTime + "m"; 
@@ -37,6 +117,21 @@ app.controller('jetSetGenie', function ($scope, $http) {
                 min = strTime.substr(-2);
                 return hr + "h " + min + "m"
             }
+    }
+
+    $scope.fetchCities = function (getPlaceUrl, fetchInfo) {
+        console.log(getPlaceUrl);
+        $http.get(getPlaceUrl)
+        .success(function (data, status, headers, config) {
+            $scope.records = $scope.records.concat(data);
+            //console.log($scope.records);
+            if (fetchInfo) 
+            $scope.fetchInfo();
+        })
+        .error(function (error, status, headers, config) {
+            console.log(status);
+            console.log("Error occured");
+        });
     }
 
     $scope.convertDate = function ( date, flight ){
@@ -80,7 +175,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
 						    browser = $("input[name='browser']").val();
 						    destination_type = (selected_destination == '') ? 'Beach' : selected_destination;
 
-						    url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + destination_type + "/destid/" + ((($scope.sparams.dest_id).length == 0) ? '0' : $scope.sparams.dest_id);
+						    url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + destination_type + "/destid/" + ((($scope.sparams.dest_id).length == 0) ? '0' : $scope.sparams.dest_id) + '/filters/0' ;
 
 						    window.location = url;
 
@@ -212,12 +307,7 @@ app.controller('jetSetGenie', function ($scope, $http) {
                 }
             },
         price: [0, 2000],
-        stops: [{
-            nonstop: 0,
-            onestop: 0,
-            twostop: 0,
-            any: 1
-        }],
+        stops: 'any',
         duration: [1, 48]
     };
 
@@ -232,8 +322,14 @@ app.controller('jetSetGenie', function ($scope, $http) {
         //alert(type);
         type = (type == '') ? 'Beach' : type;
 
-        url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + type + "/destid/" + (( ($scope.sparams.dest_id).length == 0 ) ? '0' : $scope.sparams.dest_id);
+        filters = '/filters/' + $scope.searchfilters.time.leaving.takeoff.timeslot[0] + '';
+        filters += ',' + $scope.searchfilters.time.leaving.takeoff.timeslot[1] + '';
+        filters += ',' + $scope.searchfilters.price[1];
+        filters += ',' + $scope.searchfilters.stops;
+        filters += ',' + $scope.searchfilters.duration[1];
 
+        url = "/search-results/leaving/" + leaving_date + "/returning/" + returning_date + "/origin/" + home_airport + "/type/" + type + "/destid/" + ((($scope.sparams.dest_id).length == 0) ? '0' : $scope.sparams.dest_id) + filters;
+    
         window.location = url;
     }
 
@@ -243,12 +339,9 @@ app.controller('jetSetGenie', function ($scope, $http) {
         $scope.searchfilters.time.returning.takeoff.timeslot = ['0050', '2400']
         $scope.searchfilters.time.returning.landing.timeslot = ['0050', '2400']
         $scope.searchfilters.price = [0, 2000]
-        $scope.searchfilters.stops.nonstop = false;
-        $scope.searchfilters.stops.onestop = false;
-        $scope.searchfilters.stops.twostop = false;
-        $scope.searchfilters.stops.any = false;
+        $scope.searchfilters.stops = 'any';
         $scope.searchfilters.duration = [1, 48];
-        console.log(JSON.stringify($scope.searchfilters));
+        //console.log(JSON.stringify($scope.searchfilters));
     }
 
    
@@ -277,7 +370,6 @@ function createCookie(name, value, days) {
     }
     document.cookie = name + "=" + value + expires + "; path=/";
 }
-
 
 
 app.controller('ctrlFavorites', function ($scope, $http) {
@@ -317,11 +409,11 @@ app.controller('ctrlFavorites', function ($scope, $http) {
     var favoriteMsnry;
     
     $(document).ready(function () {
-        $(".tag_places").tagsinput();
+        //$(".tag_places").tagsinput();
 
-        $(".tag_places").on('change', function () {
-            $scope.sparams.type = $(this).val();
-        })
+       // $(".tag_places").on('change', function () {
+      ///      $scope.sparams.type = $(this).val();
+      //  })
 
         favoriteMsnry = $('.favorite-container').masonry({
             itemSelector: '.list-box',
@@ -347,8 +439,14 @@ app.controller('ctrlFavorites', function ($scope, $http) {
         destination_type = $scope.sparams.type;
         home_airport = $scope.sparams.origin;
         $scope.sparams.dest_id = dest_id;
+    
+        filters = '/filters/' + $scope.searchfilters.time.leaving.takeoff.timeslot[0] + '';
+        filters += ',' + $scope.searchfilters.time.leaving.takeoff.timeslot[1] + '';
+        filters += ',' + $scope.searchfilters.price[1];
+        filters += ',' + $scope.searchfilters.stops;
+        filters += ',' + $scope.searchfilters.duration[1];
 
-        url = "/flight-results/leaving/" + leavingdt + "/returning/" + returningdt + "/origin/" + home_airport + "/destination/" + destination + "/type/" + destination_type + "/destid/" + dest_id;
+        url = "/flight-results/leaving/" + leavingdt + "/returning/" + returningdt + "/origin/" + home_airport + "/destination/" + destination + "/type/" + destination_type + "/destid/" + dest_id + filters;
         window.location = url;
         //console.log(url)
     }
@@ -470,7 +568,13 @@ app.controller('ctrlsideBar', function ($scope, $log, $http) {
         home_airport = $scope.sparams.origin;
         $scope.sparams.dest_id = dest_id;
 
-        url = "/flight-results/leaving/" + leavingdt + "/returning/" + returningdt + "/origin/" + home_airport + "/destination/" + destination + "/type/" + destination_type + "/destid/" + dest_id;
+        filters = '/filters/' + $scope.searchfilters.time.leaving.takeoff.timeslot[0] + '';
+        filters += ',' + $scope.searchfilters.time.leaving.takeoff.timeslot[1] + '';
+        filters += ',' + $scope.searchfilters.price[1];
+        filters += ',' + $scope.searchfilters.stops;
+        filters += ',' + $scope.searchfilters.duration[1];
+
+        url = "/flight-results/leaving/" + leavingdt + "/returning/" + returningdt + "/origin/" + home_airport + "/destination/" + destination + "/type/" + destination_type + "/destid/" + dest_id + filters;
         window.location = url;
     }
 });
@@ -499,6 +603,59 @@ app.controller('ctrlRefineSearch', function ($scope, $log, $http) {
             $scope.sparams.returning = selectedDate;
         }
     });
+
+    var cities = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: '/api/destination-types'
+    });
+    cities.initialize();
+
+    var elt = $('.tag_places');
+    elt.tagsinput({
+        itemValue: 'name',
+        itemText: 'name',
+        typeaheadjs: {
+            name: 'cities',
+            displayKey: 'name',
+            source: cities.ttAdapter()
+        }
+    });
+
+    $('.tag_places').on('itemAdded itemRemoved', function (event) {
+        $scope.sparams.type = $('.tag_places').val();
+    });
+
+    $scope.setDesType = function (destination) {
+        el =  $('.tag_places');
+        $http.get("/api/destination-types")
+       .success(function (data, status, headers, config) {
+           $scope.desttypes = data;           
+           angular.forEach($scope.desttypes, function (value, key) {              
+               if (destination.indexOf(value.name) >= 0) {
+                   el.tagsinput('add', value);
+                   //console.log(value);
+               }
+           });
+       })
+       .error(function (error, status, headers, config) {
+           console.log(status);
+           console.log("Error occured");
+       });
+    };
+
+    des_type = ($scope.sparams.type).split(',');
+    $scope.setDesType(des_type);
+
+    angular.forEach(des_type, function (value, key) {
+        getPlaceUrl = "/api/destination-types/" + value + "/airport";
+        $scope.fetchCities(getPlaceUrl, false);
+        if (key == des_type.length - 1) {
+            $scope.loader('hide');
+
+        }
+    });
+ 
 });
 
 app.controller('ctrlSearchResults', function ($scope, $log, $http) {
@@ -507,6 +664,13 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
     
     var sQuery = (window.location.pathname).split("/");
     airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
+
+    setFilters = sQuery[13].split(',');
+    $scope.searchfilters.time.leaving.takeoff.timeslot[0] = (setFilters[0] == 50) ? '0050' : setFilters[0];
+    $scope.searchfilters.time.leaving.takeoff.timeslot[1] = setFilters[1];
+    $scope.searchfilters.price[1] = setFilters[2];
+    $scope.searchfilters.stops = setFilters[3];
+    $scope.searchfilters.duration[1] = setFilters[4];
 
     dt = new Date( sQuery[3].replace(new RegExp('-', 'g'),'/') );
 
@@ -543,130 +707,35 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
 		//$scope.sparams.destination=destination;
 		destination = destination + " (" + dest_code + ")";
 		destination_type = $scope.sparams.type;
-		home_airport=$scope.sparams.origin;
+		home_airport = $scope.sparams.origin;
+
+		filters = '/filters/' + $scope.searchfilters.time.leaving.takeoff.timeslot[0] + '';
+		filters += ',' + $scope.searchfilters.time.leaving.takeoff.timeslot[1] + '';
+		filters += ',' + $scope.searchfilters.price[1];
+		filters += ',' + $scope.searchfilters.stops;
+		filters += ',' + $scope.searchfilters.duration[1];
 		
-		url = "/flight-results/leaving/" + leavingdt + "/returning/" + returningdt + "/origin/" + home_airport + "/destination/" + destination + "/type/" + destination_type + "/destid/" + dest_id;
+		url = "/flight-results/leaving/" + leavingdt + "/returning/" + returningdt + "/origin/" + home_airport + "/destination/" + destination + "/type/" + destination_type + "/destid/" + dest_id + filters;
 		window.location = url;
 	}
 
-	getPlaceUrl = "/api/destination-types/" + $scope.sparams.type + "/airport";
+	//getPlaceUrl = "/api/destination-types/" + $scope.sparams.type + "/airport";
 
 	$scope.loader('show');
 
-	$scope.records = [];
-
-	$scope.fetchCities = function () {
-	    $http.get(getPlaceUrl)
-        .success(function (data, status, headers, config) {
-            $scope.records = $scope.records.concat(data);
-            //console.log($scope.records);
-            $scope.fetchInfo();
-        })
-        .error(function (error, status, headers, config) {
-            console.log(status);
-            console.log("Error occured");
-        });
-	}
-
-    testctr = 0;
-
-    $scope.fetchInfo = function (data) {
-        $scope.setRecords = $scope.records;
-        $scope.setRecords = [];
-        angular.forEach($scope.setRecords, function (value, key) {
-	        value.duration = '...';
-	        value.fare = '...';
-
-	        setTimeout(function(){
-	         
-	        var origin = $scope.sparams.origincode;
-	        var destination = value.airport_code;
-	        var leavingdt = new Date($scope.sparams.leaving);
-	         
-	        var leavingdt = leavingdt.getFullYear() + '-' + (parseInt(leavingdt.getMonth())+1) + '-' + leavingdt.getDate();
-
-	        var infoRequest = {
-	            "request": {
-	                "passengers": {
-	                    "adultCount": 1
-	                },
-	                "slice": [
-                        {
-                            "origin": origin,
-                            "destination": destination,
-                            "date": leavingdt
-                        }
-	                ],
-	                "solutions": 20,
-	                "refundable": false,
-	                "saleCountry": "US"
-	            }
-	        }
-
-	   //     console.log(JSON.stringify(infoRequest) );
-	        
-	        
-
-	        loopNode = $(this);
-	        var durationContainer = $('.durationInfo', '#card-' + value.id);
-	        var priceContainer = $('.priceInfo', '#card-' + value.id);
-	   //     console.log(durationContainer);
-
-	        var url = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCMCG3JaUmNbKhKHFdZ4bUNu2SopqA_MqY";
-	        $.ajax({
-	            type: "POST",
-	            url: url,
-	            data: JSON.stringify(infoRequest),
-	            contentType: "application/json; charset=utf-8",
-	            dataType: "json",
-	            success: function (data) {
-	                //console.log( JSON.stringify(data) );
-	                //priceContainer.html(data.trips.tripOption[0].saleTotal);
-
-	                priceContainer.html('$' + parseInt((data.trips.tripOption[0].saleTotal).match(/\d+/), 10));
-	                
-	                if (data.trips.tripOption[0].slice[0].duration) {
-	                    minutes = data.trips.tripOption[0].slice[0].duration
-	                    hr = parseInt(minutes / 60);
-	                    minutes = minutes % 60;
-
-	                    
-	                    durationContainer.html(hr + " hr " + minutes + " min");
-	                    //durationContainer.html(hr + " hr " + minutes + " min");	                    
-
-	                }
-
-	            },
-	            failure: function (errMsg) {
-	                alert(errMsg);
-	            }
-	        });
-
-	        }, 500);
-            //timeout
-
-	    });
-	}
- 
-
-	$(".tag_places").tagsinput();
-	$(".tag_places").on('change', function () {
-	    $scope.sparams.type = $(this).val();
-	})
-
-	//$scope.sparams.type = $(".tag_places").val();
-
 	des_type = ($scope.sparams.type).split(',');
-
+	 
 	angular.forEach(des_type, function (value, key) {
 	    getPlaceUrl = "/api/destination-types/" + value + "/airport";
-	    $scope.fetchCities();
-	    $('.tag_places').tagsinput('add', value);
-	    if (key == des_type.length - 1){
+	    $scope.fetchCities( getPlaceUrl, true );
+	    if (key == des_type.length - 1) {
 	        $scope.loader('hide');
-	        
 	    }
 	});
+
+	//$scope.fetchCities(getPlaceUrl);
+
+    testctr = 0;
  
  
     // Slider options with event handlers
@@ -692,7 +761,14 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
     $scope.carriers = [];
   
     var sQuery = (window.location.pathname).split("/");
-
+    
+    setFilters = sQuery[15].split(',');
+    $scope.searchfilters.time.leaving.takeoff.timeslot[0] = (setFilters[0] == 50) ? '0050' : setFilters[0];
+    $scope.searchfilters.time.leaving.takeoff.timeslot[1] = setFilters[1];
+    $scope.searchfilters.price[1] = setFilters[2];
+    $scope.searchfilters.stops = setFilters[3];
+    $scope.searchfilters.duration[1] = setFilters[4];
+    
     airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
     dest_code = (((decodeURIComponent(sQuery[9])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
 
@@ -748,6 +824,34 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
         }
     };
 
+    //$scope.FlightRequest.request.slice[0]["maxStops"] = 1;
+   // console.log(JSON.stringify($scope.searchfilters));
+    //return;
+    if ( $scope.searchfilters.stops != 'any')
+        $scope.FlightRequest.request.slice[0]["maxStops"] = $scope.searchfilters.stops;
+    
+    //$scope.searchfilters.price[1] = 1000;
+    if ($scope.searchfilters.price[1] < 2000)
+        $scope.FlightRequest.request["maxPrice"] = 'USD' + $scope.searchfilters.price[1];
+    
+    //$scope.searchfilters.duration[1] = 20
+    if ($scope.searchfilters.duration[1] < 48)
+        $scope.FlightRequest.request.slice[0]["maxConnectionDuration"] = $scope.searchfilters.duration[1];
+
+    //$scope.searchfilters.time.leaving.takeoff.timeslot[1] = 2200;
+    if (parseInt($scope.searchfilters.time.leaving.takeoff.timeslot[0]) > 50 || parseInt($scope.searchfilters.time.leaving.takeoff.timeslot[1]) < 2400) {
+        eTime = $scope.searchfilters.time.leaving.takeoff.timeslot[0] + '';
+        lTime = $scope.searchfilters.time.leaving.takeoff.timeslot[1] + '';
+
+        earliest = eTime.substr(0, 2) + ":" + eTime.substr(2, 2);
+        latest = lTime.substr(0, 2) + ":" + lTime.substr(2, 2);
+
+        $scope.FlightRequest.request.slice[0]["permittedDepartureTime"] = { "earliestTime": earliest, 'latestTime': latest };
+        console.log(JSON.stringify($scope.FlightRequest.request.slice[0].permittedDepartureTime));
+    }
+    
+   // console.log(JSON.stringify($scope.FlightRequest));
+      
 	//getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE";
    // getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4";
     getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCMCG3JaUmNbKhKHFdZ4bUNu2SopqA_MqY"
@@ -895,10 +999,10 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
         });
    
         $scope.loader('hide');
-        $(".tag_places").tagsinput();
-        $(".tag_places").on('change', function () {
-            $scope.sparams.type = $(this).val();
-        })
+       // $(".tag_places").tagsinput();
+        //$(".tag_places").on('change', function () {
+       //     $scope.sparams.type = $(this).val();
+      //  })
        
     });
 
@@ -929,7 +1033,8 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
                     $scope.FavRequest = {
                         "destination_id": findPlace.id,
                         "duration": findPlace.duration,
-                        "fare": findPlace.fare
+                        "fare": findPlace.fare,
+                        "updated_at": Date(),
                     }
 
                      

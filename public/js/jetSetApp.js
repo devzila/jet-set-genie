@@ -10,8 +10,7 @@ var app = angular.module("jetSetGenie", ['ngRoute', 'ngResource', 'ngSanitize', 
 	$rootScope.randomcolor = function () {
 	    return $rootScope.place_bg_colors[Math.floor(Math.random() * $rootScope.place_bg_colors.length)];	    
 	}	
-})
- 
+}) 
 
 app.filter('getById', function () {
     return function (input, id) {
@@ -24,9 +23,7 @@ app.filter('getById', function () {
         return null;
     }
 })
-
-
-
+ 
 app.filter('myDateFilter', function () {
     return function (value, scope, dt) {
         var date = new Date(dt);

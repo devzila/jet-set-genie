@@ -64,34 +64,5 @@
 <script src="{{ asset('/js/bootstrap-slider.js') }}"></script>
 <script src="{{ asset('js/masonry.pkgd.min.js') }}" ></script>
 <script src="{{asset('/js/search-form.js') }}"></script>
-<script>
-	/*//tag inputs
-	var tagit = $('.tag_places');
-
-	tagit.tagsinput({
-	    tagClass: function (item) {
-	        switch (item.continent) {
-	            case 'Europe': return 'label label-primary';
-	            case 'America': return 'label label-danger label-important';
-	            case 'Australia': return 'label label-success';
-	            case 'Africa': return 'label label-default';
-	            case 'Asia': return 'label label-warning';
-	        }
-	    },
-	    itemValue: 'slug',
-	    itemText: 'name',
-	    typeaheadjs: {
-	        name: 'destinations',
-	        displayKey: 'name',
-	        source: [{ "value": 1, "text": "Amsterdam", "continent": "Europe" }],
-            freeInput: false
-	    }
-	});
-
-	tagit.tagsinput('add', { "value": 1, "text": "Amsterdam", "continent": "Europe" });
-    */
-
-	 
-
-</script>
+ 
 @stop
