@@ -664,13 +664,15 @@ app.controller('ctrlSearchResults', function ($scope, $log, $http) {
     
     var sQuery = (window.location.pathname).split("/");
     airportCode = (((decodeURIComponent(sQuery[7])).replace('(', '[')).replace(')', ']')).match(/\[(.*)\]/).pop();
-
-    setFilters = sQuery[13].split(',');
-    $scope.searchfilters.time.leaving.takeoff.timeslot[0] = (setFilters[0] == 50) ? '0050' : setFilters[0];
-    $scope.searchfilters.time.leaving.takeoff.timeslot[1] = setFilters[1];
-    $scope.searchfilters.price[1] = setFilters[2];
-    $scope.searchfilters.stops = setFilters[3];
-    $scope.searchfilters.duration[1] = setFilters[4];
+    
+    if (sQuery[13] != '0') {
+        setFilters = sQuery[13].split(',');
+        $scope.searchfilters.time.leaving.takeoff.timeslot[0] = (setFilters[0] == 50) ? '0050' : setFilters[0];
+        $scope.searchfilters.time.leaving.takeoff.timeslot[1] = setFilters[1];
+        $scope.searchfilters.price[1] = setFilters[2];
+        $scope.searchfilters.stops = setFilters[3];
+        $scope.searchfilters.duration[1] = setFilters[4];
+    }
 
     dt = new Date( sQuery[3].replace(new RegExp('-', 'g'),'/') );
 
@@ -850,10 +852,10 @@ app.controller('ctrlFlightResults', function ($scope, $http, $resource) {
         console.log(JSON.stringify($scope.FlightRequest.request.slice[0].permittedDepartureTime));
     }
     
-   // console.log(JSON.stringify($scope.FlightRequest));
+    //console.log(JSON.stringify($scope.FlightRequest));
       
 	//getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAdy8-J5mKe_j3q3IBpqTOTwwQf_nuoyoE";
-   // getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4";
+    //getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCqYVW7pZrz9kMEAbfxXJNmMRCcAyoAcY4";
     getPlaceUrl = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyCMCG3JaUmNbKhKHFdZ4bUNu2SopqA_MqY"
 
     $scope.loader('show');
